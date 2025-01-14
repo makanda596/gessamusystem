@@ -38,10 +38,10 @@ const upload = multer({ dest: 'uploads/' })
 //user routes
 
 
-app.use(cors({
+app.cors(
     origin: 'http://localhost:3000',
     credentials: true
-}))
+)
 //uploading a file
 app.use('/uploads', upload.single('file'), uploadRoutes)
 //getting the images

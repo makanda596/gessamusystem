@@ -2,7 +2,7 @@ import express from 'express';
 const app = express();
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import cors from 'cors';
+import cors from cors();
 import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import quizRoutes from './routes/quizRoutes.js'
@@ -38,10 +38,7 @@ const upload = multer({ dest: 'uploads/' })
 //user routes
 
 
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}))
+
 //uploading a file
 app.use('/uploads', upload.single('file'), uploadRoutes)
 //getting the images
