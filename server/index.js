@@ -39,8 +39,7 @@ const upload = multer({ dest: 'uploads/' })
 //user routes
 
 
-app.use(cors(
-    {
+app.use(cors({
     origin:`${import.meta.env.FRONTEND_URL}` ,
     credentials: true,
 }
