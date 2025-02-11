@@ -13,7 +13,7 @@ const Log = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`${BCKEND_URL}/login`, {
+            const response = await axios.post(`${BCKEND_URL}login`, {
                 username,
                 email,
                 admNo
