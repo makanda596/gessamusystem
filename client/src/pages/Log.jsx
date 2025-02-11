@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const BCKEND_URL ="https://gessamusystem.vercel.app/"
+const BCKEND_URL ="https://gessamusystem.vercel.app"
 const Log = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
