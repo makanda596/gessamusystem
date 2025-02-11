@@ -37,10 +37,10 @@ const upload = multer({ dest: 'uploads/' })
 //     console.log(req.file)
 // })
 //user routes
-
+const FRONTEND_URL ="https://gessamuportal.vercel.app/"
 
 app.use(cors({
-    origin:`${import.meta.env.FRONTEND_URL}` ,
+    origin:`${FRONTEND_URL}` ,
     credentials: true,
 }
 ))
