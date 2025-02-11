@@ -29,7 +29,7 @@ export const useAuthStore = create((set) => ({
     adminLogin: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post(`${ADM_API}/adminLogin`, { email, password });
+            const response = await axios.post(`${import.meta.env.BCKEND_URL}/adminLogin`, { email, password });
             set({ admin: response.data.admin, isAuthenticated: true, isLoading: false, error: null });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error logging in", isLoading: false });

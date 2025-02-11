@@ -16,7 +16,7 @@ const AdminLoginPage = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault() 
         try{
-        const response = await axios.post("http://localhost:5000/admin/adminLogin",
+        const response = await axios.post(`${import.meta.env.BCKEND_URL}/admin/adminLogin`,
         {email,password},
         {withCredentials:true}) 
         console.log(response.data)

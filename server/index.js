@@ -39,10 +39,12 @@ const upload = multer({ dest: 'uploads/' })
 //user routes
 
 
-app.use(cors({
-    origin: 'http://localhost:3000',
+app.use(cors(
+    {
+    origin:`${import.meta.env.FRONTEND_URL}` ,
     credentials: true,
-}))
+}
+))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
