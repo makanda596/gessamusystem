@@ -4,16 +4,16 @@ export const postprojects = async (req, res) => {
     const { title, year, description, reference } = req.body
     try {
 
-        // const doc = req.file ? req.file.filename : null;
+        const doc = req.file ? req.file.filename : null;
 
-        // if (!doc) {
-        //     return res.status(400).json({ message: "document file is required." });
-        // }
+        if (!doc) {
+            return res.status(400).json({ message: "document file is required." });
+        }
 
-        // const doc = req.file ? req.file.filename : null;
-        // if (!doc) {
-        //     return res.status(400).json({ message: "Document file is required." });
-        // }
+        const doc = req.file ? req.file.filename : null;
+        if (!doc) {
+            return res.status(400).json({ message: "Document file is required." });
+        }
         const allprojects = new Project({
             title,
             year,
