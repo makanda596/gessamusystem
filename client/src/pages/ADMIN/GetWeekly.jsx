@@ -48,7 +48,7 @@ const GetWeekly = () => {
                         <div className="p-6">
                             <h3 className="text-2xl font-semibold text-gray-800 mb-2">{project.title}</h3>
                             <p className="text-gray-600"><strong>Trainer:</strong> {project.trainer}</p>
-                            <p className="text-gray-600 mt-2">
+                        <p className="text-gray-600 mt-2">
                                 <strong>Description:</strong> {project.description.length > 100
                                     ? `${project.description.slice(0, 100)}...`
                                     : project.description}
