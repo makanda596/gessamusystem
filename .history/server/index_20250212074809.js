@@ -64,25 +64,40 @@ app.use(session({
 }))
 
 app.post('/login', (req, res) => {
-    const { username, email, admNo } = req.body;  // Extracting multiple details from the request body
+    try {
 
-    if (username && email && admNo) {  // Ensure all required fields are provided
-        req.session.user = username;  // Store the username
-        req.session.email = email;    // Store the email
-        req.session.admNo = admNo;    // Store the admission number
-        // Send a response with all the stored details
-        res.send({
-            message: 'Logged in',
-            user:{
-            user: req.session.user,
-            email: req.session.email,
-            admNo: req.session.admNo}
-        });
-    } else {
-        // If any required field is missing, send an error message
-        res.status(400).send({ message: 'Username, email, and admission number are required' });
+        const { username, email, admNo } = req.body;
+        if (!username || !email || !admNo) {
+            throw new Error('Missing required fields');
+        }
+
+        res.status(200).json({ message: 'Login successful' });
+    } catch (error) {
+        console.error('Error in /login:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// app.post('/login', (req, res) => {
+//     const { username, email, admNo } = req.body;  // Extracting multiple details from the request body
+
+//     if (username && email && admNo) {  // Ensure all required fields are provided
+//         req.session.user = username;  // Store the username
+//         req.session.email = email;    // Store the email
+//         req.session.admNo = admNo;    // Store the admission number
+//         // Send a response with all the stored details
+//         res.send({
+//             message: 'Logged in',
+//             user:{
+//             user: req.session.user,
+//             email: req.session.email,
+//             admNo: req.session.admNo}
+//         });
+//     } else {
+//         // If any required field is missing, send an error message
+//         res.status(400).send({ message: 'Username, email, and admission number are required' });
+//     }
+// });
 
 app.get('/profile', (req, res) => {
     // Check if the user is logged in by verifying if session data exists
