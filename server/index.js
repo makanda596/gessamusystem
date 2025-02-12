@@ -41,7 +41,11 @@ const upload = multer({ dest: 'uploads/' })
 
 app.use(
     cors({
+<<<<<<< HEAD
         origin: ['https://gessamufrontend.vercel.app/'],  // Specific frontend URL
+=======
+        origin: ['https://gessamufrontend.vercel.app'],  // Specific frontend URL
+>>>>>>> aa988036075871ee08321b2c8f5ccfda3091d3d1
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         // allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
         credentials: true,  // Allow cookies to be sent with the request
