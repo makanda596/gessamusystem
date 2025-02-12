@@ -41,7 +41,7 @@ const upload = multer({ dest: 'uploads/' })
 
 app.use(
     cors({
-        origin: "https://gessamuportal.vercel.app",  // Specific frontend URL
+        origin: "http://localhost:3000",  // Specific frontend URL
     
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         // allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
