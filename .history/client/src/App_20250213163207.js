@@ -37,25 +37,50 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  const [details, setDetails] = useState(null);
+  // const [details, setDetails] = useState(null);
 
-  const fetchDetails = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/auth/profile", {
-        withCredentials: true,
-      });
-      console.log(response.data);
-      setDetails(response.data);
-    } catch (error) {
-      console.log("You need to log in to access the dashboard.");
-    } 
-  };
+  // const fetchDetails = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/auth/profile", {
+  //       withCredentials: true,
+  //     });
+  //     console.log(response.data);
+  //     setDetails(response.data);
+  //   } catch (error) {
+  //     console.log("You need to log in to access the dashboard.");
+  //   } 
+  // };
 
-  useEffect(() => {
-    fetchDetails();
-  }, []);
+  // useEffect(() => {
+  //   fetchDetails();
+  // }, []);
   const { isAuthenticated, isCheckingAuth, checkAuth, user } = useAuthStore();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [admNo, setAdmNo] = useState('');
+  const [error, setError] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('https://gessamub.vercel.app/login', {
+        username,
+        email,
+        admNo
+      });
+
+      // If login is successful
+      if (response.status === 200) {
+        setLoggedIn(true); // Set loggedIn to true
+        console.log('Logged in:', response.data);
+      }
+      window.location.href = '/user'
+    } catch (err) {
+      setError('Login failed: ' + err.response.data.message);
+    }
+  };
   useEffect(() => {
     checkAuth(); // Check authentication on app load
   }, [checkAuth]);
@@ -74,6 +99,33 @@ function App() {
   return (
     <>
     <Log/>
+    <>
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Admission Number"
+            value={admNo}
+            onChange={(e) => setAdmNo(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+        {error && <p>{error}</p>}</>
     <Router>
       
       <div className="App">
@@ -136,7 +188,8 @@ function App() {
             path="/task"
             element={
               <ProtectedRoute>
-                <Tasks userId={details?.user?.id} />
+                {/* userId={details?.user?.id} */}
+                <Tasks  />
               </ProtectedRoute>
             }
           />
@@ -145,7 +198,8 @@ function App() {
             element={
               <ProtectedRoute>
                 {/* Pass the dynamic user ID here */}
-                <Alert userId={details?.user?.id || "default-id"} />
+                {/* userId={details?.user?.id || "default-id"} */}
+                <Alert  />
               </ProtectedRoute>
             }
           />
