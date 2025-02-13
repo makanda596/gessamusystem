@@ -29,13 +29,7 @@ const Log = () => {
             setError('Login failed: ' + err.response.data.message);
         }
     };
-    fetch('https://gessamub.vercel.app/api/test', {
-        method: 'GET',
-        credentials: 'include', // Include cookies if needed
-    })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error('Error:', error));
+
     return (
         <div>
             <h2>Login</h2>
