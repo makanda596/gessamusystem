@@ -16,7 +16,6 @@ import OneProject from './pages/OneProject.jsx';
 import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
 import UserProfile from './pages/UserProfle.jsx';
 import Log from './pages/Log.jsx';
-import axios from 'axios'
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -37,23 +36,23 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  const [details, setDetails] = useState(null);
+  // const [details, setDetails] = useState(null);
 
-  const fetchDetails = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/auth/profile", {
-        withCredentials: true,
-      });
-      console.log(response.data);
-      setDetails(response.data);
-    } catch (error) {
-      console.log("You need to log in to access the dashboard.");
-    } 
-  };
+  // const fetchDetails = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/auth/profile", {
+  //       withCredentials: true,
+  //     });
+  //     console.log(response.data);
+  //     setDetails(response.data);
+  //   } catch (error) {
+  //     console.log("You need to log in to access the dashboard.");
+  //   } 
+  // };
 
-  useEffect(() => {
-    fetchDetails();
-  }, []);
+  // useEffect(() => {
+  //   fetchDetails();
+  // }, []);
   const { isAuthenticated, isCheckingAuth, checkAuth, user } = useAuthStore();
 
   useEffect(() => {
@@ -136,7 +135,8 @@ function App() {
             path="/task"
             element={
               <ProtectedRoute>
-                <Tasks userId={details?.user?.id} />
+                {/* userId={details?.user?.id} */}
+                <Tasks  />
               </ProtectedRoute>
             }
           />
@@ -145,7 +145,8 @@ function App() {
             element={
               <ProtectedRoute>
                 {/* Pass the dynamic user ID here */}
-                <Alert userId={details?.user?.id || "default-id"} />
+                {/* userId={details?.user?.id || "default-id"} */}
+                <Alert  />
               </ProtectedRoute>
             }
           />
