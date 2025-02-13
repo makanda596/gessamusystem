@@ -73,11 +73,11 @@ function App() {
 
   return (
     <Router>
-      <Log />
       <div className="App">
         <Routes>
           <Route path='/user' element={<UserProfile />} />
-         
+          <Log/>
+          
           <Route
             path="/dashboard"
             element={
