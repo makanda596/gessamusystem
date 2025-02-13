@@ -14,7 +14,7 @@ import imagesRoutes from './routes/imagesRoutes.js'
 import projectsRoutes from './routes/projectsRoutes.js'
 import alertRoutes from './routes/alertRoutes.js'
 import session from 'express-session'
-import bcrypt from "bcryptjs"
+import bcrypt from "bcrypt"
 
 import multer from 'multer'
 const upload = multer({ dest: 'uploads/' })
