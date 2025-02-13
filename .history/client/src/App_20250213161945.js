@@ -136,8 +136,7 @@ function App() {
             path="/task"
             element={
               <ProtectedRoute>
-                {/* userId={details?.user?.id} */}
-                <Tasks  />
+                <Tasks userId={details?.user?.id} />
               </ProtectedRoute>
             }
           />
@@ -146,8 +145,7 @@ function App() {
             element={
               <ProtectedRoute>
                 {/* Pass the dynamic user ID here */}
-                {/* userId={details?.user?.id || "default-id"} */}
-                <Alert  />
+                <Alert userId={details?.user?.id || "default-id"} />
               </ProtectedRoute>
             }
           />

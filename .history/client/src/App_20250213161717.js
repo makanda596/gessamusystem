@@ -37,23 +37,23 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  // const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState(null);
 
-  // const fetchDetails = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:5000/auth/profile", {
-  //       withCredentials: true,
-  //     });
-  //     console.log(response.data);
-  //     setDetails(response.data);
-  //   } catch (error) {
-  //     console.log("You need to log in to access the dashboard.");
-  //   } 
-  // };
+  const fetchDetails = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/auth/profile", {
+        withCredentials: true,
+      });
+      console.log(response.data);
+      setDetails(response.data);
+    } catch (error) {
+      console.log("You need to log in to access the dashboard.");
+    } 
+  };
 
-  // useEffect(() => {
-  //   fetchDetails();
-  // }, []);
+  useEffect(() => {
+    fetchDetails();
+  }, []);
   const { isAuthenticated, isCheckingAuth, checkAuth, user } = useAuthStore();
 
   useEffect(() => {
@@ -73,9 +73,8 @@ function App() {
 
   return (
     <>
-    <Log/>
     <Router>
-      
+      <Log />
       <div className="App">
         <Routes>
           <Route path='/user' element={<UserProfile />} />
@@ -136,8 +135,7 @@ function App() {
             path="/task"
             element={
               <ProtectedRoute>
-                {/* userId={details?.user?.id} */}
-                <Tasks  />
+                <Tasks userId={details?.user?.id} />
               </ProtectedRoute>
             }
           />
@@ -146,8 +144,7 @@ function App() {
             element={
               <ProtectedRoute>
                 {/* Pass the dynamic user ID here */}
-                {/* userId={details?.user?.id || "default-id"} */}
-                <Alert  />
+                <Alert userId={details?.user?.id || "default-id"} />
               </ProtectedRoute>
             }
           />
