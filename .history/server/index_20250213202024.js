@@ -39,10 +39,13 @@ const upload = multer({ dest: 'uploads/' })
 // })
 //user routes
 // const FRONTEND_URL ="https://gessamuportal.vercel.app"
+const FRONTEND_URL = process.env.meta.FRONTEND_URL
 app.use(cors(
    {
-        origin: process.env.FRONTEND_URL,  // Specific frontend URL
+        origin: FRONTEND_URL,  // Specific frontend URL
+    
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        // allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
         credentials: true,  // Allow cookies to be sent with the request
     })
 );

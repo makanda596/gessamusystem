@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// const BCKEND_URL ="https://gessamusystem.vercel.app"
 const Log = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -13,29 +12,32 @@ const Log = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://gessamub.vercel.app/login', {
+            const response = await axios.post('http://localhost:5000/login', {
                 username,
                 email,
                 admNo
             });
 
-            // If login is successful
             if (response.status === 200) {
-                setLoggedIn(true); // Set loggedIn to true
+                setLoggedIn(true);
                 console.log('Logged in:', response.data);
+                window.location.href = '/user'; // Redirect after successful login
             }
-            window.location.href='/user'
         } catch (err) {
-            setError('Login failed: ' + err.response.data.message);
+            setError('Login failed: ' + (err.response?.data?.message || 'Unknown error'));
         }
     };
-    fetch('https://gessamub.vercel.app/api/test', {
-        method: 'GET',
-        credentials: 'include', // Include cookies if needed
-    })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error('Error:', error));
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/test', {
+            method: 'GET',
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error('Error:', error));
+    }, []);
+
     return (
         <div>
             <h1>GESSAMU Login</h1>
