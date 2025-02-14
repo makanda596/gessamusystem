@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import axios from 'axios';
 
 // Set your API endpoints
-const USER_API = "http://localhost:5000/auth";
-const ADM_API = "http://localhost:5000/admin";
+const USER_API = "https://gessamubackend.onrender.com/auth";
+const ADM_API = "https://gessamubackend.onrender.com/admin";
 
 export const useAuthStore = create((set) => ({
     user: null,
@@ -29,7 +29,7 @@ export const useAuthStore = create((set) => ({
     adminLogin: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post(`${import.meta.env.BCKEND_URL}/adminLogin`, { email, password });
+            const response = await axios.post('https://gessamubackend.onrender.com/adminLogin', { email, password });
             set({ admin: response.data.admin, isAuthenticated: true, isLoading: false, error: null });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error logging in", isLoading: false });

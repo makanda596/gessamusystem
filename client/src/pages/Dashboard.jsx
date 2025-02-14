@@ -8,7 +8,7 @@ const Dashboard = () => {
 
     const fetchDetails = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/auth/profile", {
+            const response = await axios.get("https://gessamubackend.onrender.com/auth/profile", {
                 withCredentials: true,
             });
             setDetails(response.data);
@@ -87,7 +87,7 @@ const Dashboard = () => {
                             <div className="bg-gradient-to-tr from-red-400 to-red-200 p-8 rounded-2xl shadow-md text-center">
                                 <h3 className="text-xl font-semibold mb-2">New Messages</h3>
                                 <p className="text-3xl font-extrabold"></p>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 )}

@@ -19,7 +19,7 @@ const Allprojects = () => {
         const fetchWeeklyProjects = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:5000/projects/getweekly-projects');
+                const response = await axios.get('https://gessamubackend.onrender.com/projects/getweekly-projects');
                 setProjects(response.data);
             } catch (error) {
                 setError('Failed to fetch weekly projects.');
@@ -39,7 +39,7 @@ const Allprojects = () => {
         setYearSubmitted(true);
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:5000/projects/getprojects?year=${year}`);
+            const response = await axios.get(`https://gessamubackend.onrender.com/projects/getprojects?year=${year}`);
             setProjects(response.data);
         } catch (error) {
             setError('Failed to fetch projects. Please check the year and try again.');

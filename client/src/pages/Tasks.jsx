@@ -113,7 +113,7 @@ const TaskCard = ({ task, showNotification }) => {
         }
 
         try {
-            await axios.post('http://localhost:5000/task/submitTask/:id', { title });
+            await axios.post('https://gessamubackend.onrender.com/task/submitTask/:id', { title });
             showNotification('Task submitted successfully!');
             setShowModal(false);
             setTitle('');

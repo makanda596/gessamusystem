@@ -13,7 +13,7 @@ const OneProject = () => {
 
     const fetchProject = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/projects/oneproject/${id}`);
+            const response = await axios.get(`https://gessamubackend.onrender.com/projects/oneproject/${id}`);
             setProject(response.data);
         } catch (err) {
             setError("Failed to load project. Please try again.");
@@ -22,7 +22,7 @@ const OneProject = () => {
 
     const fetchWeeklyProjects = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/projects/getweekly-projects");
+            const response = await axios.get("https://gessamubackend.onrender.com/projects/getweekly-projects");
             const filteredProjects = response.data.filter((proj) => proj._id !== id).slice(0, 6);
             setWeeklyProjects(filteredProjects);
         } catch (error) {
