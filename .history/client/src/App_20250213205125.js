@@ -41,7 +41,7 @@ function App() {
 
   const fetchDetails = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.BCKEND_URL}/auth/profile`, {
+      const response = await axios.get(`${BCKEND_URL} /auth/profile1, {
         withCredentials: true,
       });
       console.log(response.data);
@@ -73,13 +73,13 @@ function App() {
 
   return (
     <>
-   
+    <Log/>
     <Router>
       
       <div className="App">
         <Routes>
           <Route path='/user' element={<UserProfile />} />
-         <Route path='/log' element={<Log/>}/>
+         
           <Route
             path="/dashboard"
             element={
