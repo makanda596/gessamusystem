@@ -81,7 +81,7 @@ function App() {
           <Route path="/task/:id" element={<ProtectedRoute><Specific /></ProtectedRoute>} />
           <Route path="/project/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
-          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          {/* <Route path="*" element={<h1>404 - Page Not Found</h1>} /> */}
         </Routes>
       </div>
     </Router>
