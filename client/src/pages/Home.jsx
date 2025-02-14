@@ -18,7 +18,7 @@ function Home() {
 
     const fetchDetails = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/auth/profile", {
+            const response = await axios.get("https://gessamubackend.onrender.com/auth/profile", {
                 withCredentials: true,
             });
             setDetails(response.data);

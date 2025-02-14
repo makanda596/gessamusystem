@@ -8,7 +8,7 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await axios.get('https://gessamubackend.vercel.app/profile', {
+                const response = await axios.get('https://gessamubackend.onrender.com/profile', {
                     withCredentials: true  // Include cookies with the request
                 });
                 setUserDetails(response.data);

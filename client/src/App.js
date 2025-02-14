@@ -41,7 +41,7 @@ function App() {
 
   const fetchDetails = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.BCKEND_URL}/auth/profile`, {
+      const response = await axios.get('https://gessamubackend.onrender.com/auth/profile', {
         withCredentials: true,
       });
       console.log(response.data);

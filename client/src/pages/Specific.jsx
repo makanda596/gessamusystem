@@ -11,7 +11,7 @@ const Specific = () => {
     // Fetch specific task details
     const showSpecific = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/task/onetask/${id}`);
+            const response = await axios.get(`https://gessamubackend.onrender.com/task/onetask/${id}`);
             setTask(response.data);
         } catch (error) {
             setError('Failed to load task. Please try again later.');
@@ -30,7 +30,7 @@ const Specific = () => {
                 completed: !task.completed, // Toggle the current completed status
             };
 
-            await axios.put(`http://localhost:5000/task/toggleComplete/${id}`, { completed: updatedTask.completed });
+            await axios.put(`https://gessamubackend.onrender.com/task/toggleComplete/${id}`, { completed: updatedTask.completed });
 
             // Update the task in state
             setTask(updatedTask);

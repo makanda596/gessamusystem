@@ -12,7 +12,7 @@ const Log = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/login', {
+            const response = await axios.post('https://gessamubackend.onrender.com/login', {
                 username,
                 email,
                 admNo
@@ -29,7 +29,7 @@ const Log = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/test', {
+        fetch('https://gessamubackend.onrender.com/api/test', {
             method: 'GET',
             credentials: 'include',
         })

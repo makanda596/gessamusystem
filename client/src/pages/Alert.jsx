@@ -15,7 +15,7 @@ const Alert = ({ userId }) => {
  
         const fetchAlerts = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/alert/takeAlert/${userId}`);
+                const response = await axios.get(`https://gessamubackend.onrender.com/alert/takeAlert/${userId}`);
                 setAlerts(response.data.alerts); // Ensure alerts is an array
             } catch (err) {
                 console.error("Error fetching alerts:", err.response?.data || err.message);
@@ -44,7 +44,7 @@ const Alert = ({ userId }) => {
             ) : (
                 <ul className="list-disc pl-5">
                     {alerts.map((alert) => (
-                        <li key={alert._id} className="mb-1">
+                         <li key={alert._id} className="mb-1">
                             {alert.message} - <span className="font-bold">{alert.status}</span>
                         </li>
                     ))}
