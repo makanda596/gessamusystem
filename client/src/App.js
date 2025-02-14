@@ -8,14 +8,14 @@ import Home from './pages/Home.jsx';
 import SignUp from './pages/SignUp.jsx';
 import AdminLoginPage from './pages/ADMIN/adminLogin.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
-import ResetPassword from './pages/Resetpassword.jsx';
+import Resetpassword from './pages/Resetpassword.jsx';
 import Allprojects from './pages/Allprojects.jsx';
 import Tasks from './pages/Tasks.jsx';
 import Alert from './pages/Alert.jsx';
 import Specific from './pages/Specific.jsx';
 import OneProject from './pages/OneProject.jsx';
 import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
-import UserProfile from './pages/UserProfile.jsx';
+import UserProfile from './pages/UserProfle.jsx';
 import Log from './pages/Log.jsx';
 
 // Protect routes that require authentication
@@ -74,7 +74,7 @@ function App() {
           <Route path="/adminLogin" element={<AdminLoginPage />} />
           <Route path="/signup" element={<RedirectAuthenticatedUser><SignUp /></RedirectAuthenticatedUser>} />
           <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPassword /></RedirectAuthenticatedUser>} />
-          <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><ResetPassword /></RedirectAuthenticatedUser>} />
+          <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><Resetpassword /></RedirectAuthenticatedUser>} />
           <Route path="/projects" element={<ProtectedRoute><Allprojects /></ProtectedRoute>} />
           <Route path="/task" element={<ProtectedRoute><Tasks userId={details?.user?.id || null} /></ProtectedRoute>} />
           <Route path="/alert" element={<ProtectedRoute><Alert userId={details?.user?.id || "default-id"} /></ProtectedRoute>} />
