@@ -9,8 +9,7 @@ export const UsersetCookieGenerateToken = async (res, userId) => {
         const token = jwt.sign({ userId }, SECTRET_KEY, { expiresIn: "15 min" })
 
         res.cookie("token", token, {
-            httpOnly: true,
-            sameSite: "Strict",
+            httpOnly: false,
             secure: true,
             // maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days in milliseconds
         })

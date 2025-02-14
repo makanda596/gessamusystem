@@ -9,8 +9,7 @@ export const UserRefreshToken = async (res, userId) => {
         const refreshtoken = jwt.sign({ userId }, REFRESH_KEY, { expiresIn: "1hour" })
 
         res.cookie("refreshtoken", refreshtoken, {
-            httpOnly: true,
-            sameSite: "strict",
+            httpOnly: false,
             secure: true,
             maxAge: 60 * 60 * 1000
         })
