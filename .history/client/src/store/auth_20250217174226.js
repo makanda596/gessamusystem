@@ -79,7 +79,7 @@ export const useAuthStore = create((set) => ({
         set({ isCheckingAuth: true, error: null });
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get('https://gessamubackend.onrender.com/auth/check-auth', {
+            const response = await axios.get('https://gessamubackend.onrender.com/check-auth', {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });
