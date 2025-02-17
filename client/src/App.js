@@ -31,23 +31,23 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  const [details, setDetails] = useState(null);
+  // const [details, setDetails] = useState(null);
   const { isAuthenticated, isCheckingAuth, checkAuth } = useAuthStore();
 
-  useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const response = await axios.get('https://gessamubackend.onrender.com/auth/profile', {
-          withCredentials: true,
-        });
-        setDetails(response.data);
-      } catch (error) {
-        console.log("You need to log in to access the dashboard.");
-      }
-    };
+  // useEffect(() => {
+  //   const fetchDetails = async () => {
+  //     try {
+  //       const response = await axios.get('https://gessamubackend.onrender.com/auth/profile', {
+  //         withCredentials: true,
+  //       });
+  //       setDetails(response.data);
+  //     } catch (error) {
+  //       console.log("You need to log in to access the dashboard.");
+  //     }
+  //   };
 
-    fetchDetails();
-  }, []);
+  //   fetchDetails();
+  // }, []);
 
   useEffect(() => {
     checkAuth(); // Check authentication on app load
