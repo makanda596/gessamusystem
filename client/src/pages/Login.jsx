@@ -17,9 +17,7 @@ const LoginPage = () => {
 
         try {
             await login(admNo,password,{withCredentials:true})
-            // const response = await axios.post("http://localhost:5000/auth/login",{
-            //     admNo,password
-            // },{withCredentials:true}
+           
             window.location.href = '/dashboard';
         } catch (error) {
             console.log(error.response ? error.response.data.message : 'Login failed');
