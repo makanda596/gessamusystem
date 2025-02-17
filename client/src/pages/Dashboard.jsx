@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const Dashboard = () => {
-    const [details, setDetails] = useState(null);
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(true);
+    // const [details, setDetails] = useState(null);
+    // const [error, setError] = useState("");
+    // const [loading, setLoading] = useState(true);
 
-    const fetchDetails = async () => {
-        try {
-            const response = await axios.get("https://gessamubackend.onrender.com/auth/profile", {
-                withCredentials: true,
-            });
-            setDetails(response.data);
-            console.log(response.data)
-        } 
-         finally {
-            setLoading(false);
-        }
-    };
+    // const fetchDetails = async () => {
+    //     try {
+    //         const response = await axios.get("https://gessamubackend.onrender.com/auth/profile", {
+    //             withCredentials: true,
+    //         });
+    //         setDetails(response.data);
+    //         console.log(response.data)
+    //     } 
+    //      finally {
+    //         setLoading(false);
+    //     }
+    // };
 
-    useEffect(() => { 
-        fetchDetails();
-    }, []);
+    // useEffect(() => { 
+    //     fetchDetails();
+    // }, []);
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 p-6">
@@ -30,7 +30,7 @@ const Dashboard = () => {
                     Welcome to Your Dashboard
                 </h1>
 
-                {loading ? (
+                {/* {loading ? (
                     <p className="text-center text-gray-500 text-lg">Loading...</p>
                 ) : error ? (
                     <p className="text-center text-red-500 text-lg">{error}</p>
@@ -68,7 +68,8 @@ const Dashboard = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
+                        
 
                         {/* Dashboard Stats with Gradient Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
