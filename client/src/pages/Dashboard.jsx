@@ -13,9 +13,8 @@ const Dashboard = () => {
             });
             setDetails(response.data);
             console.log(response.data)
-        } catch (error) {
-            setError("You need to log in to access the dashboard.");
-        } finally {
+        } 
+         finally {
             setLoading(false);
         }
     };
