@@ -8,9 +8,10 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await axios.get('https://gessamubackend.onrender.com/profile', {
+                const response = await axios.get('http://localhost:5000/profile', {
                     withCredentials: true  ,// Include cookies with the request
                 });
+                console.log(response.data)
                 setUserDetails(response.data);
             } catch (err) {
                 setError('You need to log in .');

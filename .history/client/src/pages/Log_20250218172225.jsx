@@ -6,13 +6,13 @@ const Log = () => {
     const [email, setEmail] = useState('');
     const [admNo, setAdmNo] = useState('');
     const [error, setError] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false); 
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://gessamubackend.onrender.com/login', {
+            const response = await axios.post('http://localhost:5000/login', {
                 username,
                 email,
                 admNo
@@ -29,7 +29,7 @@ const Log = () => {
     };
 
     useEffect(() => {
-        fetch('https://gessamubackend.onrender.com/api/test', {
+        fetch('http://localhost:5000/api/test', {
             method: 'GET',
             credentials: 'include',
         })

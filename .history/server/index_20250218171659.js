@@ -63,6 +63,7 @@ app.use(
         cookie: { 
             secure: true,  // Only send cookies over HTTPS
             httpOnly: true,  // Prevent client-side access to the cookie
+            sameSite: 'stric
         }
     })
 );
