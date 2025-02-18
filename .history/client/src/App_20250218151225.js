@@ -47,7 +47,6 @@ function App() {
     } catch (error) {
       console.log("Failed to fetch user details. Please log in.")
     };
-  }
   useEffect(() => {
     fetchDetails();
   }, []);
@@ -90,6 +89,6 @@ function App() {
     </Router>
   );
 }
-}
+
 export default App;
 
