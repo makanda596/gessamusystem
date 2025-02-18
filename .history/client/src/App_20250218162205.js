@@ -17,6 +17,7 @@ import OneProject from './pages/OneProject.jsx';
 import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
 import UserProfile from './pages/UserProfle.jsx';
 import Log from './pages/Log.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
