@@ -52,7 +52,7 @@ function Home() {
 
     return (
         <div>
-            <Navbar userId="67a2084a137a44a6b6f49e32"/>
+            <Navbar userId={details?.user?.id}/>
             <Dashboard />
             <Footer />
             {/* <button onClick={handlesubmit} className="bg-red-500 text-white px-4 py-2 rounded">
@@ -61,6 +61,5 @@ function Home() {
         </div>
     );
 } 
-// details?.user?.id
 
 export default Home;
