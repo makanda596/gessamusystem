@@ -17,6 +17,7 @@ import OneProject from './pages/OneProject.jsx';
 import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
 import UserProfile from './pages/UserProfle.jsx';
 import Log from './pages/Log.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -33,7 +34,7 @@ return children;
 };
 
 function App() {
-  const [details, setDetails] = useState(null);
+  // const [details, setDetails] = useState(null);
   const {  isCheckingAuth, checkAuth } = useAuthStore();
 
   const fetchDetails = async () => {
@@ -81,8 +82,8 @@ function App() {
           <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPassword /></RedirectAuthenticatedUser>} />
           <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><Resetpassword /></RedirectAuthenticatedUser>} />
           <Route path="/projects" element={<ProtectedRoute><Allprojects /></ProtectedRoute>} />
-          <Route path="/task" element={<ProtectedRoute><Tasks userId={details?.user?.id} /></ProtectedRoute>} />
-          <Route path="/alert" element={<ProtectedRoute><Alert userId={details?.user?.id} /></ProtectedRoute>} />
+          <Route path="/task" element={<ProtectedRoute><Tasks  /></ProtectedRoute>} />
+          <Route path="/alert" element={<ProtectedRoute><Alert  /></ProtectedRoute>} />
           <Route path="/task/:id" element={<ProtectedRoute><Specific /></ProtectedRoute>} />
           <Route path="/project/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
