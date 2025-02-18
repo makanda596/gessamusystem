@@ -35,27 +35,21 @@ return children;
 function App() {
   const [details, setDetails] = useState(null);
   const {  isCheckingAuth, checkAuth } = useAuthStore();
+
   const fetchDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-
-      if (!token) {
-        console.log("No token found. Please log in.");
-        return;
-      }
 
       const response = await axios.get('https://gessamubackend.onrender.com/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
 
-      setDetails(response.data); // Use the data directly as you were doing
+      setDetails(response.data);
     } catch (error) {
-      console.log("Failed to fetch user details. Please log in.", error);
-    }
-  };
-
-  
+      console.log("Failed to fetch user details. Please log in.")
+    };
+  }
   useEffect(() => {
     fetchDetails();
   }, []);
