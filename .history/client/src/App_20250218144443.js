@@ -78,8 +78,8 @@ function App() {
           <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPassword /></RedirectAuthenticatedUser>} />
           <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><Resetpassword /></RedirectAuthenticatedUser>} />
           <Route path="/projects" element={<ProtectedRoute><Allprojects /></ProtectedRoute>} />
-          <Route path="/task" element={<ProtectedRoute><Tasks userId="67a20fc8b0d2021b64dc6466" /></ProtectedRoute>} />
-          <Route path="/alert" element={<ProtectedRoute><Alert userId="67a20fc8b0d2021b64dc6466" /></ProtectedRoute>} />
+          <Route path="/task" element={<ProtectedRoute><Tasks userId="679c7322a2ff5f84894bc948" /></ProtectedRoute>} />
+          <Route path="/alert" element={<ProtectedRoute><Alert userId="679c7322a2ff5f84894bc948" /></ProtectedRoute>} />
           <Route path="/task/:id" element={<ProtectedRoute><Specific /></ProtectedRoute>} />
           <Route path="/project/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
