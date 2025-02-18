@@ -147,7 +147,7 @@ export const forgotPassword = async (req, res) => {
         await user.save()
 
         //sending the email to the user after saving the reset token and expires at
-        sendPasswordResetEmail(user.email, `https://gessamubackend.onrender.com/reset-password/${resetToken}`)
+        sendPasswordResetEmail(user.email, `https://gessamubackend.onrender.com//reset-password/${resetToken}`)
         res.status(200).json({ message: "reset password link sent to your email" })
     }
     catch (error) {
