@@ -47,7 +47,6 @@ function App() {
     } catch (error) {
       console.log("Failed to fetch user details. Please log in.")
     };
-  }
   useEffect(() => {
     fetchDetails();
   }, []);
@@ -79,8 +78,8 @@ function App() {
           <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPassword /></RedirectAuthenticatedUser>} />
           <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><Resetpassword /></RedirectAuthenticatedUser>} />
           <Route path="/projects" element={<ProtectedRoute><Allprojects /></ProtectedRoute>} />
-          <Route path="/task" element={<ProtectedRoute><Tasks userId={details?.user?.id} /></ProtectedRoute>} />
-          <Route path="/alert" element={<ProtectedRoute><Alert userId={details?.user?.id} /></ProtectedRoute>} />
+          <Route path="/task" element={<ProtectedRoute><Tasks userId="67a20fc8b0d2021b64dc6466" /></ProtectedRoute>} />
+          <Route path="/alert" element={<ProtectedRoute><Alert userId="67a20fc8b0d2021b64dc6466" /></ProtectedRoute>} />
           <Route path="/task/:id" element={<ProtectedRoute><Specific /></ProtectedRoute>} />
           <Route path="/project/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
@@ -90,6 +89,6 @@ function App() {
     </Router>
   );
 }
-}
+
 export default App;
 
