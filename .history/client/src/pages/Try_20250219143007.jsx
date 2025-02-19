@@ -119,9 +119,9 @@ const Navbar = ({ userId }) => {
                     <FaTimes className="text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
                 </div>
 
-                <nav className="flex flex-col space-y-4 ">
-                    <a href="/" className="hover:text-gray-300 cursor-pointer">Home</a>
-                    <a href="/projects" className="hover:text-gray-300">Projects</a>
+                <nav className="flex flex-col space-y-4">
+                    <a href="/dashboard" className="hover:text-gray-300">Home</a>
+                    <a href="/Projects" className="hover:text-gray-300">Projects</a>
                     <a href="/trainings" className="hover:text-gray-300">Live Trainings</a>
                     <a href="/asqQuiz" className="hover:text-gray-300">asqQuiz</a>
                     <a href="/task" className="hover:text-gray-300">Tasks</a>
