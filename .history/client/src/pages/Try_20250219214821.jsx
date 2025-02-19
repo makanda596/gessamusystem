@@ -8,6 +8,7 @@ const Navbar = ({ userId }) => {
     const [details, setDetails] = useState(null);
     const [alertCount, setAlertCount] = useState(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -47,9 +48,10 @@ const Navbar = ({ userId }) => {
         <>
             {/* Navbar */}
             <nav className="bg-green-800 p-4 text-white flex items-center justify-between relative shadow-lg">
+                {/* Logo */}
                 <h4 className="text-xl font-bold">GESSAMU PORTAL</h4>
 
-                {/* Search Bar - Hidden on Small Screens */}
+                {/* Search Bar (Hidden on Small Screens) */}
                 <div className="hidden md:flex items-center bg-green-700 rounded-full px-4 py-2">
                     <input
                         type="text"
@@ -67,7 +69,7 @@ const Navbar = ({ userId }) => {
                     <a href="/asqQuiz" className="hover:text-gray-300">asqQuiz</a>
                     <a href="/task" className="hover:text-gray-300">Tasks</a>
 
-                    {/* Alert Icon */}
+                    {/* Alert Icon with Count */}
                     <a href="/alert" className="relative hover:text-gray-300">
                         <FaBell className="text-2xl" />
                         {alertCount > 0 && (
@@ -77,10 +79,10 @@ const Navbar = ({ userId }) => {
                         )}
                     </a>
 
-                    {/* Profile */}
+                    {/* Profile Icon */}
                     <div className="relative">
                         <img
-                            src={details?.user?.avatar || "https://via.placeholder.com/100"}
+                            src={details?.user.avatar || "https://via.placeholder.com/100"}
                             alt="Profile"
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             className="w-12 h-12 rounded-full border-4 border-white cursor-pointer"
@@ -99,42 +101,44 @@ const Navbar = ({ userId }) => {
                 </div>
 
                 {/* Mobile Menu Button */}
-                <label htmlFor="menu-toggle" className="lg:hidden cursor-pointer">
-                    <FaBars className="text-white text-3xl" />
-                </label>
+                <div className="lg:hidden">
+                    <FaBars
+                        className="text-white text-3xl cursor-pointer"
+                        onClick={() => setIsSidebarOpen(true)}
+                    />
+                </div>
             </nav>
 
-            {/* Mobile Sidebar */}
-            <input type="checkbox" id="menu-toggle" className="hidden peer" />
-            <div className="fixed inset-0 bg-black bg-opacity-50 hidden peer-checked:block lg:hidden"></div>
-            <div className="fixed top-0 left-0 h-full w-64 bg-green-900 text-white p-5 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out shadow-lg lg:hidden">
+            {/* Sidebar for Mobile */}
+            <div
+                className={`fixed top-0 left-0 h-full w-64 bg-green-900 text-white p-5 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } transition-transform duration-300 ease-in-out shadow-lg lg:hidden`}
+            >
                 <div className="flex justify-between items-center mb-6">
                     <h4 className="text-xl font-bold">Menu</h4>
-                    <label htmlFor="menu-toggle" className="cursor-pointer">
-                        <FaTimes className="text-2xl" />
-                    </label>
+                    <FaTimes className="text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
                 </div>
 
-                {/* Mobile Navigation */}
+                {/* Updated Mobile Navigation with Clickable Links */}
                 <nav className="flex flex-col space-y-4">
-                    <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
+                    <a href="/dashboard" onClick={() => setIsSidebarOpen(false)} className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">
                         Home
                     </a>
-                    <a href="/projects" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
+                    <a href="/projects" onClick={() => setIsSidebarOpen(false)} className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">
                         Projects
                     </a>
-                    <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
+                    <a href="/trainings" onClick={() => setIsSidebarOpen(false)} className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">
                         Live Trainings
                     </a>
-                    <a href="/asqQuiz" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
+                    <a href="/asqQuiz" onClick={() => setIsSidebarOpen(false)} className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">
                         asqQuiz
                     </a>
-                    <a href="/task" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
+                    <a href="/task" onClick={() => setIsSidebarOpen(false)} className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">
                         Tasks
                     </a>
 
-                    {/* Alert */}
-                    <a href="/alert" className="relative hover:text-gray-300 flex items-center">
+                    {/* Alert Icon with Count */}
+                    <a href="/alert" onClick={() => setIsSidebarOpen(false)} className="relative hover:text-gray-300 flex items-center">
                         <FaBell className="text-2xl mr-2" />
                         {alertCount > 0 && (
                             <span className="bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
@@ -149,7 +153,10 @@ const Navbar = ({ userId }) => {
                         <div className="ml-3">
                             <p className="font-semibold">{details?.user?.name || "Guest"}</p>
                             <button
-                                onClick={logoutHandle}
+                                onClick={() => {
+                                    logoutHandle();
+                                    setIsSidebarOpen(false);
+                                }}
                                 className="text-red-500 mt-1 text-sm hover:underline"
                             >
                                 Logout
@@ -158,6 +165,14 @@ const Navbar = ({ userId }) => {
                     </div>
                 </nav>
             </div>
+
+            {/* Overlay when Sidebar is open */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 lg:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
         </>
     );
 };
