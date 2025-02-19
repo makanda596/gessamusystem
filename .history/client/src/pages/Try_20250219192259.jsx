@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import logo from '../assets/logo.PNG';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash'; 
 
 const Allprojects = () => {
     const [projects, setProjects] = useState([]);
@@ -11,8 +11,11 @@ const Allprojects = () => {
     const [viewWeeklyProjects, setViewWeeklyProjects] = useState(true);
     const [yearSubmitted, setYearSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar state
+
+    const projectsPerPage = 6;
 
     useEffect(() => {
         const fetchWeeklyProjects = async () => {
@@ -32,6 +35,36 @@ const Allprojects = () => {
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
+
+    const handleSearch = debounce(() => {
+        if (searchTerm.trim() === '') {
+            setError('Please enter a search term.');
+            return;
+        }
+        setLoading(true);
+        try {
+            const filteredProjects = projects.filter(project => {
+                const title = project.title || '';
+                const description = project.description || '';
+                const trainer = project.trainer || '';
+                return (
+                    title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    trainer.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            });
+
+            if (filteredProjects.length > 0) {
+                setProjects(filteredProjects);
+            } else {
+                setError('No projects found.');
+            }
+        } catch (error) {
+            setError('Failed to fetch search results.');
+        } finally {
+            setLoading(false);
+        }
+    }, 500); 
 
     return (
         <div className="flex relative">
@@ -63,15 +96,13 @@ const Allprojects = () => {
                 </ul>
             </div>
 
-            {/* Sidebar Toggle Button (Hidden when sidebar is open) */}
-            {!sidebarOpen && (
-                <button
-                    onClick={toggleSidebar}
-                    className="fixed top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
-                >
-                    ☰
-                </button>
-            )}
+            {/* Sidebar Toggle Button */}
+            <button
+                onClick={toggleSidebar}
+                className="fixed top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+                ☰
+            </button>
 
             {/* Main Content */}
             <div className="flex-1 p-6 bg-gray-50 overflow-y-auto h-screen">
@@ -86,7 +117,7 @@ const Allprojects = () => {
                         placeholder="Search projects..."
                         className="border border-gray-300 p-2 rounded-md w-1/2 text-black"
                     />
-                    <button onClick={toggleSidebar} className="bg-blue-500 text-white p-2 ml-2 rounded-md hover:bg-blue-600">
+                    <button onClick={handleSearch} className="bg-blue-500 text-white p-2 ml-2 rounded-md hover:bg-blue-600">
                         Search
                     </button>
                 </div>
