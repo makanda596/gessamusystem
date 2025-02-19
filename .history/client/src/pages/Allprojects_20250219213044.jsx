@@ -35,7 +35,7 @@ const Allprojects = () => {
 
     return (
         <>
-       <Navbar />
+        
         <div className="flex relative">
             {/* Sidebar */}
             <div className={`fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white p-4 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out`}>
@@ -121,8 +121,7 @@ const Allprojects = () => {
                 )}
             </div>
         </div>
-</>
     );
 };
-
+</>
 export default Allprojects;
