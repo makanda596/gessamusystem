@@ -95,7 +95,7 @@ function App() {
           <Route path="/alert" element={<ProtectedRoute><Alert userId="67a20fc8b0d2021b64dc6466" /></ProtectedRoute>} />
           <Route path="/task/:id" element={<ProtectedRoute><Specific /></ProtectedRoute>} />
           <Route path="/trainings" element={<ProtectedRoute><Training /></ProtectedRoute>} />
-          <Route path="/asqQuiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+          <Route path="/Qasquiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
           <Route path="/project/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
           {/* <Route path="*" element={<h1>404 - Page Not Found</h1>} /> */}
