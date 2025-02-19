@@ -71,7 +71,7 @@ const Navbar = ({ userId }) => {
 
                     {/* Alert Icon with Count */}
                     <a href="/alert" className="relative hover:text-gray-300">
-                        <FaBell className="text-xl" />
+                        <FaBell className="text-2xl" />
                         {alertCount > 0 && (
                             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                 {alertCount}
@@ -119,9 +119,9 @@ const Navbar = ({ userId }) => {
                     <FaTimes className="text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
                 </div>
 
-                <nav className="flex flex-col space-y-4 ">
-                    <a href="/" className="hover:text-gray-300 cursor-pointer">Home</a>
-                    <a href="/projects" className="hover:text-gray-300">Projects</a>
+                <nav className="flex flex-col space-y-4">
+                    <a href="/dashboard" className="hover:text-gray-300">Home</a>
+                    <a href="/Projects" className="hover:text-gray-300">Projects</a>
                     <a href="/trainings" className="hover:text-gray-300">Live Trainings</a>
                     <a href="/asqQuiz" className="hover:text-gray-300">asqQuiz</a>
                     <a href="/task" className="hover:text-gray-300">Tasks</a>
