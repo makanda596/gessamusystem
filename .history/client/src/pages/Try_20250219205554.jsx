@@ -44,7 +44,6 @@ const Quiz = () => {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const questions = quizLevels[level];
 
@@ -67,16 +66,8 @@ const Quiz = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      {/* Sidebar Toggle Button (Only visible on small screens) */}
-      <button
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="md:hidden p-3 bg-blue-600 text-white font-bold w-full"
-      >
-        {isSidebarOpen ? "Close Levels" : "Select Level"}
-      </button>
-
       {/* Sidebar for selecting level */}
-      <div className={`w-full md:w-1/4 bg-gray-800 text-white p-6 absolute md:relative transition-all duration-300 ${isSidebarOpen ? "left-0" : "-left-full"} md:left-0 md:block`}>
+      <div className="w-full md:w-1/4 bg-gray-800 text-white p-6">
         <h2 className="text-xl font-bold mb-4">Select Level</h2>
         {Object.keys(quizLevels).map((lvl) => (
           <button
@@ -86,10 +77,10 @@ const Quiz = () => {
               setAnswers({});
               setSubmitted(false);
               setScore(0);
-              setIsSidebarOpen(false);
             }}
-            className={`w-full p-3 mb-2 text-left rounded-md text-lg ${level === lvl ? "bg-blue-500" : "hover:bg-gray-600"
-              }`}
+            className={`w-full p-2 mb-2 text-left rounded-md ${
+              level === lvl ? "bg-blue-500" : "hover:bg-gray-600"
+            }`}
           >
             {lvl.charAt(0).toUpperCase() + lvl.slice(1)}
           </button>
@@ -109,14 +100,15 @@ const Quiz = () => {
               {q.options.map((option) => (
                 <button
                   key={option}
-                  className={`block w-full text-left p-3 rounded-md border text-sm sm:text-base ${submitted
+                  className={`block w-full text-left p-2 rounded-md border ${
+                    submitted
                       ? option === q.correct
                         ? "bg-green-500 text-white"
                         : answers[index] === option
-                          ? "bg-red-500 text-white"
-                          : "bg-gray-200"
+                        ? "bg-red-500 text-white"
+                        : "bg-gray-200"
                       : "hover:bg-blue-200"
-                    }`}
+                  }`}
                   onClick={() => handleSelect(index, option)}
                   disabled={submitted}
                 >
@@ -130,7 +122,7 @@ const Quiz = () => {
         {!submitted ? (
           <button
             onClick={handleSubmit}
-            className="w-full bg-blue-600 text-white font-bold py-3 mt-4 rounded-md hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white font-bold py-2 mt-4 rounded-md hover:bg-blue-700"
           >
             Submit Quiz
           </button>
