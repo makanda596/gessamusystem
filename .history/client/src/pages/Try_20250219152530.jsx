@@ -78,7 +78,7 @@ const Allprojects = () => {
             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden p-4">
                 {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-
+            
             {/* Sidebar */}
             <div className={`absolute md:relative bg-gray-800 text-white p-4 md:w-64 w-3/4 h-full transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 duration-300`}>
                 <h2 className="text-xl font-semibold mb-6">Dashboard</h2>
