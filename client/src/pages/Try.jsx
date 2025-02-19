@@ -1,191 +1,73 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Navbar from '../components/Navbar';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Tasks = () => {
-    const [tasks, setTasks] = useState([]);
+const Alert = ({ userId }) => {
+    const [alerts, setAlerts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
-    const [notification, setNotification] = useState(null);
+    const [error, setError] = useState(null);
 
-    const showTask = async () => {
-        try {
-            const response = await axios.get('https://gessamubackend.onrender.com/task/takeTask');
-            setTasks(response.data);
-        } catch (error) {
-            setError('Failed to load tasks. Please try again later.');
-        } finally {
+    useEffect(() => {
+        if (!userId) {
+            setError("User ID is missing.");
             setLoading(false);
-        }
-    };
-
-    const showNotification = (message) => {
-        setNotification(message);
-        setTimeout(() => setNotification(null), 3000);
-    };
-
-    useEffect(() => {
-        showTask();
-    }, []);
-
-    const filteredTasks = tasks.filter(
-        (task) =>
-            (task.task && task.task.toLowerCase().includes(searchQuery.toLowerCase())) ||
-            (task.description && task.description.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-
-    return (
-        <>
-            <Navbar />
-            <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
-                <h1 className="text-3xl sm:text-4xl font-bold text-center text-blue-600 mb-6">My Tasks</h1>
-
-                {notification && (
-                    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white py-2 px-4 rounded shadow-lg">
-                        {notification}
-                    </div>
-                )}
-
-                <div className="max-w-md mx-auto mb-4 sm:mb-6">
-                    <input
-                        type="text"
-                        placeholder="Search tasks..."
-                        className="w-full p-3 sm:p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                </div>
-
-                {loading && <div className="text-center text-gray-600">Loading tasks...</div>}
-                {error && <div className="text-center text-red-500">{error}</div>}
-
-                {filteredTasks.length === 0 && !loading && !error ? (
-                    <div className="text-center text-gray-600">No tasks found.</div>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                        {filteredTasks.map((task) => (
-                            <TaskCard key={task._id} task={task} showNotification={showNotification} />
-                        ))}
-                    </div>
-                )}
-            </div>
-        </>
-    );
-};
-
-const TaskCard = ({ task, showNotification }) => {
-    const [countdown, setCountdown] = useState('');
-    const [showModal, setShowModal] = useState(false);
-    const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        const updateCountdown = () => {
-            setCountdown(calculateCountdown(task.date));
-        };
-
-        updateCountdown();
-        const interval = setInterval(updateCountdown, 1000);
-
-        return () => clearInterval(interval);
-    }, [task.date]);
-
-    const shareTask = () => {
-        const taskUrl = `${window.location.origin}/task/${task._id}`;
-        if (navigator.share) {
-            navigator
-                .share({
-                    title: task.title,
-                    text: task.description,
-                    url: taskUrl,
-                })
-                .catch((error) => console.error('Error sharing:', error));
-        } else {
-            navigator.clipboard.writeText(taskUrl);
-            showNotification('Task link copied to clipboard!');
-        }
-    };
-
-    const handleSubmitTask = async () => {
-        if (!title.trim()) {
-            showNotification('Please enter a title for your submission.');
             return;
         }
 
-        try {
-            await axios.post(`https://gessamubackend.onrender.com/task/submitTask/${task._id}`, { title });
-            showNotification('Task submitted successfully!');
-            setShowModal(false);
-            setTitle('');
-        } catch (error) {
-            showNotification('Failed to submit the task. Please try again.');
-        }
-    };
+        const fetchAlerts = async () => {
+            try {
+                const response = await axios.get(`https://gessamubackend.onrender.com/alert/takeAlert/${userId}`);
+                setAlerts(response.data.alerts);
+            } catch (err) {
+                console.error("Error fetching alerts:", err.response?.data || err.message);
+                setError(err.response?.data?.message || "An error occurred while fetching alerts");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAlerts();
+    }, [userId]);
+
+    if (loading) {
+        return <div className="text-center text-gray-600">Loading alerts...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center text-red-600 font-semibold">{error}</div>;
+    }
 
     return (
-        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition">
-            <h2 className="text-lg sm:text-xl font-bold text-blue-700 mb-2">{task.task}</h2>
-            <p className="text-gray-700 mb-2 sm:mb-4">{task.description}</p>
-            <p className="text-sm text-gray-500 mb-2">
-                Level: <span className="font-medium">{task.level}</span>
-            </p>
-            <p className="text-sm text-gray-500 mb-4">
-                Due: <span className="font-medium">{new Date(task.date).toLocaleString()}</span>
-            </p>
-            <p className="text-sm text-red-600 font-semibold">Time Remaining: {countdown}</p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4">
-                <button className="px-3 sm:px-4 py-2 text-white rounded-md bg-green-500 hover:bg-green-600">
-                    {task.completed ? 'Mark as Pending' : 'Mark as Completed'}
-                </button>
-                <button className="px-3 sm:px-4 py-2 text-white rounded-md bg-gray-500 hover:bg-gray-600">
-                    Delete
-                </button>
-                <button
-                    onClick={shareTask}
-                    className="px-3 sm:px-4 py-2 text-white rounded-md bg-blue-500 hover:bg-blue-600"
-                >
-                    Share Task
-                </button>
-                <button
-                    onClick={() => setShowModal(true)}
-                    className="px-3 sm:px-4 py-2 text-white rounded-md bg-green-500 hover:bg-green-600"
-                >
-                    Submit Task
-                </button>
-            </div>
+        <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+            <h2 className="text-xl font-bold text-blue-700 mb-4">Your Alerts</h2>
 
-            {showModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
-                    <div className="bg-white p-4 sm:p-8 rounded-md shadow-lg max-w-xs sm:max-w-md w-full">
-                        <h3 className="text-lg sm:text-2xl font-bold mb-4">Submit Task</h3>
-                        <p className="mb-2"><strong>Selected Task:</strong> {task.task}</p>
-                        <p>Enter a title for your submission:</p>
-                        <input
-                            type="text"
-                            placeholder="Submission Title"
-                            className="w-full p-2 sm:p-3 border border-gray-300 rounded-md mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                        <div className="mt-4 sm:mt-6 flex justify-end gap-2 sm:gap-4">
-                            <button className="bg-gray-500 text-white px-3 sm:px-4 py-2 rounded-md hover:bg-gray-600" onClick={() => setShowModal(false)}>
-                                Cancel
-                            </button>
-                            <button className="bg-blue-500 text-white px-3 sm:px-4 py-2 rounded-md hover:bg-blue-600" onClick={handleSubmitTask}>
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            {alerts.length === 0 ? (
+                <p className="text-gray-500 text-center">No alerts available</p>
+            ) : (
+                <ul className="space-y-4">
+                    {alerts.map((alert) => (
+                        <li key={alert._id} className={`p-4 rounded-md shadow-sm text-white ${getStatusColor(alert.status)}`}>
+                            <p className="text-lg font-semibold">{alert.message}</p>
+                            <p className="text-sm font-medium mt-1">{alert.status}</p>
+                        </li>
+                    ))}
+                </ul>
             )}
         </div>
     );
 };
 
-const calculateCountdown = (dueDate) => {
-    const timeDiff = new Date(dueDate) - new Date();
-    if (timeDiff <= 0) return "Time's up!";
-    return new Date(timeDiff).toISOString().substr(11, 8);
+// Function to apply different colors based on alert status
+const getStatusColor = (status) => {
+    switch (status.toLowerCase()) {
+        case "urgent":
+            return "bg-red-500"; // Red for urgent alerts
+        case "pending":
+            return "bg-yellow-500"; // Yellow for pending
+        case "resolved":
+            return "bg-green-500"; // Green for resolved
+        default:
+            return "bg-gray-500"; // Default gray
+    }
 };
 
-export default Tasks;
+export default Alert;
