@@ -7,40 +7,30 @@ function SignUpForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [admNo, setAdmNo] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('');
   const [year, setYear] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+  const [loading, setLoading] = useState(false); // Loading state
 
   const { message, error, signup } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setPasswordError('Passwords do not match');
-      return;
-    }
-
-    setPasswordError('');
-    setLoading(true);
-
+    setLoading(true); // Start loading
     try {
       await signup(firstName, lastName, admNo, year, email, phoneNumber, password);
-      window.location.href = '/';
+      window.location.href = '/'
     } catch (error) {
       console.log(error.response ? error.response.data.message : 'Sign up failed');
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
+    <div className="min-h-screen flex items-center justify-center bg-blue-600">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <h1 className="text-4xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
         <p className="text-gray-600 text-center mb-6">Join us and start your journey!</p>
@@ -98,7 +88,7 @@ function SignUpForm() {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               className="pl-10 w-full p-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Phone Number"
+              placeholder="phone number"
               required
             />
           </div>
@@ -124,28 +114,18 @@ function SignUpForm() {
               required
             />
           </div>
-          <div className="relative">
-            <FiLock className="absolute top-3 left-3 text-gray-400" />
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="pl-10 w-full p-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Confirm Password"
-              required
-            />
-          </div>
-          {passwordError && <p className="text-red-500 text-sm text-center">{passwordError}</p>}
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 font-semibold"
-            disabled={loading}
+            disabled={loading} // Disable button while loading
           >
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
         </form>
         {message && (
-          <p className={`mt-4 text-center text-sm ${error ? 'text-red-500' : 'text-green-500'}`}>
+          <p
+            className={`mt-4 text-center text-sm ${error ? 'text-red-500' : 'text-green-500'}`}
+          >
             {message}
           </p>
         )}

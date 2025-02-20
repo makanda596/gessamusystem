@@ -42,8 +42,7 @@ const LoginPage = () => {
 
         {loading ? (
           <div className="flex flex-col items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-blue-500 border-gray-200 rounded-full animate-spin"></div>
-           
+              <div className="mt-8 w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
