@@ -109,7 +109,7 @@ const LoginPage = () => {
         )}
 
         {!loading && (
-          <div className="text-center mt-2">
+          <div className="text-center mt-4">
             <p>
               <a href="/forgot-password" className="text-white ">
                 Forgot your password?
