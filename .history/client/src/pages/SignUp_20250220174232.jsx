@@ -15,20 +15,12 @@ function SignUpForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [passwordError, setPasswordError] = useState('');
 
     const { message, error, signup } = useAuthStore();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setPasswordError('');
-
-        if (password !== confirmPassword) {
-            setPasswordError('Passwords do not match');
-            return;
-        }
-
         setLoading(true);
         try {
             await signup(firstName, lastName, admNo, year, email, phoneNumber, password);
@@ -41,14 +33,13 @@ function SignUpForm() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
-            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
-                <h1 className="text-4xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
-                <p className="text-gray-600 text-center mb-6">Join us and start your journey!</p>
-                {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-                {passwordError && <p className="text-red-500 text-center mb-4">{passwordError}</p>}
+        <div className="min-h-screen flex items-center justify-center ">
+            <div className="bg-white px-8 py-2 rounded-2xl shadow-2xl w-full max-w-md">
+                <h1 className="text-2xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
+                <p className="text-gray-600 text-center mb-4">Join us and start your journey!</p>
+                {error && <p className="text-red-500 text-center mb-2">{error}</p>}
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-2">
                     <div className="relative">
                         <FiUser className="absolute top-3 left-3 text-gray-400" />
                         <input
@@ -150,8 +141,8 @@ function SignUpForm() {
                     >
                         {loading ? 'Creating Account...' : 'Sign Up'}
                     </button>
-                </form>
-                <p className="text-center mt-4 text-gray-600">Already have an account? <a href="/login" className="text-indigo-600 hover:underline">Log in</a></p>
+                </form>       
+                         <p className="text-center mt-4 text-gray-600">Already have an account? <a href="/" className="text-indigo-600 hover:underline">Log in</a></p>
             </div>
         </div>
     );
