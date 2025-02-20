@@ -20,6 +20,6 @@ export const UsersetCookieGenerateToken = async (res, userId) => {
         }
         return token
     } catch (error) {
-        res.status(404).json({message:"no"})
+        res.status(404).json(error.message)
     }
 }
