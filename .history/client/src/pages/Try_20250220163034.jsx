@@ -29,13 +29,13 @@ const LoginPage = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-blue-600 shadow-lg rounded-lg p-8 w-full max-w-md">
-        <div className=" flex justify-center mb-6">
+        <div className="flex justify-center mb-6">
           <img
             src={logo} // Replace with the correct path to your logo
             alt="Gessamu Logo"
-            className="w-40 h-40"
+            className="w-20 h-20"
           />
         </div>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -116,8 +116,8 @@ const LoginPage = () => {
               </a>
             </p>
             <p className="mt-2">
-              <a href="/signup" className="text-white ">
-                Don't have an account? <span className="text-black font-bold">Sign up here.</span>
+              <a href="/signup" className="text-white underline">
+                Don't have an account? Sign up here.
               </a>
             </p>
           </div>

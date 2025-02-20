@@ -29,8 +29,8 @@ const LoginPage = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center ">
-      <div className="bg-blue-600 shadow-lg rounded-lg p-8 w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center lg:bg-blue-600">
+      <div className=" shadow-lg rounded-lg p-8 w-full max-w-md">
         <div className=" flex justify-center mb-6">
           <img
             src={logo} // Replace with the correct path to your logo
@@ -116,8 +116,8 @@ const LoginPage = () => {
               </a>
             </p>
             <p className="mt-2">
-              <a href="/signup" className="text-white ">
-                Don't have an account? <span className="text-black font-bold">Sign up here.</span>
+              <a href="/signup" className="text-white underline">
+                Don't have an account? Sign up here.
               </a>
             </p>
           </div>

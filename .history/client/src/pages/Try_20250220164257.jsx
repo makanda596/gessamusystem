@@ -117,7 +117,7 @@ const LoginPage = () => {
             </p>
             <p className="mt-2">
               <a href="/signup" className="text-white ">
-                Don't have an account? <span className="text-black font-bold">Sign up here.</span>
+                Don't have an account? <span>Sign up here.</span>
               </a>
             </p>
           </div>
