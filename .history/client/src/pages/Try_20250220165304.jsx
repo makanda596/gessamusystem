@@ -101,7 +101,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-white text-blue-600 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full bg-white text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
             >
               Log In
             </button>
@@ -109,7 +109,7 @@ const LoginPage = () => {
         )}
 
         {!loading && (
-          <div className="text-center mt-2">
+          <div className="text-center mt-4">
             <p>
               <a href="/forgot-password" className="text-white ">
                 Forgot your password?
