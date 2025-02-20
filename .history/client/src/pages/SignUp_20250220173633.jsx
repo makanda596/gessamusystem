@@ -141,8 +141,7 @@ function SignUpForm() {
                     >
                         {loading ? 'Creating Account...' : 'Sign Up'}
                     </button>
-                </form>       
-                         <p className="text-center mt-4 text-gray-600">Already have an account? <a href="/" className="text-indigo-600 hover:underline">Log in</a></p>
+                </form>
             </div>
             <p>create an account</p>
         </div>

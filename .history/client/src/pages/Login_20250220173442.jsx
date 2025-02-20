@@ -99,7 +99,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-white text-blue-600 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full bg-white text-blue-600 py-2 rounded-lg hover:bg-black focus:outline-none focus:ring focus:ring-blue-300"
             >
               Log In
             </button>

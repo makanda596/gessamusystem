@@ -34,7 +34,7 @@ function SignUpForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center ">
-      <div className="bg-white px-8 py-2 rounded-2xl shadow-4xl w-full max-w-md">
+      <div className="bg-white px-8 py-2 rounded-2xl shadow-2xl w-full max-w-md">
         <h1 className="text-2xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
         <p className="text-gray-600 text-center mb-4">Join us and start your journey!</p>
         {error && <p className="text-red-500 text-center mb-2">{error}</p>}
@@ -142,9 +142,8 @@ function SignUpForm() {
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
         </form>
-        <p>create an account</p>
       </div>
-
+      <p>create an account</p>
     </div>
   );
 }
