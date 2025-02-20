@@ -137,6 +137,17 @@ const TaskCard = ({ task, showNotification }) => {
             {/* Responsive Buttons */}
             <div className="flex flex-wrap gap-2 justify-between items-center mt-4">
                 <button
+                    className={`flex-1 px-4 py-2 rounded-lg text-white text-sm sm:text-base transition-all duration-300 ${task.completed ? 'bg-green-500 hover:bg-green-600 active:scale-95' : 'bg-red-500 hover:bg-red-600 active:scale-95'
+                        }`}
+                >
+                    {task.completed ? 'Mark as Pending' : 'Mark as Completed'}
+                </button>
+
+                <button className="flex-1 bg-gray-500 text-white px-4 py-2 rounded-lg text-sm sm:text-base hover:bg-gray-600 transition-all duration-300 active:scale-95">
+                    Delete
+                </button>
+
+                <button
                     onClick={shareTask}
                     className="flex-1 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm sm:text-base hover:bg-blue-600 transition-all duration-300 active:scale-95"
                 >
