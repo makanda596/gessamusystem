@@ -1,6 +1,5 @@
 import react, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar';
-import axios from 'axios'
 import logo from '../assets/logo.jpg'
 import { debounce } from 'lodash'; // Debounce import
 
