@@ -33,13 +33,13 @@ function SignUpForm() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center ">
-            <div className="bg-white px-8 py-2 rounded-2xl shadow-2xl w-full max-w-md">
-                <h1 className="text-2xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
-                <p className="text-gray-600 text-center mb-4">Join us and start your journey!</p>
-                {error && <p className="text-red-500 text-center mb-2">{error}</p>}
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+                <h1 className="text-4xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
+                <p className="text-gray-600 text-center mb-6">Join us and start your journey!</p>
+                {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-                <form onSubmit={handleSubmit} className="space-y-2">
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="relative">
                         <FiUser className="absolute top-3 left-3 text-gray-400" />
                         <input
