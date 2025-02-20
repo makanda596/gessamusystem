@@ -144,18 +144,16 @@ const Allprojects = () => {
                         onClick={handleSearch}
                         className="bg-blue-500 text-white p-2 ml-2 rounded-md hover:bg-blue-600"
                     >
-                        Search 
+                        Search
                     </button>
                 </div>
 
                 {/* Loading Indicator */}
-                {loading && <div className="text-center">  <div className="flex items-center justify-center min-h-screen">
-                    <div className="mt-8 w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
-                </div></div>}
+                {loading && <div className="text-center">Loading...</div>}
 
                 {/* Projects List */}
                 {!loading && (viewWeeklyProjects || yearSubmitted) && (
-                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                         {currentProjects.length > 0 ? (
                             currentProjects.map((project, index) => (
                                 <div
@@ -175,13 +173,13 @@ const Allprojects = () => {
                                     <p className="text-black font-semibold mt-2">
                                         {project.description.length > 100 ? `${project.description.slice(0, 100)}...` : project.description}
                                     </p>
-                                    <p className="text-sm text-black font-sans">
-                                        {/* Link:{""} */}
+                                    <p className="text-md text-black font-bold">
+                                        Link:{""}
                                         <a href={project.reference} target="_blank" rel="noreferrer" className="text-blue-600 font-sans underline hover:text-green-600">
                                             {project.reference}                          </a>
                                     </p>
-                                    <p className="text-sm text-black font-bold">
-                                        Trainer: <span className="text-green-600 text-xl font-semibold">{project.trainer}</span>
+                                    <p className="text-md text-black font-bold">
+                                        Trainer: <span className="text-green-600 text-xl font-bold">{project.trainer}</span>
                                     </p>
                                     <p className="text-sm text-black font-bold">
                                         Date: <span className="text-red-700">{new Date(project?.date).toLocaleDateString()}</span>
@@ -196,7 +194,7 @@ const Allprojects = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="mt-4 flex justify-center">
+                    <div className="mt-6 flex justify-center">
                         <button
                             onClick={() => handlePageChange(currentPage - 1)}
                             disabled={currentPage === 1}

@@ -144,18 +144,16 @@ const Allprojects = () => {
                         onClick={handleSearch}
                         className="bg-blue-500 text-white p-2 ml-2 rounded-md hover:bg-blue-600"
                     >
-                        Search 
+                        Search
                     </button>
                 </div>
 
                 {/* Loading Indicator */}
-                {loading && <div className="text-center">  <div className="flex items-center justify-center min-h-screen">
-                    <div className="mt-8 w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
-                </div></div>}
+                {loading && <div className="text-center">Loading...</div>}
 
                 {/* Projects List */}
                 {!loading && (viewWeeklyProjects || yearSubmitted) && (
-                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                         {currentProjects.length > 0 ? (
                             currentProjects.map((project, index) => (
                                 <div
@@ -196,7 +194,7 @@ const Allprojects = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="mt-4 flex justify-center">
+                    <div className="mt-6 flex justify-center">
                         <button
                             onClick={() => handlePageChange(currentPage - 1)}
                             disabled={currentPage === 1}

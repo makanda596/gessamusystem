@@ -47,7 +47,7 @@ const Tasks = () => {
                     </div>
                 )}
 
-                <div className="max-w-sm mx-auto mb-2">
+                <div className="max-w-sm mx-auto mb-4">
                     <input
                         type="text"
                         placeholder="Search tasks..."
@@ -63,7 +63,7 @@ const Tasks = () => {
                 {filteredTasks.length === 0 && !loading && !error ? (
                     <div className="text-center text-gray-600">No tasks found.</div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredTasks.map((task) => (
                             <TaskCard key={task._id} task={task} showNotification={showNotification} />
                         ))}
