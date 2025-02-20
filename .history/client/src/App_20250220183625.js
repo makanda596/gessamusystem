@@ -75,7 +75,14 @@ function App() {
       // <div className="flex items-center justify-center min-h-screen">
       //   <div className="mt-8 w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
       // </div>
-    ) ;
+    )}else {
+      return (
+        <div>
+          <h1>Welcome to the App</h1>
+       
+        </div>
+      );
+    }
   }
 
   return (
