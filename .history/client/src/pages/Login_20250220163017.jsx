@@ -35,7 +35,7 @@ const LoginPage = () => {
                     <img
                         src={logo} // Replace with the correct path to your logo
                         alt="Gessamu Logo"
-                        className="w-40 h-40"
+                        className="w-20 h-20"
                     />
                 </div>
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}

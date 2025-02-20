@@ -30,25 +30,25 @@ const LoginPage = () => {
    
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-blue-600 shadow-lg rounded-lg p-8 w-full max-w-md">
+            <div className="bg-[#006400] shadow-lg rounded-lg p-8 w-full max-w-md">
                 <div className="flex justify-center mb-6">
                     <img
                         src={logo} // Replace with the correct path to your logo
-                        alt="Gessamu Logo"
-                        className="w-40 h-40"
+                        alt="Moi University Logo"
+                        className="w-20 h-20"
                     />
                 </div>
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
+                {/* Show loader or login form */}
                 {loading ? (
                     <div className="flex flex-col items-center justify-center">
                         <div className="w-10 h-10 border-4 border-t-blue-500 border-gray-200 rounded-full animate-spin"></div>
-                       <div className="flex items-center justify-center min-h-screen">
-                            <div className="mt-8 w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
-                        </div>
+                        <p className="mt-4 text-white">Logging in...</p>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Registration Number Input */}
                         <div>
                             <label className="block text-white font-medium mb-2">
                                 Reg. Number
@@ -86,6 +86,7 @@ const LoginPage = () => {
                             </div>
                         </div>
 
+                        {/* Remember Me Checkbox */}
                         <div className="flex items-center">
                             <input
                                 type="checkbox"
@@ -99,6 +100,7 @@ const LoginPage = () => {
                             </label>
                         </div>
 
+                        {/* Login Button */}
                         <button
                             type="submit"
                             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
@@ -108,10 +110,11 @@ const LoginPage = () => {
                     </form>
                 )}
 
+                {/* Forgot Password and Signup Links */}
                 {!loading && (
                     <div className="text-center mt-4">
                         <p>
-                            <a href="/forgot-password" className="text-white ">
+                            <a href="/forgot-password" className="text-white underline">
                                 Forgot your password?
                             </a>
                         </p>

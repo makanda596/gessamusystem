@@ -6,16 +6,16 @@ const SECTRET_KEY = process.env.SECTRET_KEY
 
 export const UsersetCookieGenerateToken = async (res, userId) => {
     try {
-        const token = jwt.sign({ userId }, SECTRET_KEY, { expiresIn: "7d" })
+        const token = jwt.sign({ userId }, SECTRET_KEY, { expiresIn: "15 min" })
 
         res.cookie("token", token, {
-            httpOnly: true,
-            sameSite: Strict,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days in milliseconds
+            httpOnly: false,
+            secure: true,
+            sameSite:"None",
+            // maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days in milliseconds
         })
         if (!token) {
-            res.status(404).json({ message: "token not provided" })
+            res.status(404).json({ message: "" })
             return 0;
         }
         return token
