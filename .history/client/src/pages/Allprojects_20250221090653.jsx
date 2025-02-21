@@ -160,7 +160,7 @@ const Allprojects = () => {
                             currentProjects.map((project, index) => (
                                 <div
                                     key={index}
-                                    className="mb-2 p-2 border bg-gray-200 border-gray-200 rounded-lg shadow-md"
+                                    className="mb-4 p-2 border bg-gray-200 border-gray-200 rounded-lg shadow-md"
                                 >
                                     <h2 className="text-md font-semibold text-blue-600 p-1 rounded-md transition-colors duration-300">
                                         <a href={`/project/${project._id}`} target="_blank" rel="noreferrer" className="hover:underline hover:text-blue-600">
@@ -172,7 +172,7 @@ const Allprojects = () => {
                                         alt={project.task || "Task Image"}
                                         className="mt-2 w-full h-56 object-cover rounded-sm mb-2 "
                                     />
-                                    <p className="text-black font-semibold mt-0">
+                                    <p className="text-black font-semibold mt-2">
                                         {project.description.length > 100 ? `${project.description.slice(0, 100)}...` : project.description}
                                     </p>
                                     <p className="text-sm text-black font-sans">

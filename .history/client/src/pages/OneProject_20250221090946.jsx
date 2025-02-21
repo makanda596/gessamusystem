@@ -102,7 +102,7 @@ const OneProject = () => {
                                 </a>
                                 <button
                                     onClick={() => handleCopyLink(project.reference)}
-                                    className="ml-2 px-2 py-1 text-sm bg-green-600 hover:bg-gray-300 rounded border"
+                                    className="ml-2 px-2 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded border"
                                 >
                                     Copy Link
                                 </button>
