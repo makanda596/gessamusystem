@@ -7,7 +7,7 @@ const GetSubmission = () => {
 
     const fetchSubmissions = async () => {
         try {
-            const response = await axios.get('https://gessamubackend.onrender.com/task/getSubmittedTask');
+            const response = await axios.get('https://gessamubackend.onrender.com//task/getSubmittedTask');
             setSubmissions(response.data);
         } catch (error) {
             setError('No submitted tasks found.');
