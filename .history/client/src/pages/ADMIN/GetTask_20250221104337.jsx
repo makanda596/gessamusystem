@@ -10,7 +10,7 @@ const GetTask = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get('https://gessamubackend.onrender.com/task/takeTask');
+            const response = await axios.get('https://gessamubackend.onrender.com//task/takeTask');
             setTasks(response.data);
             setFilteredTasks(response.data);
         } catch (err) {
