@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         try {
             const response = await axios.post("https://gessamubackend.onrender.com/admin/adminLogout")
             console.log(response)
-            window.location.href = '/adminLogin'
+            window.location.href = '/'
         } catch (error) {
             console.log(error.message)
         }

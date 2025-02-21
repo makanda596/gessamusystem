@@ -10,7 +10,7 @@ export const AdminsetCookieGenerateToken = async (res, adminId) => {
         const token = jwt.sign({ adminId }, SECTRET_KEY, { expiresIn: "1day" })
 
         res.cookie("token", token, {
-          httpOnly: false,
+          httpOnly: true,
             secure: true,
             sameSite:"None",
             maxAge: 4 * 24 * 60 * 60 * 1000,
