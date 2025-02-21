@@ -102,7 +102,7 @@ const OneProject = () => {
                                 </a>
                                 <button
                                     onClick={() => handleCopyLink(project.reference)}
-                                    className="ml-2 px-2 py-1 text-sm bg-green-600 hover:bg-gray-300 rounded border"
+                                    className="ml-2 px-2 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded border"
                                 >
                                     Copy Link
                                 </button>
@@ -117,8 +117,8 @@ const OneProject = () => {
                 </div>
 
                 {/* Recommended Projects */}
-                <div className="lg:w-1/3 bg-white p-2 rounded-lg shadow-md border border-gray-300 h-full  right-2 ">
-                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Recommended Projects</h2>
+                <div className="lg:w-1/3 bg-white p-2 rounded-lg shadow-md border border-gray-300 h-full fixed right-2 ">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Recommended Projects</h2>
                     {weeklyProjects.length > 0 ? (
                         <ul className="space-y-4">
                             {weeklyProjects
