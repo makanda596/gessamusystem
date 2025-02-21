@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../store/auth';
+import logo from '../assets/logo.jpg'
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -42,16 +43,16 @@ const ForgotPassword = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-blue-500">
-            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+            <div className="bg-white shadow-lg rounded-lg p-4 w-full max-w-md">
                 <div className="flex justify-center mb-6">
                     <img
-                        src="/path-to-logo.png" // Replace with the correct path to your logo
+                        src={logo} // Replace with the correct path to your logo
                         alt="Logo"
                         className="w-20 h-20"
                     />
                 </div>
 
-                <h2 className="text-2xl font-semibold text-center mb-4">Forgot Password</h2>
+                <h2 className="text-xl font-semibold text-center mb-4">Forgot Password</h2>
 
                 {/* Success or Error Message */}
                 {message && <p className="text-green-500 text-center mb-4">{message}</p>}
@@ -101,7 +102,7 @@ const ForgotPassword = () => {
 
                 <div className="text-center mt-4">
                     <p>
-                        <a href="/login" className="text-blue-600 underline">Remembered your password? Login here.</a>
+                        <a href="/" className="text-blue-600 underline">Remembered your password? Login here.</a>
                     </p>
                 </div>
             </div>
