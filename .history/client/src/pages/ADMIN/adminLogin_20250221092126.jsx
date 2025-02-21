@@ -109,7 +109,11 @@ const AdminLoginPage = () => {
                             Forgot your password?
                         </a>
                     </p>
-                    
+                    <p className="mt-2">
+                        <a href="/signup" className="text-green-700 hover:text-green-800">
+                            Don't have an account? Sign up here.
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
