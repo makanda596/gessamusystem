@@ -20,6 +20,7 @@ export const UserRefreshToken = async (res, userId) => {
         return refreshtoken
 
     } catch (error) {
+        res.status(404).json(error.message)
 
     }
 }
