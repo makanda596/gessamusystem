@@ -91,16 +91,13 @@ phoneNumber: user.phoneNumber,
         console.log("✅ Session after login:", req.session);
 
         // ✅ Return user details in response (excluding password)
-        req.session.save((err) => {
-            if (err) {
-                console.error("Session save error:", err);
-                return res.status(500).json({ message: "Session error" });
-            }
-            res.json({ message: "Login successful", user: req.session.user });
+        res.status(200).json({
+            success: true,
+            message: "User logged in successfully",
+            user: req.session.user, // Sending session data
         });
 
     } catch (error) {
-        console.error("❌ Login Error:", error);
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
