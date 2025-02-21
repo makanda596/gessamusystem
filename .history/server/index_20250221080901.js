@@ -75,7 +75,14 @@ app.use(
     })
 );
 //for testng
-
+app.get('/session', (req, res) => {
+    if (req.session.user) {
+        const user = JSON.parse(req.session.user); 
+        res.json(user);
+    } else {
+        res.json({ message: "No session found." });
+    }
+});
 
 app.get('/api/test', (req, res) => {
     res.json({ message: 'CORS works!' });
@@ -103,11 +110,19 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
+    // Check if the user is logged in by verifying if session data exists
     if (req.session.user) {
-        const user = JSON.parse(req.session.user);
-        res.json(user);
+        const user = JSON.parse(req.session.user); 
+        res.json({
+            message: 'Profile details',
+            user:{
+            user: req.session.user,
+            email: req.session.email,
+            admNo: req.session.admNo}
+        });
     } else {
-        res.json({ message: "No session found." });
+        // If the session doesn't exist, send an error indicating the user needs to log in
+        res.status(401).send({ message: 'You need to log in first' });
     }
 });
 //uploading a file
