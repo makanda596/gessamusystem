@@ -65,6 +65,7 @@ app.use(
             mongoUrl: "mongodb+srv://oumab743:makandabrian123@cluster0.qj7my.mongodb.net/Gessamu?retryWrites=true&w=majority&appName=Cluster0",
             collectionName: 'sessions',
             ttl: 14 * 24 * 60 * 60, // Expire sessions after 14 days
+            stringify: true 
         }),
         cookie: { 
             secure: true,  // Only send cookies over HTTPS
@@ -74,7 +75,10 @@ app.use(
     })
 );
 //for testng
-
+app.get('/session', (req, res) => {
+    console.log("Session Data:", req.session);
+    res.send(req.session);
+});
 app.get('/api/test', (req, res) => {
     res.json({ message: 'CORS works!' });
 });

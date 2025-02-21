@@ -65,6 +65,7 @@ app.use(
             mongoUrl: "mongodb+srv://oumab743:makandabrian123@cluster0.qj7my.mongodb.net/Gessamu?retryWrites=true&w=majority&appName=Cluster0",
             collectionName: 'sessions',
             ttl: 14 * 24 * 60 * 60, // Expire sessions after 14 days
+            stringify: true 
         }),
         cookie: { 
             secure: true,  // Only send cookies over HTTPS
@@ -74,6 +75,7 @@ app.use(
     })
 );
 //for testng
+
 
 app.get('/api/test', (req, res) => {
     res.json({ message: 'CORS works!' });
@@ -100,20 +102,7 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
-    // Check if the user is logged in by verifying if session data exists
-    if (req.session.user) {
-        res.send({
-            message: 'Profile details',
-            user: req.session.user,
-            email: req.session.email,
-            admNo: req.session.admNo
-        });
-    } else {
-        // If the session doesn't exist, send an error indicating the user needs to log in
-        res.status(401).send({ message: 'You need to log in first' });
-    }
-});
+
 //uploading a file
 app.use('/uploads', upload.single('file'), uploadRoutes)
 //getting the images
