@@ -64,7 +64,6 @@ app.use(
         store: MongoStore.create({
             mongoUrl: "mongodb+srv://oumab743:makandabrian123@cluster0.qj7my.mongodb.net/Gessamu?retryWrites=true&w=majority&appName=Cluster0",
             collectionName: 'sessions',
-            ttl: 14 * 24 * 60 * 60, // Expire sessions after 14 days
         }),
         cookie: { 
             secure: true,  // Only send cookies over HTTPS
