@@ -8,16 +8,16 @@ import { sendPasswordResetEmail, sendRestPasswordEmail } from '../mailtrap/Email
 
 
 export const signup = async (req, res) => {
-    const { firstName, lastName, email, phoneNumber ,password } = req.body;
+    const { firstName, lastName, admNo, year ,password } = req.body;
 
     try {
-        if (!firstName || !lastName  || !email ||! phoneNumber ||! password) {
+        if (!firstName || !lastName || !admNo || !year || !email ||! phoneNumber ||! password) {
             return res.status(400).json({ message: "Please fill all the fields" });
         }
 
-        const existingUser = await User.findOne({ email});
+        const existingUser = await User.findOne({ admNo });
         if (existingUser) {
-            return res.status(400).json({ message: "Email already exists" });
+            return res.status(400).json({ message: "AdmNo already exists" });
         } 
         const existingphone = await User.findOne({ phoneNumber });
         if (existingphone) {
@@ -32,8 +32,8 @@ export const signup = async (req, res) => {
         const user = new User({
             firstName,
             lastName,
-            // admNo,
-            // year,
+            admNo,
+            year,
             email,
             phoneNumber,
             password: hashPassword,
@@ -57,13 +57,13 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { admNo, password } = req.body;
 
     try {
         // Find user by admission number
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ admNo });
         if (!user) {
-            return res.status(404).json({ message: "Invalid email address" });
+            return res.status(404).json({ message: "Invalid admission number" });
         }
 
         // Compare passwords
@@ -80,12 +80,12 @@ export const login = async (req, res) => {
         // ✅ Store user details in session
       req.session.user = {
     id: user._id,
-    // admNo: user.admNo,
+    admNo: user.admNo,
     email: user.email,
     firstName: user.firstName,
     lastName: user.lastName,
 //     year:user.year,
-phoneNumber: user.phoneNumber,
+// phoneNumber: user.phoneNumber,
     avatar: user.avatar, // Add the avatar URL or path here
         }; 
         console.log("✅ Session after login:", req.session);

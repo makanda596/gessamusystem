@@ -1,55 +1,56 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuthStore } from '../store/auth';
-import logo from '../assets/logo.jpg';
-import gis from '../assets/gis.webp'; // Import your background image
+import logo from '../assets/logo.jpg'
 
 const LoginPage = () => {
   const [admNo, setAdmNo] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const { login, error } = useAuthStore();
+  const [loading, setLoading] = useState(false); // State to handle loading
+  const { login, error, isAuthenticated } = useAuthStore();
   axios.defaults.withCredentials = true;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(true); // Start loading
 
     try {
-      await login(admNo, password, { withCredentials: true });
+      await login(admNo, password, { withCredentials: true })
+
       window.location.href = '/dashboard';
     } catch (error) {
       console.log(error.response ? error.response.data.message : 'Login failed');
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading
     }
   };
 
+
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
-      style={{ backgroundImage: `url(${gis})` }}
-    >
-      {/* Overlay for better readability */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-
-      <div className="bg-blue-600 shadow-lg rounded-lg p-6 w-full max-w-md z-10">
-        <div className="flex justify-center mb-6">
-          <img src={logo} alt="Gessamu Logo" className="w-20 h-20" />
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className="bg-blue-600 shadow-lg rounded-lg p-2 w-full max-w-md">
+        <div className=" flex justify-center mb-6">
+          <img
+            src={logo} // Replace with the correct path to your logo
+            alt="Gessamu Logo"
+            className="w-20 h-20"
+          />
         </div>
-
         {error && <p className="text-red-500 text-center mb-2 font-bold">{error}</p>}
 
         {loading ? (
           <div className="flex flex-col items-center justify-center">
             <div className="w-10 h-10 border-4 border-t-blue-500 border-gray-200 rounded-full animate-spin"></div>
+
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-white font-medium mb-2">Reg. Number</label>
+              <label className="block text-white font-medium mb-2">
+                Reg. Number
+              </label>
               <input
                 type="text"
                 value={admNo}
@@ -62,7 +63,9 @@ const LoginPage = () => {
 
             {/* Password Input */}
             <div>
-              <label className="block text-white font-medium mb-2">Password</label>
+              <label className="block text-white font-medium mb-2">
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -89,7 +92,9 @@ const LoginPage = () => {
                 onChange={() => setRememberMe(!rememberMe)}
                 className="mr-2"
               />
-              <label htmlFor="rememberMe" className="text-white">Remember me</label>
+              <label htmlFor="rememberMe" className="text-white">
+                Remember me
+              </label>
             </div>
 
             <button
@@ -104,12 +109,12 @@ const LoginPage = () => {
         {!loading && (
           <div className="text-center mt-2">
             <p>
-              <a href="/forgot-password" className="text-white">
+              <a href="/forgot-password" className="text-white ">
                 Forgot your password?
               </a>
             </p>
             <p className="mt-2">
-              <a href="/signup" className="text-white">
+              <a href="/signup" className="text-white ">
                 Don't have an account? <span className="text-black font-bold">Sign up here.</span>
               </a>
             </p>

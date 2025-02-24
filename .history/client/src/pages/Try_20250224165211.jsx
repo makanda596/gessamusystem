@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuthStore } from '../store/auth';
 import logo from '../assets/logo.jpg';
-import gis from '../assets/gis.webp'; // Import your background image
+import backgroundImage from '../assets/background.jpg'; // Import your background image
 
 const LoginPage = () => {
   const [admNo, setAdmNo] = useState('');
@@ -30,7 +30,7 @@ const LoginPage = () => {
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
-      style={{ backgroundImage: `url(${gis})` }}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
