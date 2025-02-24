@@ -5,7 +5,7 @@ import logo from '../assets/logo.jpg';
 import gis from '../assets/gis.webp'; // Import your background image
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [admNo, setAdmNo] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +18,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      await login(email, password, { withCredentials: true });
+      await login(admNo, password, { withCredentials: true });
       window.location.href = '/dashboard';
     } catch (error) {
       console.log(error.response ? error.response.data.message : 'Login failed');
@@ -29,7 +29,7 @@ const LoginPage = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+      className="min-h-screen text-black flex items-center justify-center bg-cover bg-center relative"
       style={{ backgroundImage: `url(${gis})` }}
     >
       {/* Overlay for better readability */}
@@ -49,13 +49,13 @@ const LoginPage = () => {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-white font-medium mb-2">Email</label>
+              <label className="block text-white font-medium mb-2">Reg. Number</label>
               <input
                 type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={admNo}
+                onChange={(e) => setAdmNo(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                placeholder="email "
+                placeholder="Reg. Number"
                 required
               />
             </div>
