@@ -29,7 +29,7 @@ const LoginPage = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+      className="min-h-screen flex items-center justify-center bg-contain bg-center relative"
       style={{ backgroundImage: `url(${gis})` }}
     >
       {/* Overlay for better readability */}

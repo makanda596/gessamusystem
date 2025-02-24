@@ -6,8 +6,10 @@ import { FiUser, FiMail, FiLock, FiHash, FiEye, FiEyeOff } from 'react-icons/fi'
 function SignUpForm() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [admNo, setAdmNo] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [year, setYear] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +31,7 @@ function SignUpForm() {
 
         setLoading(true);
         try {
-            await signup(firstName, lastName, email, phoneNumber, password);
+            await signup(firstName, lastName, admNo, year, email, phoneNumber, password);
             window.location.href = '/';
         } catch (error) {
             console.log(error.response ? error.response.data.message : 'Sign up failed');
