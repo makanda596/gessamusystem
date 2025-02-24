@@ -86,6 +86,8 @@ const CreateUser = () => {
                         />
                     </div>
 
+
+                    {/* Phone Number */}
                     <div className="relative">
                         <FiPhone className="absolute top-3 left-3 text-gray-400" />
                         <input
