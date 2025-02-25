@@ -198,24 +198,21 @@ export const getStudent = async (req, res) => {
 }
 
 export const deleteUser = async (req, res) => {
-    const { id } = req.params;
-
+    const { id } = req.params
     try {
-        const user = await User.findByIdAndDelete(id);
-
+        const user = await User.findByIdAndDelete(id)
         if (!user) {
-            return res.status(404).json({ message: "User not found with this ID" });
+            return res.status(400).json({ message: "user not found with this id" })
         }
-
-        res.status(200).json({ message: "User successfully deleted", user });
+        await user.save()
+        res.status(200).json({ message: "user successfully deleted", user })
     } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
+        res.status(400).json(error.message)
     }
-};
-
+}
 
 // export const deleteAccount = async (req,res)=>{
-// } 
+// }
 // Route to get the student count
 export const countStudents = async (req, res) => {
     try {

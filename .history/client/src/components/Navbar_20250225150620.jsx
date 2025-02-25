@@ -12,6 +12,10 @@ const Settings = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
   const [password, setPassword] = useState('');
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [language, setLanguage] = useState('English');
+  const [privacy, setPrivacy] = useState('Public');
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
@@ -28,7 +32,10 @@ const Settings = () => {
     setShowDeletePopup(true);
   };
 
-
+  const confirmDeleteAccount = () => {
+    setShowDeletePopup(false);
+    alert('Your account has been deleted.');
+  };
 
   const logoutHandle = async () => {
     try {
@@ -41,7 +48,7 @@ const Settings = () => {
 
   const deleteStudent = async () => {
     try {
-      await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/`);
+      await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/${selectedStudent}`);
       setMessage("account deleted successfully!");
       window.location.href = '/'
     } catch (error) {

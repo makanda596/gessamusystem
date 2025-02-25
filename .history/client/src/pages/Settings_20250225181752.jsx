@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { FaUserCircle } from "react-icons/fa";
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
 
 
 const Settings = () => {
-    const { id } = useParams()
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -29,11 +27,10 @@ const Settings = () => {
 
     const confirmDeleteAccount = async () => {
         try{
-         await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/${id}`)
+        const response = await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/${id}`)
         }
         catch(error){
             console.error("Error deleting account:", error);
-            
         }
         setShowDeletePopup(false);
         alert('Your account has been deleted.');

@@ -203,7 +203,7 @@ export const deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(id);
 
-        if (!user) {
+        if (user) {
             return res.status(404).json({ message: "User not found with this ID" });
         }
 
