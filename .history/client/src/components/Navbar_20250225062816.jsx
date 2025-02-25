@@ -88,7 +88,7 @@ const Navbar = ({ userId }) => {
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white text-black p-3 rounded-lg shadow-lg w-40">
                 <ul>
-                  <a href='/profile' className="py-1 px-4 hover:bg-gray-200 cursor-pointer">My Profie</a>
+                  <a href='profile' className="py-1 px-4 hover:bg-gray-200 cursor-pointer">My Profie</a>
                   <li className="py-1 px-4 hover:bg-gray-200 cursor-pointer" onClick={logoutHandle}>
                     Logout
                   </li>
