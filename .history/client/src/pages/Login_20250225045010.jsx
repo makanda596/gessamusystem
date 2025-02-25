@@ -35,8 +35,8 @@ const LoginPage = () => {
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="bg-blue-600 shadow-lg rounded-lg p-4 w-full max-w-md z-10">
-        <div className="flex justify-center mb-4">
+      <div className="bg-blue-600 shadow-lg rounded-lg p-6 w-full max-w-md z-10">
+        <div className="flex justify-center mb-6">
           <img src={logo} alt="Gessamu Logo" className="w-20 h-20" />
         </div>
 
@@ -54,7 +54,7 @@ const LoginPage = () => {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-96 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                 placeholder="email "
                 required
               />
@@ -67,7 +67,7 @@ const LoginPage = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-96 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                   placeholder="Password"
                   required
                 />
