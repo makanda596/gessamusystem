@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 
@@ -30,10 +29,10 @@ const Settings = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center w-full">
+      <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
         <h1 className="text-2xl font-bold text-blue-600 mb-6">Settings</h1>
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg sm:max-w-md">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <label className="block text-gray-700">First Name</label>
               <input
@@ -70,7 +69,7 @@ const Settings = () => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </div>
-            <div className="md:col-span-2">
+            <div>
               <label className="block text-gray-700">Profile Picture</label>
               <input
                 type="file"
