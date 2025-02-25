@@ -46,9 +46,9 @@ const Navbar = ({ userId }) => {
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40">
-        <a href="mailto:gessamusuport@gmail.com" target="_blank"
-          rel="noopener noreferrer" className="text-blue-600">Email :  <span className="text-white">gessamusuport@gmail.com</span></a>
+      <nav className="bg-green-800 p-2 text-white flex items-center justify-between relative shadow-lg z-40">
+<a href="mailto:murimiisaac8@gmail.com" target="_blank"
+                        rel="noopener noreferrer">Email :murimiisaac8@gmail.com</a>
 
         <div className="hidden lg:flex items-center space-x-6">
           <a href="/dashboard" className="hover:text-gray-300">Home</a>
