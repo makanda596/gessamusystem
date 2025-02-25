@@ -66,9 +66,7 @@ const Footer = () => {
       {/* Copyright Section */}
       <div className="mt-6 border-t border-gray-700 pt-4 text-center">
         <p className="text-sm">
-          &copy; {new Date().getFullYear()}   <a href="mailto:oumab743@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer text-lg">
-            MakandaWorksofts
-          </a>. All rights reserved.
+          &copy; {new Date().getFullYear()} Your Company Name. All rights reserved.
         </p>
       </div>
     </footer>

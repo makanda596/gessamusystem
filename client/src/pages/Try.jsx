@@ -1,140 +1,78 @@
-import React, { useState, useEffect } from "react";
-import { FaSearch, FaBell, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
-import { useAuthStore } from "../store/auth";
-import axios from "axios";
+import React from "react";
+import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-const Navbar = ({ userId }) => {
-  const { logout } = useAuthStore();
-  const [details, setDetails] = useState(null);
-  const [alertCount, setAlertCount] = useState(0);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const response = await axios.get("https://gessamubackend.onrender.com/auth/profile", {
-          withCredentials: true,
-        });
-        setDetails(response.data);
-      } catch (error) {
-        console.error("Error fetching details:", error.message);
-      }
-    };
-
-    const countAlert = async () => {
-      try {
-        const response = await axios.get(`https://gessamubackend.onrender.com/alert/countAlert/${userId}`);
-        setAlertCount(response.data.count);
-      } catch (error) {
-        console.error("Error fetching alert count:", error);
-      }
-    };
-
-    fetchDetails();
-    countAlert();
-  }, [userId]);
-
-  const logoutHandle = async () => {
-    try {
-      await logout();
-      window.location.href = "/";
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
+const Footer = () => {
   return (
-    <>
-      {/* Navbar - Hidden when Sidebar is Open */}
-      <nav className={`bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40 ${isSidebarOpen ? "hidden" : "flex"}`}>
-        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
-          Email : <span className="text-white">gessamusuport@gmail.com</span>
-        </a>
-
-        <div className="hidden lg:flex items-center space-x-6">
-          <a href="/dashboard" className="hover:text-gray-300 cursor-pointer">Home</a>
-          <a href="/projects" className="hover:text-gray-300 cursor-pointer">Projects</a>
-          <a href="/trainings" className="hover:text-gray-300 cursor-pointer">Trainings</a>
-          <a href="/task" className="hover:text-gray-300 cursor-pointer">Tasks</a>
-          <a href="/settings" className="hover:text-gray-300 cursor-pointer">Settings</a>
-
-          {/* Alert Icon */}
-          <a href="/alert" className="relative hover:text-gray-300 cursor-pointer">
-            <FaBell className="text-2xl" />
-            {alertCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                {alertCount}
-              </span>
-            )}
-          </a>
-
-          {/* Profile */}
-          <div className="relative">
-            <FaUserCircle onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="w-12 h-12 text-2xl rounded-full border-4 cursor-pointer" />
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white text-black p-3 rounded-lg shadow-lg w-40">
-                <ul>
-                  <a href="/profile" className="py-1 px-4 hover:bg-gray-200 cursor-pointer">My Profile</a>
-                  <li className="py-1 px-4 hover:bg-gray-200 cursor-pointer" onClick={logoutHandle}>Logout</li>
-                </ul>
-              </div>
-            )}
-          </div>
+    <footer className="bg-gray-800 text-gray-200 py-6">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center sm:text-left">
+        {/* About Section */}
+        <div>
+          <h3 className="text-xl font-semibold mb-3">About Us</h3>
+          <p className="text-sm">
+            We provide outstanding solutions and projects to meet your needs.
+            Dedicated to delivering quality and innovation in every service.
+          </p>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden cursor-pointer">
-          {isSidebarOpen ? <FaTimes className="text-white text-2xl" /> : <FaBars className="text-white text-2xl" />}
-        </button>
-      </nav>
-
-      {/* Mobile Sidebar Overlay */}
-      {/* Mobile Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-20 z-40"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
-      )}
-
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-96 bg-green-900 text-white p-5 pt-14 transform transition-transform duration-300 ease-in-out shadow-lg lg:hidden z-50 ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h4 className="text-xl font-bold">Menu</h4>
-          <FaTimes className="text-white text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
+        {/* Links Section */}
+        <div>
+          <h3 className="text-xl font-semibold mb-3">Quick Links</h3>
+          <ul className="text-sm space-y-2">
+            <li>
+              <a href="/home" className="hover:text-gray-400">Home</a>
+            </li>
+            <li>
+              <a href="/projects" className="hover:text-gray-400">Projects</a>
+            </li>
+            <li>
+              <a href="/contact" className="hover:text-gray-400">Contact Us</a>
+            </li>
+            <li>
+              <a href="/about" className="hover:text-gray-400">About Us</a>
+            </li>
+          </ul>
         </div>
 
-        <nav className="flex flex-col space-y-4 mt-6 text-lg">
-          <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Home</a>
-          <a href="/projects" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Projects</a>
-          <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Trainings</a>
-          <a href="/settings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Settings</a>
-          <a href="/task" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Tasks</a>
-
-          {/* Alert */}
-          <a href="/alert" className="relative hover:text-gray-300 flex items-center">
-            <FaBell className="text-2xl mr-2" />
-            {alertCount > 0 && (
-              <span className="bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                {alertCount}
-              </span>
-            )}
+        {/* Contact Section */}
+        <div>
+          <h3 className="text-xl font-semibold mb-3">Contact</h3>
+          <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
+            Email: <span className="text-white">gessamusuport@gmail.com</span>
           </a>
-
-          <a href="/profile">
-            <FaUserCircle className="text-4xl" />
-          </a>
-
-          <button onClick={logoutHandle} className="text-red-500 mt-1 font-bold text-xl hover:underline">Logout</button>
-        </nav>
+          <p>
+            <a href="tel:+254742149060" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+              Phone: +2547 4214 9060
+            </a>
+          </p>
+        </div>
       </div>
 
-    </>
+      {/* Social Media Section */}
+      <div className="mt-6 flex justify-center space-x-6">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+          <FaFacebook className="text-2xl" />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+          <FaTwitter className="text-2xl" />
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+          <FaLinkedin className="text-2xl" />
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
+          <FaInstagram className="text-2xl" />
+        </a>
+      </div>
+
+      {/* Copyright Section */}
+      <div className="mt-6 border-t border-gray-700 pt-4 text-center">
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()}   <a href="mailto:oumab743@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer text-lg">
+            MakandaWorksofts
+          </a>. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 };
 
-export default Navbar;
+export default Footer;

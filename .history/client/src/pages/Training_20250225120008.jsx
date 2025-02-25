@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from '../components/Navbar.jsx'
+
 const trainingSessions = [
   { id: 1, title: "GIS Basics", date: "2025-03-01", status: "Upcoming" },
   { id: 2, title: "Remote Sensing Workshop", date: "2024-02-20", status: "Past" },
@@ -17,7 +17,7 @@ const Training = () => {
 
   return (
     <>
-    <Navbar />
+    <Navba className="z-index"/>
     <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">Training Sessions</h2>
 
