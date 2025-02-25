@@ -47,7 +47,7 @@ const Navbar = ({ userId }) => {
     <>
       {/* Navbar */}
       <nav className="bg-green-800 p-2 text-white flex items-center justify-between relative shadow-lg ">
-        <h4 className="text-sm font-bold">oumab743@gmail.com</h4>
+        <h4 className="text-md font-bold">oumab743@gmail.com</h4>
 
         <div className="hidden lg:flex items-center space-x-6">
           <a href="/dashboard" className="hover:text-gray-300">Home</a>
