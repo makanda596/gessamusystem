@@ -172,7 +172,7 @@ const Allprojects = () => {
                                     <img
                                         src={logo}
                                         alt={project.task || "Task Image"}
-                                        className="mt-2 w-20 h-20 object-cover rounded-sm mb-2 "
+                                        className="mt-2 w-full h-56 object-cover rounded-sm mb-2 "
                                     />
                                     <p className="text-black font-semibold mt-0">
                                         {project.description.length > 200 ? `${project.description.slice(0, 200)}...` : project.description}
@@ -182,12 +182,12 @@ const Allprojects = () => {
                                         <a href={project.reference} target="_blank" rel="noreferrer" className="text-blue-600 font-sans underline hover:text-green-600">
                                             {project.reference}                          </a>
                                     </p>
-                                    <p className="text-sm text-black font-bold">
+                                    {/* <p className="text-sm text-black font-bold">
                                         Trainer: <span className="text-green-600 text-md font-semibold">{project.trainer}</span>
                                     </p>
                                     <p className="text-sm text-black font-bold">
                                         Date: <span className="text-red-700">{new Date(project?.CreatedAt).toLocaleDateString()}</span>
-                                    </p>
+                                    </p> */}
                                 </div>
                             ))
                         ) : (
