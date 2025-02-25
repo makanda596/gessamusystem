@@ -136,7 +136,7 @@ const TaskCard = ({ task, showNotification }) => {
                 </div>
             )}
         </div>
-           {showModal && (
+           {        showModal && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                 <div className="bg-white p-8 rounded-md shadow-lg max-w-md w-full">
                     <h3 className="text-2xl font-bold mb-4">Submit </h3>
