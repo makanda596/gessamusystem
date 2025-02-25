@@ -46,8 +46,8 @@ const Navbar = ({ userId }) => {
 
   return (
     <>
-      {/* Navbar - Hidden when Sidebar is Open */}
-      <nav className={`bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40 ${isSidebarOpen ? "hidden" : "flex"}`}>
+      {/* Navbar */}
+      <nav className="bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40">
         <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
           Email : <span className="text-white">gessamusuport@gmail.com</span>
         </a>
@@ -99,6 +99,9 @@ const Navbar = ({ userId }) => {
         className={`z-40 fixed top-0 right-0 h-full w-96 bg-green-900 text-white p-5 pt-14 transform transition-transform duration-300 ease-in-out shadow-lg lg:hidden ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
           }`}
       >
+        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
+          Email : <span className="text-white ">gessamusuport@gmail.com</span>
+        </a>
         <div className="flex justify-between items-center mb-6">
           <h4 className="text-xl font-bold">Menu</h4>
           <FaTimes className="text-white text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
