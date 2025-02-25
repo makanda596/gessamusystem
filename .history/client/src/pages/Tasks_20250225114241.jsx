@@ -134,7 +134,7 @@ const TaskCard = ({ task, showNotification }) => {
                 {menuOpen && (
                     <div className="absolute top-8 right-4 bg-white shadow-md rounded-md p-2 w-36 flex flex-col">
                         <button onClick={shareTask} className="text-sm p-1 text-blue-500 bg-gray-600 rounded-md">Share</button>
-                        <button onClick={() => setShowModal(true)} className="text-sm p-1 text-white bg-black rounded-md">Submit</button>
+                        <button onClick={() => setShowModal(true)} className="text-sm p-2 text-white bg-black rounded-md">Submit</button>
                     </div>
                 )}
             </div>
