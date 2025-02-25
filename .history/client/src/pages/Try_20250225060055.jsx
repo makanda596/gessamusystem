@@ -147,13 +147,13 @@ const Navbar = ({ userId }) => {
           </a>
 
           <FaUserCircle className="text-4xl" />
-
-          <button
-            onClick={logoutHandle}
-            className="text-red-500 mt-1 font-bold text-xl  hover:underline"
-          >
-            Logout
-          </button>
+     
+            <button
+              onClick={logoutHandle}
+              className="text-red-500 mt-1 font-bold text-md  hover:underline"
+            >
+              Logout
+            </button>
         </nav>
       </div>
     </>

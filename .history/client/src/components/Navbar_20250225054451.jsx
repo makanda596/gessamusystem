@@ -50,7 +50,7 @@ const Navbar = ({ userId }) => {
         <h4 className="text-md font-bold">GESSAMU PORTAL</h4>
 
         {/* Search Bar - Hidden on Small Screens */}
-        <div className="hidden md:flex items-center bg-green-700 rounded-full px-4 py-1">
+        <div className="hidden md:flex items-center bg-green-700 rounded-full px-4 py-2">
           <input
             type="text"
             placeholder="Search..."
@@ -64,7 +64,6 @@ const Navbar = ({ userId }) => {
           <a href="/dashboard" className="hover:text-gray-300">Home</a>
           <a href="/projects" className="hover:text-gray-300">Projects</a>
           <a href="/trainings" className="hover:text-gray-300">Trainings</a>
-          <a href="/settings" className="hover:text-gray-300">Settings</a>
           {/* <a href="/asqQuiz" className="hover:text-gray-300">asqQuiz</a> */}
           <a href="/task" className="hover:text-gray-300">Tasks</a>
 
@@ -80,15 +79,16 @@ const Navbar = ({ userId }) => {
 
           {/* Profile */}
           <div className="relative">
-            <FaUserCircle
+            <img
+              src={details?.user?.avatar }
               alt="Profile"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-12 h-12 text-4xl rounded-full border-4 border-white cursor-pointer"
+              className="w-12 h-12 rounded-full border-4 border-white cursor-pointer"
             />
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white text-black p-3 rounded-lg shadow-lg w-40">
                 <ul>
-                  <li className="py-1 px-4 hover:bg-gray-200 cursor-pointer">My Profie</li>
+                  <li className="py-1 px-4 hover:bg-gray-200 cursor-pointer">Settings</li>
                   <li className="py-1 px-4 hover:bg-gray-200 cursor-pointer" onClick={logoutHandle}>
                     Logout
                   </li>
@@ -100,7 +100,7 @@ const Navbar = ({ userId }) => {
 
         {/* Mobile Menu Button */}
         <label htmlFor="menu-toggle" className="lg:hidden cursor-pointer">
-          <FaBars className="text-white text-2xl" />
+          <FaBars className="text-white text-3xl" />
         </label>
       </nav>
 
@@ -124,14 +124,11 @@ const Navbar = ({ userId }) => {
             Projects
           </a>
           <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
-            Trainings
+            Live Trainings
           </a>
-          <a href="/settings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
-            Settings
-          </a>
-          {/* <a href="/asqQuiz" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
+          <a href="/asqQuiz" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
             asqQuiz
-          </a> */}
+          </a>
           <a href="/task" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
             Tasks
           </a>
@@ -146,14 +143,19 @@ const Navbar = ({ userId }) => {
             )}
           </a>
 
-          <FaUserCircle className="text-4xl" />
-
-          <button
-            onClick={logoutHandle}
-            className="text-red-500 mt-1 font-bold text-xl  hover:underline"
-          >
-            Logout
-          </button>
+          {/* Profile Section */}
+          <div className="flex items-center mt-4">
+            <FaUserCircle className="text-4xl" />
+            <div className="ml-3">
+              <p className="font-semibold">{details?.user?.name || "Guest"}</p>
+              <button
+                onClick={logoutHandle}
+                className="text-red-500 mt-1 text-sm hover:underline"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </nav>
       </div>
     </>
