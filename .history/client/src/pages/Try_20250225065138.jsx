@@ -26,7 +26,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-100">
-      <div className="w-full h-40 md:h-60 bg-gray-300 relative">
+      <div className="w-96 h-40 md:h-60 bg-gray-300 relative">
         {backgroundImage && <img src={backgroundImage} alt="Background" className="w-full h-full object-cover" />}
         <label
           htmlFor="background-upload"
