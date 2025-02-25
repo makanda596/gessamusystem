@@ -45,7 +45,7 @@ const Tasks = () => {
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-gray-100 p-4 md:p-4">
+            <div className="min-h-screen bg-gray-100 p-2 md:p-4">
                 <h1 className="text-xl md:text-xl font-bold text-center text-blue-600 mb-2">Available Tasks</h1>
 
                 {notification && (

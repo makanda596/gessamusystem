@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Try";
 
 const trainingSessions = [
-  { id: 1, title: "GIS Basics", date: "2025-03-01", status: "Upcoming" },
+  { id: 1, title: "GIS Basics", date: "2024-03-01", status: "Upcoming" },
   { id: 2, title: "Remote Sensing Workshop", date: "2024-02-20", status: "Past" },
   { id: 3, title: "Surveying Techniques", date: "2024-03-10", status: "Upcoming" },
   { id: 4, title: "Geospatial Data Analysis", date: "2024-02-15", status: "Past" },
