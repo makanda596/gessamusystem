@@ -47,6 +47,7 @@ const Navbar = ({ userId }) => {
     <>
       {/* Navbar */}
       <nav className="bg-green-800 p-2 text-white flex items-center justify-between relative shadow-lg ">
+        <p>brian</p>
         <h4 className="text-md font-bold">GESSAMU PORTAL</h4>
 
         {/* Search Bar - Hidden on Small Screens */}

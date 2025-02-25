@@ -47,10 +47,11 @@ const Navbar = ({ userId }) => {
     <>
       {/* Navbar */}
       <nav className="bg-green-800 p-2 text-white flex items-center justify-between relative shadow-lg ">
+        <p>brian</p>
         <h4 className="text-md font-bold">GESSAMU PORTAL</h4>
 
         {/* Search Bar - Hidden on Small Screens */}
-        <div className="flex items-center ">
+        <div className="flex items-center bg-green-700 rounded-full px-4 py-1">
                   <p>oumab743@gmil.com</p>
         </div>
 

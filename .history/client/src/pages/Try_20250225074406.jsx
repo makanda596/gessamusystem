@@ -47,11 +47,19 @@ const Navbar = ({ userId }) => {
     <>
       {/* Navbar */}
       <nav className="bg-green-800 p-2 text-white flex items-center justify-between relative shadow-lg ">
-        <h4 className="text-md font-bold">GESSAMU PORTAL</h4>
+        <div className="flex flex-col">
+          <p className="text-white">oumab743@gmail.com</p>
+          <h4 className="text-md font-bold">GESSAMU PORTAL</h4>
+        </div>
 
         {/* Search Bar - Hidden on Small Screens */}
-        <div className="flex items-center ">
-                  <p>oumab743@gmil.com</p>
+        <div className="hidden md:flex items-center bg-green-700 rounded-full px-4 py-1">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-transparent text-white outline-none placeholder:text-white w-full"
+          />
+          <FaSearch className="ml-2 text-white cursor-pointer" />
         </div>
 
         {/* Desktop Navigation */}
