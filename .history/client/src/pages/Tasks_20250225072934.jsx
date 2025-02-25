@@ -83,7 +83,6 @@ const Tasks = () => {
 
 const TaskCard = ({ task, showNotification }) => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [showPopup, setShowPopup] = useState(false);
 
     const shareTask = () => {
         const taskUrl = `${window.location.origin}/task/${task._id}`;
@@ -102,28 +101,8 @@ const TaskCard = ({ task, showNotification }) => {
 
             {menuOpen && (
                 <div className="absolute top-8 right-3 bg-white shadow-md rounded-md p-2 w-24 flex flex-col">
-                    <button onClick={shareTask} className="text-sm p-1 text-blue-500 hover:bg-gray-200 rounded-md">
-                        Share
-                    </button>
-                    <button onClick={() => setShowPopup(true)} className="text-sm p-1 text-green-500 hover:bg-gray-200 rounded-md">
-                        Submit
-                    </button>
-                </div>
-            )}
-
-            {/* Popup Modal */}
-            {showPopup && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-md w-80 text-center">
-                        <h2 className="text-lg font-bold text-blue-700">Task Submitted!</h2>
-                        <p className="text-gray-700 mt-2">Your task submission was successful.</p>
-                        <button
-                            onClick={() => setShowPopup(false)}
-                            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                        >
-                            Close
-                        </button>
-                    </div>
+                    <button onClick={shareTask} className="text-sm p-1 text-blue-500 hover:bg-gray-200 rounded-md">Share</button>
+                    <button className="text-sm p-1 text-green-500 hover:bg-gray-200 rounded-md">Submit</button>
                 </div>
             )}
         </div>
