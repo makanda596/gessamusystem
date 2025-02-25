@@ -35,7 +35,7 @@ const LoginPage = () => {
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="bg-blue-600 shadow-lg rounded-lg p-6 w-full max-w-md z-10">
+      <div className="bg-blue-600 shadow-lg rounded-lg p-4 w-full max-w-md z-10">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Gessamu Logo" className="w-20 h-20" />
         </div>
@@ -47,40 +47,40 @@ const LoginPage = () => {
             <div className="w-10 h-10 border-4 border-t-blue-500 border-gray-200 rounded-full animate-spin"></div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 flex flex-col items-center">
-            <div className="w-full">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
               <label className="block text-white font-medium mb-2">Email</label>
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                placeholder="Email"
+                className="w-96 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                placeholder="email "
                 required
               />
             </div>
 
-            <div className="w-full">
+            <div>
               <label className="block text-white font-medium mb-2">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                  className="w-96 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                   placeholder="Password"
                   required
                 />
                 <span
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-4 flex items-center text-gray-500 cursor-pointer"
+                  className="absolute inset-y-0 right-10 flex items-center text-gray-500 cursor-pointer"
                 >
                   {showPassword ? '🙈' : '👁️'}
                 </span>
               </div>
             </div>
 
-            <div className="w-full flex items-center">
+            <div className="flex items-center">
               <input
                 type="checkbox"
                 id="rememberMe"
@@ -91,10 +91,9 @@ const LoginPage = () => {
               <label htmlFor="rememberMe" className="text-white">Remember me</label>
             </div>
 
-            {/* Centered Button */}
             <button
               type="submit"
-              className="w-48 bg-white text-blue-600 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 mx-auto"
+              className="w-42 bg-white text-blue-600 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
             >
               Log In
             </button>
@@ -102,7 +101,7 @@ const LoginPage = () => {
         )}
 
         {!loading && (
-          <div className="text-center mt-4">
+          <div className="text-center mt-2">
             <p>
               <a href="/forgot-password" className="text-white">
                 Forgot your password?
