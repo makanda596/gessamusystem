@@ -90,48 +90,49 @@ const Navbar = ({ userId }) => {
       </nav>
 
       {/* Mobile Sidebar Overlay */}
-      {/* Mobile Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-20 z-40"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
+     {/* Mobile Sidebar Overlay */}
+{isSidebarOpen && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-20 z-40"
+    onClick={() => setIsSidebarOpen(false)}
+  ></div>
+)}
+
+{/* Mobile Sidebar */}
+<div
+  className={`fixed top-0 right-0 h-full w-96 bg-green-900 text-white p-5 pt-14 transform transition-transform duration-300 ease-in-out shadow-lg lg:hidden z-50 ${
+    isSidebarOpen ? "translate-x-0" : "translate-x-full"
+  }`}
+>
+  <div className="flex justify-between items-center mb-6">
+    <h4 className="text-xl font-bold">Menu</h4>
+    <FaTimes className="text-white text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
+  </div>
+
+  <nav className="flex flex-col space-y-4 mt-6 text-lg">
+    <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Home</a>
+    <a href="/projects" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Projects</a>
+    <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Trainings</a>
+    <a href="/settings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Settings</a>
+    <a href="/task" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Tasks</a>
+
+    {/* Alert */}
+    <a href="/alert" className="relative hover:text-gray-300 flex items-center">
+      <FaBell className="text-2xl mr-2" />
+      {alertCount > 0 && (
+        <span className="bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+          {alertCount}
+        </span>
       )}
+    </a>
 
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-96 bg-green-900 text-white p-5 pt-14 transform transition-transform duration-300 ease-in-out shadow-lg lg:hidden z-50 ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h4 className="text-xl font-bold">Menu</h4>
-          <FaTimes className="text-white text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
-        </div>
+    <a href="/profile">
+      <FaUserCircle className="text-4xl" />
+    </a>
 
-        <nav className="flex flex-col space-y-4 mt-6 text-lg">
-          <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Home</a>
-          <a href="/projects" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Projects</a>
-          <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Trainings</a>
-          <a href="/settings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Settings</a>
-          <a href="/task" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Tasks</a>
-
-          {/* Alert */}
-          <a href="/alert" className="relative hover:text-gray-300 flex items-center">
-            <FaBell className="text-2xl mr-2" />
-            {alertCount > 0 && (
-              <span className="bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                {alertCount}
-              </span>
-            )}
-          </a>
-
-          <a href="/profile">
-            <FaUserCircle className="text-4xl" />
-          </a>
-
-          <button onClick={logoutHandle} className="text-red-500 mt-1 font-bold text-xl hover:underline">Logout</button>
-        </nav>
-      </div>
+    <button onClick={logoutHandle} className="text-red-500 mt-1 font-bold text-xl hover:underline">Logout</button>
+  </nav>
+</div>
 
     </>
   );
