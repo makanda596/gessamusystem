@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -5,14 +6,6 @@ const Dashboard = () => {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  // Function to determine greeting based on time
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning";
-    if (hour < 18) return "Good Afternoon";
-    return "Good Evening";
-  };
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -34,10 +27,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 p-6 flex items-center justify-center">
       <div className="max-w-4xl w-full bg-white p-8 rounded-2xl shadow-lg">
-        {/* Dynamic Greeting */}
-        <h1 className="text-2xl font-bold text-center mb-6 text-indigo-700">
-          {getGreeting()}, Welcome to Your Dashboard
-        </h1>
+        <h1 className="text-2xl font-bold text-center mb-6 text-indigo-700">Welcome to Your Dashboard</h1>
 
         {loading ? (
           <div className="flex justify-center">
@@ -66,10 +56,10 @@ const Dashboard = () => {
                 { title: "Projects Submitted", count: 8, color: "from-blue-400 to-blue-200" },
                 { title: "Upcoming Deadlines", count: 3, color: "from-yellow-400 to-yellow-200" },
                 { title: "New Messages", count: 0, color: "from-red-400 to-red-200" },
-              ].map((stat, index) => (
-                <div key={index} className={`bg-gradient-to-tr ${stat.color} p-6 rounded-xl shadow-md text-center`}>
-                  <h3 className="text-xl font-semibold">{stat.title}</h3>
-                  <p className="text-3xl font-extrabold">{stat.count}</p>
+              ].map((item, index) => (
+                <div key={index} className={`bg-gradient-to-tr ${item.color} p-6 rounded-xl shadow-md text-center`}>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="text-2xl font-bold">{item.count}</p>
                 </div>
               ))}
             </div>
