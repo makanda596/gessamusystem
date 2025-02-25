@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from '../components/Navbar.jsx'
+
 const trainingSessions = [
   { id: 1, title: "GIS Basics", date: "2025-03-01", status: "Upcoming" },
   { id: 2, title: "Remote Sensing Workshop", date: "2024-02-20", status: "Past" },
