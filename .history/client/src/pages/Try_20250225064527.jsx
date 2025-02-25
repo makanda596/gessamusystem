@@ -51,7 +51,7 @@ const Profile = () => {
         />
         <label
           htmlFor="profile-upload"
-          className="absolute text-2xl bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-blue-600"
+          className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-blue-600"
         >
           +
         </label>

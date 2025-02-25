@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { FaSearch, FaBell, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
-
 
 const Profile = () => {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -45,13 +43,14 @@ const Profile = () => {
 
       {/* Profile Picture */}
       <div className="relative -mt-12 md:-mt-16">
-        <FaUserCircle
+        <img
+          src={profilePicture || '<FaUserCircle className="text-4xl" />'}
           alt="Profile"
           className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-md"
         />
         <label
           htmlFor="profile-upload"
-          className="absolute text-2xl bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-blue-600"
+          className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-blue-600"
         >
           +
         </label>
