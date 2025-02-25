@@ -89,13 +89,13 @@ const Navbar = ({ userId }) => {
 
         {/* Mobile Menu Button */}
         <label htmlFor="menu-toggle" className="lg:hidden cursor-pointer">
-          <FaBars className="text-white text-2xl"/>
+          <FaBars className="text-white text-2xl" />
         </label>
       </nav>
 
       {/* Mobile Sidebar */}
       <input type="checkbox" id="menu-toggle" className="hidden peer" />
-      <div className="fixed inset-0 bg-black bg-opacity-50 hidden peer-checked:block lg:hidden"></div>
+      <div className="fixed inset-0 bg-black bg-opacity-50 hidden peer-checked:block\ lg:hidden"></div>
       <div className="fixed top-0 left-0 h-full w-64 bg-green-900 text-white p-5 pt-14 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out shadow-lg lg:hidden">
         <div className="flex justify-between items-center mb-6">
           <h4 className="text-xl font-bold">Menu</h4>
@@ -105,7 +105,7 @@ const Navbar = ({ userId }) => {
         </div>
 
         {/* Mobile Navigation */}
-        <nav className="flex flex-col space-y-4  mt-6">
+        <nav className="flex flex-col space-y-4 z-40 mt-6">
           <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
             Home
           </a>
