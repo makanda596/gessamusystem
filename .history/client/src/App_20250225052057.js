@@ -65,10 +65,10 @@ function App() {
   // Checking authentication - show loading screen
   if (isCheckingAuth) {
     return (
-      
-      <div className="flex items-center justify-center min-h-screen hidden" >
-        <div className="w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
-      </div>
+      <>h</>
+      // <div className="flex items-center justify-center min-h-screen">
+      //   <div className="w-16 h-16 border-4 border-t-red-600 border-b-green-600 border-l-white border-r-white rounded-full animate-spin"></div>
+      // </div>
     );
   } else {
     // Main app content after auth check
