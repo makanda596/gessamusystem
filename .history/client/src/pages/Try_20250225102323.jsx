@@ -95,8 +95,8 @@ const Navbar = ({ userId }) => {
 
       {/* Mobile Sidebar */}
       <input type="checkbox" id="menu-toggle" className="hidden peer" />
-      <div className="fixed inset-0 bg-black bg-opacity-50 hidden peer-checked:block z-10 lg:hidden"></div>
-      <div className="fixed top-0 left-0 h-full w-64 bg-green-900 text-white p-5 pt-14 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out shadow-lg lg:hidden">
+      <div className="fixed inset-0 bg-black bg-opacity-50 hidden peer-checked:block lg:hidden"></div>
+      <div className="fixed top-0 left-0 h-full w-64 bg-green-900 text-white p-5 pt-10 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out shadow-lg lg:hidden">
         <div className="flex justify-between items-center mb-6">
           <h4 className="text-xl font-bold">Menu</h4>
           <label htmlFor="menu-toggle" className="cursor-pointer">

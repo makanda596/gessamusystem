@@ -120,7 +120,7 @@ const TaskCard = ({ task, showNotification }) => {
 
 
     return (
-        <div className='z-[-10px]'>
+        <div >
         <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition relative">
             <h2 className="text-xl font-bold text-blue-700 mb-2">{task.task}</h2>
             <p className="text-gray-700 mb-4">{task.description}</p>
