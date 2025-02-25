@@ -45,7 +45,7 @@ const Tasks = () => {
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-gray-100 p-4 md:p-4">
+            <div className="min-h-screen bg-gray-100 p-2 md:p-4">
                 <h1 className="text-xl md:text-xl font-bold text-center text-blue-600 mb-2">Available Tasks</h1>
 
                 {notification && (
@@ -58,7 +58,7 @@ const Tasks = () => {
                     <input
                         type="text"
                         placeholder="Search tasks..."
-                        className="w-80 p-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        className="w-96 p-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />

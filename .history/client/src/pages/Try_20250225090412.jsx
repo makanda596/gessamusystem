@@ -58,7 +58,7 @@ const Tasks = () => {
           <input
             type="text"
             placeholder="Search tasks..."
-            className="w-80 p-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-96 p-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
