@@ -65,8 +65,9 @@ const Navbar = ({ userId }) => {
           <a href="/projects" className="hover:text-gray-300">Projects</a>
           <a href="/trainings" className="hover:text-gray-300">Trainings</a>
           {/* <a href="/asqQuiz" className="hover:text-gray-300">asqQuiz</a> */}
-          <a href="/task" className="hover:text-gray-300">Tasks</a>
           <a href="/settings" className="hover:text-gray-300">Settings</a>
+          <a href="/task" className="hover:text-gray-300">Tasks</a>
+
           {/* Alert Icon */}
           <a href="/alert" className="relative hover:text-gray-300">
             <FaBell className="text-2xl" />
