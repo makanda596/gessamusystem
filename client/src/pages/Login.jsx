@@ -60,7 +60,6 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* Password Input */}
             <div>
               <label className="block text-white font-medium mb-2">Password</label>
               <div className="relative">
