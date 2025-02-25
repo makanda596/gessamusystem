@@ -46,21 +46,21 @@ const Navbar = ({ userId }) => {
 
   return (
     <>
-      {/* Navbar - Hidden when Sidebar is Open */}
-      <nav className={`bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40 ${isSidebarOpen ? "hidden" : "flex"}`}>
-        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
+      {/* Navbar */}
+      <nav className="bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40">
+        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600">
           Email : <span className="text-white">gessamusuport@gmail.com</span>
         </a>
 
         <div className="hidden lg:flex items-center space-x-6">
-          <a href="/dashboard" className="hover:text-gray-300 cursor-pointer">Home</a>
-          <a href="/projects" className="hover:text-gray-300 cursor-pointer">Projects</a>
-          <a href="/trainings" className="hover:text-gray-300 cursor-pointer">Trainings</a>
-          <a href="/task" className="hover:text-gray-300 cursor-pointer">Tasks</a>
-          <a href="/settings" className="hover:text-gray-300 cursor-pointer">Settings</a>
+          <a href="/dashboard" className="hover:text-gray-300">Home</a>
+          <a href="/projects" className="hover:text-gray-300">Projects</a>
+          <a href="/trainings" className="hover:text-gray-300">Trainings</a>
+          <a href="/task" className="hover:text-gray-300">Tasks</a>
+          <a href="/settings" className="hover:text-gray-300">Settings</a>
 
           {/* Alert Icon */}
-          <a href="/alert" className="relative hover:text-gray-300 cursor-pointer">
+          <a href="/alert" className="relative hover:text-gray-300">
             <FaBell className="text-2xl" />
             {alertCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
@@ -96,9 +96,12 @@ const Navbar = ({ userId }) => {
 
       {/* Mobile Sidebar (Full Screen and Slides from Right) */}
       <div
-        className={`z-40 fixed top-0 right-0 h-full w-96 bg-green-900 text-white p-5 pt-14 transform transition-transform duration-300 ease-in-out shadow-lg lg:hidden ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+        className={`z-40 fixed top-0 right-0 h-full w-full bg-green-900 text-white p-5 pt-14 transform transition-transform duration-300 ease-in-out shadow-lg lg:hidden ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
           }`}
       >
+        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
+          Email : <span className="text-white ">gessamusuport@gmail.com</span>
+        </a>
         <div className="flex justify-between items-center mb-6">
           <h4 className="text-xl font-bold">Menu</h4>
           <FaTimes className="text-white text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
@@ -106,14 +109,14 @@ const Navbar = ({ userId }) => {
 
         {/* Mobile Navigation */}
         <nav className="flex flex-col space-y-4 mt-6 text-lg">
-          <a href="/dashboard" className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">Home</a>
-          <a href="/projects" className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">Projects</a>
-          <a href="/trainings" className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">Trainings</a>
-          <a href="/settings" className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">Settings</a>
-          <a href="/task" className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out hover:underline">Tasks</a>
+          <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Home</a>
+          <a href="/projects" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Projects</a>
+          <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Trainings</a>
+          <a href="/settings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Settings</a>
+          <a href="/task" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">Tasks</a>
 
           {/* Alert */}
-          <a href="/alert" className="relative hover:text-gray-300 cursor-pointer flex items-center">
+          <a href="/alert" className="relative hover:text-gray-300 flex items-center">
             <FaBell className="text-2xl mr-2" />
             {alertCount > 0 && (
               <span className="bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
@@ -122,11 +125,11 @@ const Navbar = ({ userId }) => {
             )}
           </a>
 
-          <a href="/profile" className="cursor-pointer">
+          <a href="/profile">
             <FaUserCircle className="text-4xl" />
           </a>
 
-          <button onClick={logoutHandle} className="text-red-500 mt-1 font-bold text-xl hover:underline cursor-pointer">Logout</button>
+          <button onClick={logoutHandle} className="text-red-500 mt-1 font-bold text-xl hover:underline">Logout</button>
         </nav>
       </div>
     </>
