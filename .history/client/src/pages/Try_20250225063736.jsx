@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { FaSearch, FaBell, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
-
 
 const Profile = () => {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -17,41 +15,23 @@ const Profile = () => {
     }
   };
 
-  const handleBackgroundImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setBackgroundImage(URL.createObjectURL(file));
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-100">
       {/* Background Image */}
       <div className="w-full h-40 md:h-60 bg-gray-300 relative">
         {backgroundImage && <img src={backgroundImage} alt="Background" className="w-full h-full object-cover" />}
-        <label
-          htmlFor="background-upload"
-          className="absolute top-2 right-2 bg-gray-700 text-white p-2 rounded cursor-pointer text-sm hover:bg-gray-800"
-        >
-          Edit
-        </label>
-        <input
-          type="file"
-          id="background-upload"
-          className="hidden"
-          onChange={handleBackgroundImageChange}
-        />
       </div>
 
       {/* Profile Picture */}
       <div className="relative -mt-12 md:-mt-16">
-        <FaUserCircle
+        <img
+          src={profilePicture || 'https://via.placeholder.com/150'}
           alt="Profile"
           className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-md"
         />
         <label
           htmlFor="profile-upload"
-          className="absolute text-2xl bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-blue-600"
+          className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-blue-600"
         >
           +
         </label>
