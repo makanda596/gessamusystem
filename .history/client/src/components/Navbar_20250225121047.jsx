@@ -47,9 +47,9 @@ const Navbar = ({ userId }) => {
   return (
     <>
       {/* Navbar - Hidden when Sidebar is Open */}
-      <nav className={`bg-green-800 p-4 px-4 text-white flex items-center justify-between relative shadow-lg z-40 ${isSidebarOpen ? "hidden" : "flex"}`}>
-        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-black cursor-pointer">
-          <span className="text-white">gessamusuport@gmail.com</span>
+      <nav className={`bg-green-800 p-2 px-4 text-white flex items-center justify-between relative shadow-lg z-40 ${isSidebarOpen ? "hidden" : "flex"}`}>
+        <a href="mailto:gessamusuport@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer">
+          Email : <span className="text-white">gessamusuport@gmail.com</span>
         </a>
 
         <div className="hidden lg:flex items-center space-x-6">
