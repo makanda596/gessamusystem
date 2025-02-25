@@ -80,7 +80,7 @@ const Navbar = ({ userId }) => {
 
           {/* Profile */}
           <div className="relative">
-            <FaUserCircle
+            <FaUserCircle            
               alt="Profile"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="w-12 h-12 text-4xl rounded-full border-4 border-white cursor-pointer"
@@ -124,10 +124,7 @@ const Navbar = ({ userId }) => {
             Projects
           </a>
           <a href="/trainings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
-            Trainings
-          </a>
-          <a href="/settings" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
-            Settings
+            Live Trainings
           </a>
           {/* <a href="/asqQuiz" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
             asqQuiz
@@ -146,14 +143,19 @@ const Navbar = ({ userId }) => {
             )}
           </a>
 
-          <FaUserCircle className="text-4xl" />
-
-          <button
-            onClick={logoutHandle}
-            className="text-red-500 mt-1 font-bold text-xl  hover:underline"
-          >
-            Logout
-          </button>
+          {/* Profile Section */}
+          <div className="flex items-center mt-4">
+            <FaUserCircle className="text-4xl" />
+            <div className="ml-3">
+              <p className="font-semibold">{details?.user?.name || "Guest"}</p>
+              <button
+                onClick={logoutHandle}
+                className="text-red-500 mt-1 text-sm hover:underline"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </nav>
       </div>
     </>

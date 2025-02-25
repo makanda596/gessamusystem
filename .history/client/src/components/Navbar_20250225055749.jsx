@@ -80,7 +80,7 @@ const Navbar = ({ userId }) => {
 
           {/* Profile */}
           <div className="relative">
-            <FaUserCircle
+            <FaUserCircle            
               alt="Profile"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="w-12 h-12 text-4xl rounded-full border-4 border-white cursor-pointer"
@@ -146,14 +146,15 @@ const Navbar = ({ userId }) => {
             )}
           </a>
 
-          <FaUserCircle className="text-4xl" />
-
-          <button
-            onClick={logoutHandle}
-            className="text-red-500 mt-1 font-bold text-xl  hover:underline"
-          >
-            Logout
-          </button>
+            <FaUserCircle className="text-4xl" />
+            <div className="ml-3">
+              <button
+                onClick={logoutHandle}
+                className="text-red-500 mt-1 text-sm hover:underline"
+              >
+                Logout
+              </button>
+          </div>
         </nav>
       </div>
     </>
