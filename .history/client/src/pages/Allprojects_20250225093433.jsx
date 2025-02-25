@@ -89,7 +89,7 @@ const Allprojects = () => {
 
     return (
         <>
-        <Navbar className="z-10"/>
+        <Navbar className"z-10/>
         <div className="flex">
             {/* Sidebar */}
             <div className="w-64 bg-gray-800 text-white h-screen sticky top-0 p-4">
