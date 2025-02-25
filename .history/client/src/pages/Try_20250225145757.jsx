@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { FaUserCircle } from "react-icons/fa";
-import { useAuthStore } from '../store/auth';
-import axios from "axios";
 
 
 const Settings = () => {
@@ -12,13 +10,11 @@ const Settings = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
   const [password, setPassword] = useState('');
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [language, setLanguage] = useState('English');
+  const [privacy, setPrivacy] = useState('Public');
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [message, setMessage] = useState("");
-  const [showConfirm, setShowConfirm] = useState(false);
-
-
-
-  const { logout } = useAuthStore();
 
   const handleSave = () => {
     alert('Settings saved successfully!');
@@ -28,33 +24,15 @@ const Settings = () => {
     setShowDeletePopup(true);
   };
 
-
-
-  const logoutHandle = async () => {
-    try {
-      await logout();
-      window.location.href = "/";
-    } catch (error) {
-      alert(error.message);
-    }
+  const confirmDeleteAccount = () => {
+    setShowDeletePopup(false);
+    alert('Your account has been deleted.');
   };
 
-  const deleteStudent = async () => {
-    try {
-      await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/`);
-      setMessage("account deleted successfully!");
-      window.location.href = '/'
-    } catch (error) {
-      console.error("Error deleting student:", error);
-    }
-    setShowConfirm(false);
-  };
   return (
     <>
       <Navbar />
-      {message && <div className="bg-green-500 text-white p-3 rounded mb-4 text-center">{message}</div>}
-
-      <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center w-full">
+      <div className="min-h-screen bg-gray-100 p-14 flex flex-col items-center w-full">
         <h1 className="text-2xl font-bold text-blue-600 mb-6">Settings</h1>
         <div className="bg-white p-14 rounded-lg shadow-md w-full max-w-4xl flex">
           <div className="w-3/4">
@@ -119,7 +97,7 @@ const Settings = () => {
           </div>
           <div className="w-1/4 flex flex-col items-center">
             <FaUserCircle className="text-4xl h-32 w-32 rounded-full mb-4" />
-            <button onClick={logoutHandle} className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-900 transition-all">Logout</button>
+            <button className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-900 transition-all">Logout</button>
           </div>
         </div>
       </div>
@@ -130,7 +108,7 @@ const Settings = () => {
             <p className="text-gray-700 mt-2">Are you sure you want to delete your account? You will lose all your data.</p>
             <div className="mt-4 flex justify-end gap-4">
               <button className="px-4 py-2 bg-gray-300 rounded" onClick={() => setShowDeletePopup(false)}>Cancel</button>
-              <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={deleteStudent}>Confirm</button>
+              <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={confirmDeleteAccount}>Confirm</button>
             </div>
           </div>
         </div>

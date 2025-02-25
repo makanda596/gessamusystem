@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { FaUserCircle } from "react-icons/fa";
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
 
 
 const Settings = () => {
-    const { id } = useParams()
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -33,7 +31,6 @@ const Settings = () => {
         }
         catch(error){
             console.error("Error deleting account:", error);
-            
         }
         setShowDeletePopup(false);
         alert('Your account has been deleted.');

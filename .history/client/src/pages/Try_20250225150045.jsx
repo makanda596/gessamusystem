@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { FaUserCircle } from "react-icons/fa";
 import { useAuthStore } from '../store/auth';
-import axios from "axios";
 
 
 const Settings = () => {
@@ -12,11 +11,11 @@ const Settings = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
   const [password, setPassword] = useState('');
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [language, setLanguage] = useState('English');
+  const [privacy, setPrivacy] = useState('Public');
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [message, setMessage] = useState("");
-  const [showConfirm, setShowConfirm] = useState(false);
-
-
 
   const { logout } = useAuthStore();
 
@@ -28,7 +27,10 @@ const Settings = () => {
     setShowDeletePopup(true);
   };
 
-
+  const confirmDeleteAccount = () => {
+    setShowDeletePopup(false);
+    alert('Your account has been deleted.');
+  };
 
   const logoutHandle = async () => {
     try {
@@ -38,22 +40,9 @@ const Settings = () => {
       alert(error.message);
     }
   };
-
-  const deleteStudent = async () => {
-    try {
-      await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/`);
-      setMessage("account deleted successfully!");
-      window.location.href = '/'
-    } catch (error) {
-      console.error("Error deleting student:", error);
-    }
-    setShowConfirm(false);
-  };
   return (
     <>
       <Navbar />
-      {message && <div className="bg-green-500 text-white p-3 rounded mb-4 text-center">{message}</div>}
-
       <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center w-full">
         <h1 className="text-2xl font-bold text-blue-600 mb-6">Settings</h1>
         <div className="bg-white p-14 rounded-lg shadow-md w-full max-w-4xl flex">
@@ -130,7 +119,7 @@ const Settings = () => {
             <p className="text-gray-700 mt-2">Are you sure you want to delete your account? You will lose all your data.</p>
             <div className="mt-4 flex justify-end gap-4">
               <button className="px-4 py-2 bg-gray-300 rounded" onClick={() => setShowDeletePopup(false)}>Cancel</button>
-              <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={deleteStudent}>Confirm</button>
+              <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={confirmDeleteAccount}>Confirm</button>
             </div>
           </div>
         </div>

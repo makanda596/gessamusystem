@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import { FaUserCircle } from "react-icons/fa";
-import axios from 'axios'
-import { useParams } from 'react-router-dom';
-
 
 const Settings = () => {
-    const { id } = useParams()
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -27,16 +22,13 @@ const Settings = () => {
         setShowDeletePopup(true);
     };
 
-    const confirmDeleteAccount = async () => {
-        try{
-         await axios.delete(`https://gessamubackend.onrender.com/auth/deleteUser/${id}`)
-        }
-        catch(error){
-            console.error("Error deleting account:", error);
-            
-        }
+    const confirmDeleteAccount = () => {
         setShowDeletePopup(false);
         alert('Your account has been deleted.');
+    };
+
+    const handleLogout = () => {
+        alert('Logged out successfully!');
     };
 
     return (
@@ -44,8 +36,8 @@ const Settings = () => {
             <Navbar />
             <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center w-full">
                 <h1 className="text-2xl font-bold text-blue-600 mb-6">Settings</h1>
-                <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl flex">
-                    <div className="w-3/4">
+                <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl flex flex-col md:flex-row justify-between">
+                    <div className="w-full md:w-3/4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-gray-700">First Name</label>
@@ -105,9 +97,20 @@ const Settings = () => {
                             Delete Account
                         </button>
                     </div>
-                    <div className="w-1/4 flex flex-col items-center">
-                        <FaUserCircle className="text-4xl h-32 w-32 rounded-full mb-4" />
-                        <button className="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-900 transition-all">Logout</button>
+                    <div className="w-full md:w-1/4 flex flex-col items-center">
+                        {profilePicture && (
+                            <img 
+                                src={URL.createObjectURL(profilePicture)} 
+                                alt="Profile" 
+                                className="w-24 h-24 rounded-full object-cover mt-4" 
+                            />
+                        )}
+                        <button
+                            className="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-900 transition-all mt-4"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </button>
                     </div>
                 </div>
             </div>
