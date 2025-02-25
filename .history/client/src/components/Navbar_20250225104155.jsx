@@ -89,7 +89,7 @@ const Navbar = ({ userId }) => {
 
         {/* Mobile Menu Button */}
         <label htmlFor="menu-toggle" className="lg:hidden cursor-pointer">
-          <FaBars className="text-white text-2xl"/>
+          <FaBars className="text-white text-2xl" />
         </label>
       </nav>
 
@@ -105,7 +105,7 @@ const Navbar = ({ userId }) => {
         </div>
 
         {/* Mobile Navigation */}
-        <nav className="flex flex-col space-y-4  mt-6">
+        <nav className="flex flex-col space-y-4 z-40 mt-6">
           <a href="/dashboard" className="hover:text-gray-300 transition duration-300 ease-in-out hover:underline">
             Home
           </a>
