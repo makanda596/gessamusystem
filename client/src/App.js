@@ -75,11 +75,11 @@ function App() {
     return (
       <Router>
         <div className="App">
+          {/* ..d */}
           <Routes>
             <Route path="/try" element={<Try />} />
             <Route path="/user" element={<UserProfile />} />
             <Route path="/log" element={<Log />} />
-
             <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
             <Route path="/adminLogin" element={<AdminLoginPage />} />
