@@ -15,6 +15,7 @@ import Alert from './pages/Alert.jsx';
 import Specific from './pages/Specific.jsx';
 import OneProject from './pages/OneProject.jsx';
 import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
+import UserProfile from './pages/UserProfle.jsx';
 import Training from './pages/Training.jsx';
 import Settings from './pages/Settings.jsx';
 import Profile from './pages/Profile.jsx';
