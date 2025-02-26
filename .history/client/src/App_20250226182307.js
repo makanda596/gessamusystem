@@ -15,9 +15,9 @@ import Alert from './pages/Alert.jsx';
 import Specific from './pages/Specific.jsx';
 import OneProject from './pages/OneProject.jsx';
 import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
+import UserProfile from './pages/UserProfle.jsx';
 import Training from './pages/Training.jsx';
 import Settings from './pages/Settings.jsx';
-import Profile from './pages/Profile.jsx';
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -74,6 +74,7 @@ function App() {
         <div className="App">
           {/* ..d */}
           <Routes>
+            <Route path="/user" element={<UserProfile />} />
             <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
             <Route path="/adminLogin" element={<AdminLoginPage />} />
