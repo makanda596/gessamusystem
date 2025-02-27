@@ -29,7 +29,7 @@ export const useAuthStore = create((set) => ({
     adminLogin: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('https://gessamubackend.onrender.comadminLogin', { email, password });
+            const response = await axios.post('https://gessamusystem.onrender.com/adminLogin', { email, password });
             set({ admin: response.data.admin, isAuthenticated: true, isLoading: false, error: null });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error logging in", isLoading: false });
@@ -54,7 +54,7 @@ export const useAuthStore = create((set) => ({
     // Logout 
     logout: async () => {
         try { 
-            await axios.post('https://gessamubackend.onrender.com/auth/logout', null, { withCredentials: true });
+            await axios.post('https://gessamusystem.onrender.com/auth/logout', null, { withCredentials: true });
             localStorage.removeItem("token");
             set({ user: null, isAuthenticated: false, isCheckingAuth: false });
         } catch (error) {
@@ -80,7 +80,7 @@ export const useAuthStore = create((set) => ({
         set({ isCheckingAuth: true, error: null });
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get('https://gessamubackend.onrender.com/auth/check-auth', {
+            const response = await axios.get('https://gessamusystem.onrender.com/auth/check-auth', {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });
