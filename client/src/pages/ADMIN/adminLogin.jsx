@@ -16,10 +16,10 @@ const AdminLoginPage = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault() 
         try{
-            const response = await axios.post('https://gessamubackend.onrender.com/admin/adminLogin',
+            const response = await axios.post('https://gessamusystem1.vercel.app/admin/adminLogin',
         {email,password},
         {withCredentials:true}) 
-        console.log(response.data)
+        console.log(response.data) 
         window.location.href="/adminDashboard"
     }
     catch(error){
