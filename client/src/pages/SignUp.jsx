@@ -16,7 +16,6 @@ function SignUpForm() {
     const [passwordError, setPasswordError] = useState('');
 
     const { message, error, signup } = useAuthStore();
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,7 +25,7 @@ function SignUpForm() {
             setPasswordError('Passwords do not match');
             return;
         }
-
+// hjk?
         setLoading(true);
         try {
             await signup(firstName, lastName, email, phoneNumber, password);
