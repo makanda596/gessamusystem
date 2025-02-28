@@ -17,7 +17,7 @@ export const useAuthStore = create((set) => ({
     signup: async (firstName, lastName, email, phoneNumber, password, avatar) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('https://gessamubackend.onrender.com/signup', { firstName, lastName,  email, phoneNumber, password, avatar });
+            const response = await axios.post('https://gessamusystem1.vercel.app/signup', { firstName, lastName,  email, phoneNumber, password, avatar });
             set({ user: response.data.user, isLoading: false, isAuthenticated: true });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error signing up", isLoading: false });
@@ -29,7 +29,7 @@ export const useAuthStore = create((set) => ({
     adminLogin: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('https://gessamubackend.onrender.com/adminLogin', { email, password });
+            const response = await axios.post('https://gessamusystem1.vercel.app/adminLogin', { email, password });
             set({ admin: response.data.admin, isAuthenticated: true, isLoading: false, error: null });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error logging in", isLoading: false });
@@ -54,7 +54,7 @@ export const useAuthStore = create((set) => ({
     // Logout 
     logout: async () => {
         try { 
-            await axios.post('https://gessamubackend.onrender.com/auth/logout', null, { withCredentials: true });
+            await axios.post('https://gessamusystem1.vercel.app/auth/logout', null, { withCredentials: true });
             localStorage.removeItem("token");
             set({ user: null, isAuthenticated: false, isCheckingAuth: false });
         } catch (error) {
@@ -80,7 +80,7 @@ export const useAuthStore = create((set) => ({
         set({ isCheckingAuth: true, error: null });
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get('https://gessamubackend.onrender.com/auth/check-auth', {
+            const response = await axios.get('https://gessamusystem1.vercel.app/auth/check-auth', {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });
