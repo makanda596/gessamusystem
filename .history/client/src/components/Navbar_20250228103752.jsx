@@ -41,7 +41,7 @@ const Settings = () => {
 
   const deleteStudent = async () => {
     try {
-      await axios.delete('http://localhost:5000/auth/deleteUser/');
+      await axios.delete(`localhost:5000/auth/deleteUser/`);
       setMessage("account deleted successfully!");
       window.location.href = '/'
     } catch (error) {

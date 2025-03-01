@@ -1,35 +1,49 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from '../store/auth';
-import { FiUser, FiMail, FiLock, FiHash } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiHash, FiEye, FiEyeOff } from 'react-icons/fi';
 
 function SignUpForm() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [admNo, setAdmNo] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
-    const [year, setYear] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
 
     const { message, error, signup } = useAuthStore();
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setPasswordError('');
+
+        if (password !== confirmPassword) {
+            setPasswordError('Passwords do not match');
+            return;
+        }
+// hjk?
+        setLoading(true);
         try {
-            await signup(firstName, lastName, admNo, year, email, password);
-            navigate('/login');
+            await signup(firstName, lastName, email, phoneNumber, password);
+            window.location.href = '/';
         } catch (error) {
             console.log(error.response ? error.response.data.message : 'Sign up failed');
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
-            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
-                <h1 className="text-4xl font-extrabold text-indigo-600 text-center mb-4">Create Account</h1>
-                <p className="text-gray-600 text-center mb-6">Join us and start your journey!</p>
+        <div className="min-h-screen flex items-center justify-center ">
+            <div className="bg-white px-8 py-2 rounded-2xl shadow-2xl w-full max-w-md">
+                <h1 className="text-2xl font-extrabold text-indigo-600 text-center mb-2">Create Account</h1>
+                <p className="text-gray-600 text-center mb-4">Join us and start your journey!</p>
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+                {passwordError && <p className="text-red-500 text-center mb-4">{passwordError}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="relative">
@@ -54,17 +68,7 @@ function SignUpForm() {
                             required
                         />
                     </div>
-                    <div className="relative">
-                        <FiHash className="absolute top-3 left-3 text-gray-400" />
-                        <input
-                            type="text"
-                            value={admNo}
-                            onChange={(e) => setAdmNo(e.target.value)}
-                            className="pl-10 w-full p-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                            placeholder="Admission Number"
-                            required
-                        />
-                    </div>
+
                     <div className="relative">
                         <FiMail className="absolute top-3 left-3 text-gray-400" />
                         <input
@@ -79,49 +83,52 @@ function SignUpForm() {
                     <div className="relative">
                         <FiHash className="absolute top-3 left-3 text-gray-400" />
                         <input
-                            type="text"
-                            value={year}
-                            onChange={(e) => setYear(e.target.value)}
+                            type="number"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
                             className="pl-10 w-full p-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                            placeholder="Year of Study"
+                            placeholder="Phone Number"
                             required
                         />
                     </div>
+                 
                     <div className="relative">
                         <FiLock className="absolute top-3 left-3 text-gray-400" />
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="pl-10 w-full p-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
                             placeholder="Password"
                             required
                         />
+                        <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? <FiEyeOff /> : <FiEye />}
+                        </div>
+                    </div>
+                    <div className="relative">
+                        <FiLock className="absolute top-3 left-3 text-gray-400" />
+                        <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="pl-10 w-full p-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="Confirm Password"
+                            required
+                        />
+                        <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                            {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+                        </div>
                     </div>
                     <button
                         type="submit"
-                        onClick={handleSubmit}
                         className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 font-semibold"
+                        disabled={loading}
                     >
-                        Sign Up
+                        {loading ? 'Creating Account...' : 'Sign Up'}
                     </button>
                 </form>
-                {message && (
-                    <p
-                        className={`mt-4 text-center text-sm ${error ? 'text-red-500' : 'text-green-500'
-                            }`}
-                    >
-                        {message}
-                    </p>
-                )}
-                <div className="mt-6 text-center">
-                    <p className="text-sm text-gray-600">
-                        Already have an account?{' '}
-                        <a href="/" className="text-indigo-600 hover:underline">
-                            Login
-                        </a>
-                    </p>
-                </div>
+                <p className="text-center mt-4 text-gray-600">Already have an account? <a href="/" className="text-indigo-600 hover:underline">Log in</a></p>
             </div>
         </div>
     );
