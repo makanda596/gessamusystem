@@ -80,7 +80,8 @@ export const useAuthStore = create((set) => ({
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get('http://localhost:5000/auth/check-auth', {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}` },
                 withCredentials: true
             });
             set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });

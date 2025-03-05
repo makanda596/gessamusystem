@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // Set your API endpoints
 const USER_API = "http://localhost:5000/auth";
+const ADM_API = "http://localhost:5000/admin";
 
 export const useAuthStore = create((set) => ({
     user: null,
