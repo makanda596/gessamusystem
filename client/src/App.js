@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/auth.js';
-import axios from 'axios';
 
 import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
@@ -73,7 +72,7 @@ function App({user}) {
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/Quiz" element={<ProtectedRoute><Quiz  /></ProtectedRoute>} />
             <Route path="/project/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
-            <Route path="/adminDashboard" element={<AdminDashboard />} />
+            <Route path="/boa" element={<AdminDashboard />} />
           </Routes>
         </div>
       </Router>
