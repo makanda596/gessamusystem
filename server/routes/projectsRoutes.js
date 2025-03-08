@@ -11,7 +11,7 @@ import {
     countWeeklyProjects,
 } from "../controllers/projectControllers.js";
 import multer from "multer";
-const upload = multer({ dest: "project/" });
+const upload = multer({ dest: "project/" }); 
 const router = express.Router();
 
 router.post("/sendprojects", upload.single("file"), postprojects);
