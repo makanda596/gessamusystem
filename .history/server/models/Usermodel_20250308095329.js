@@ -9,17 +9,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    admNo: {
+    // admNo: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
+    // year: {
+    //     type:Number,
+    //     required: true
+    // },
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    year: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
+    phoneNumber:{
+        type: Number,
         required: true,
         unique: true
     },
@@ -27,12 +32,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    resetPasswordToken: String,
-    resetPasswordExpiresAt: Date,
+    lastLogin: {
+        type: Date,
+        default: Date.now,
+    },
     avatar: {
         type: String,
-        required: true
-    }
+        default: ""
+    },
+    resetPasswordToken: String,
+    resetPasswordExpiresAt: Date,
+
 }, { timestamps: true });
 
 export const User = mongoose.model("User", userSchema);

@@ -43,7 +43,7 @@ const upload = multer({ dest: 'uploads/' })
 https://gessamuportal.onrender.com/
 app.use(cors(
    {
-        origin: ["https://gessamuportal.onrender.com"],  // Specific frontend URL
+        origin: ["http://localhost:3000"],  // Specific frontend URL
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true,  // Allow cookies to be sent with the request
     })
