@@ -6,14 +6,14 @@ const Student = () => {
     const [filteredStudents, setFilteredStudents] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [error, setError] = useState("");
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState(""); 
     const [showConfirm, setShowConfirm] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
 
     // Fetch students from backend
     const fetchStudents = async () => {
         try {
-            const response = await axios.get("https://gessamubackend.onrender.com/auth/getStudents");
+            const response = await axios.get("https://gessamusystem.onrender.com/auth/getStudents");
             setStudents(response.data);
             setFilteredStudents(response.data);
         } catch (error) {
