@@ -60,7 +60,7 @@ const AllProjects = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://gessamusystem.onrender.com/projects/add', newProject);
+            await axios.post('http://localhost:5000/projects/add', newProject);
             setShowForm(false);
             fetchProjects();
         } catch (error) {
