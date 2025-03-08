@@ -14,6 +14,8 @@ import imagesRoutes from './routes/imagesRoutes.js'
 import projectsRoutes from './routes/projectsRoutes.js'
 import alertRoutes from './routes/alertRoutes.js'
 import session from 'express-session'
+import MongoStore from 'connect-mongo';
+import bcrypt from "bcryptjs"
 
 import multer from 'multer'
 const upload = multer({ dest: 'uploads/' })
@@ -37,24 +39,45 @@ const upload = multer({ dest: 'uploads/' })
 //     console.log(req.file)
 // })
 //user routes
+// const FRONTEND_URL ="https://gessamuportal.vercel.app"
+app.use(cors(
+   {
+        origin: ["https://gessamuportal.onrender.com"],  // Specific frontend URL
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true,  // Allow cookies to be sent with the request
+    })
+);
 
-
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-}))
+// Handle preflight requests (important for CORS with credentials)
+// app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 dotenv.config()
 app.use(cookieParser());
 //session setup
-app.use(session({
-    secret:"secret",
-    resave:false,
-    saveUninitialized: false, //for making a save withouth the app being modified
-    cookie:{secure:false} //coz we using http but in the pro change to true (https)
-}))
+app.use(
+    session({
+        secret: "welcome",
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: "mongodb+srv://oumab743:makandabrian123@cluster0.qj7my.mongodb.net/Gessamu?retryWrites=true&w=majority&appName=Cluster0",
+            collectionName: 'sessions',
+            ttl: 14 * 24 * 60 * 60, // Expire sessions after 14 days
+        }),
+        cookie: { 
+            secure: true,  // Only send cookies over HTTPS
+            httpOnly: true,  // Prevent client-side access to the cookie
+             sameSite: 'lax' ,
+        }
+    })
+);
+//for testng
+
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'CORS works!' });
+});
 
 app.post('/login', (req, res) => {
     const { username, email, admNo } = req.body;  // Extracting multiple details from the request body
@@ -66,9 +89,10 @@ app.post('/login', (req, res) => {
         // Send a response with all the stored details
         res.send({
             message: 'Logged in',
+            user:{
             user: req.session.user,
             email: req.session.email,
-            admNo: req.session.admNo
+            admNo: req.session.admNo}
         });
     } else {
         // If any required field is missing, send an error message
@@ -76,19 +100,8 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
-    // Check if the user is logged in by verifying if session data exists
-    if (req.session.user) {
-        res.send({
-            message: 'Profile details',
-            user: req.session.user,
-            email: req.session.email,
-            admNo: req.session.admNo
-        });
-    } else {
-        // If the session doesn't exist, send an error indicating the user needs to log in
-        res.status(401).send({ message: 'You need to log in first' });
-    }
+app.get('/', (req, res) => {
+ res.json("hello")
 });
 //uploading a file
 app.use('/uploads', upload.single('file'), uploadRoutes)
@@ -111,7 +124,7 @@ app.use('/projects', projectsRoutes)
 app.use('/alert', alertRoutes)
 //dotenv files
 const PORT = process.env.PORT || 6000;
-const MONGO_URL = process.env.MONGO_URL
+const MONGO_URL = "mongodb+srv://oumab743:makandabrian123@cluster0.qj7my.mongodb.net/Gessamu?retryWrites=true&w=majority&appName=Cluster0"
 //mongo db connect
 mongoose.connect(MONGO_URL)
 try {
@@ -124,3 +137,5 @@ app.listen(PORT, () => {
     console.log(`app listening on port ${PORT} `)
 }
 )
+
+// ,.kk
