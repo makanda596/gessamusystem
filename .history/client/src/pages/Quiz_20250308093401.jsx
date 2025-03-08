@@ -14,7 +14,7 @@ const   Quiz = () => {
       }
 
       try {
-        const response = await fetch("https://gessamusystem.onrender.com/auth/profile", {
+        const response = await fetch("https://gessamusystem.onrender.comauth/profile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

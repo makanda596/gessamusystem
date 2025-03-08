@@ -19,7 +19,7 @@ const PostProject = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post('http://localhost:5000/projects/sendprojects', formData);
+            await axios.post('https://gessamusystem.onrender.com/projects/sendprojects', formData);
             setMessage('Project posted successfully!');
             setFormData({ title: '', description: '', reference: '', year: '' });
             window.location.reload();
