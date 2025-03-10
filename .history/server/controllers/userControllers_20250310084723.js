@@ -227,6 +227,8 @@ export const countStudents = async (req, res) => {
     }
 };
 
+import bcrypt from 'bcrypt';
+import User from '../models/User.js'; // Ensure correct model import
 
 export const update = async (req, res) => {
     const { firstName, lastName, email, phoneNumber, password } = req.body;

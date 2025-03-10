@@ -227,56 +227,42 @@ export const countStudents = async (req, res) => {
     }
 };
 
+export const update = async(req,res)=>{
+      const { firstName, lastName, email, phoneNumber ,password } = req.body;
+      const {id}=req.params
 
-export const update = async (req, res) => {
-    const { firstName, lastName, email, phoneNumber, password } = req.body;
-    const { id } = req.params;
-
-    try {
-        const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
+      try{
+        const user = await User.findById(id)
+          if (!user){
+            res.json({message:"user not found"})
         }
+          if (email) {
+              const existingEmail = await User.findOne({ email });
+              if (existingEmail && existingEmail._id.toString() !== id) {
+                  return res.status(400).json({ message: "Email already exists. Please use a different one." });
+              }
+          }
 
-        // Check if email is already used by another user
-        if (email) {
-            const existingEmail = await User.findOne({ email });
-            if (existingEmail && existingEmail._id.toString() !== id) {
-                return res.status(400).json({ message: "Email already exists. Please use a different one." });
-            }
-        }
+          // Check if the new phone number is already taken (excluding the current user)
+          if (phoneNumber) {
+              const existingPhone = await User.findOne({ phoneNumber });
+              if (existingPhone && existingPhone._id.toString() !== id) {
+                  return res.status(400).json({ message: "Phone number already exists. Please use a different one." });
+              }
+          }
+          let updatedFields = {...req.body}
+          const hashpassword = await bcrypt.hash (password,10)
+          updatedFields.password = hashpassword
 
-        // Check if phone number is already used by another user
-        if (phoneNumber) {
-            const existingPhone = await User.findOne({ phoneNumber });
-            if (existingPhone && existingPhone._id.toString() !== id) {
-                return res.status(400).json({ message: "Phone number already exists. Please use a different one." });
-            }
-        }
-
-        let updatedFields = { ...req.body };
-
-        // Only hash password if it's provided
-        if (password) {
-            updatedFields.password = await bcrypt.hash(password, 10);
-        }
-
-        const updatedUser = await User.findByIdAndUpdate(id, updatedFields, { new: true });
-
-        return res.status(200).json({
-            message: "User updated successfully",
-            updatedUser: {
-                firstName: updatedUser.firstName,
-                lastName: updatedUser.lastName,
-                email: updatedUser.email,
-                phoneNumber: updatedUser.phoneNumber,
-            }
-        });
-
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-};
-
+          const updatedUser = await User.findByIdAndUpdate({id}, updatedFields, {new:true})
+          await updatedUser.save()
+          res.status(400).json({ message: "user updated" },
+              updatedUser
+          )
+      }
+      catch(error){
+        res.json(error.message)
+      }
+}
 
 //dfef
