@@ -37,7 +37,7 @@ const Settings = ({ logout }) => {
 
     const handleSave = async () => {
         const token = localStorage.getItem("token")
-        const response = await axios.put(`https://gessamusystem.onrender.com/auth/update/${user._id}`,{
+        const response = await axios.put(`http://localhost:5000/auth/update/${user._id}`,{
             headers: { Authorization: `Bearer ${token}` },
         })
         setUser(response.data);

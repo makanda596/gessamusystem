@@ -13,6 +13,6 @@ router.get('/getStudents', getStudent)
 router.delete('/deleteUser/:id', protectRoute, deleteUser)
 router.get("/studentCount", countStudents)
 router.get('/profile', protectRoute ,getUserInfo)
-router.put('/update/:id', update)
+router.put('/update', update)
 
 export default router;    
