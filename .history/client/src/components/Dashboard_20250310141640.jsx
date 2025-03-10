@@ -55,13 +55,7 @@ const Dashboard = () => {
     }, []);
 
     const Alert = async (req,res)=>{
-        try{
         const response = await axios.get(`https://gessamusystem.onrender.com/alert/countAlert/${user._id}`)
-        console.log(response.data)
-        }
-        catch(error){
-            setError(error.message)
-        }
     }
 
     useEffect(()=>{
