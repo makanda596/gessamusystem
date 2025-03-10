@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import { UsersetCookieGenerateToken } from '../utilis/UsersetCookieGenerateToken.js';
 import { UserRefreshToken } from '../utilis/UserRefreshToken.js';
 import { sendPasswordResetEmail, sendRestPasswordEmail } from '../mailtrap/Email.js';
+import multer from "multer";
 
 
 import jwt from 'jsonwebtoken';
@@ -280,11 +281,22 @@ export const countStudents = async (req, res) => {
 // };
 
 
+// Multer storage configuration (stores images in the 'uploads' folder)
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // Store images in 'uploads' folder
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`); // Unique filename
+    },
+});
+
+const upload = multer({ storage: storage });
 
 export const update = async (req, res) => {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
     const { id } = req.params;
-    const avatar = req.file ? `/uploads/${req.file.filename}` : null; // Corrected file path
+    const avatar = req.file ? `/uploads/${req.file.filename}` : null; // Get uploaded file path
 
     try {
         const user = await User.findById(id);
@@ -324,8 +336,8 @@ export const update = async (req, res) => {
     }
 };
 
-
 // Apply multer middleware to handle file uploads
+export const updateWithImage = [upload.single("image"), update];
 
 
 //dfef
