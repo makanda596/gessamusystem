@@ -3,23 +3,23 @@ import axios from "axios";
 import { FaExclamationCircle, FaCheckCircle, FaClock } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 
-const Alert = ({ user }) => {  
+const Alert = ({ userId }) => {  
     const [alerts, setAlerts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!user._id) {
+        if (!userId) {
             setError("User ID is missing.");
             setLoading(false);
             return;
         }
 
-        axios.get(`https://gessamusystem.onrender.com/alert/takeAlert/${user._id}`)
+        axios.get(`https://gessamusystem.onrender.com/alert/takeAlert/${userId}`)
             .then(response => setAlerts(response.data.alerts))
             .catch(err => setError(err.response?.data?.message || "An error occurred while fetching alerts"))
             .finally(() => setLoading(false));
-    }, [user._id]);
+    }, [userId]);
 
     if (loading) return <Loader />;
     if (error) return <Message text={error} color="text-red-600" />;
@@ -27,7 +27,6 @@ const Alert = ({ user }) => {
     return (
         <>
             <Navbar />
-            {user ? (<h1>{user.email}</h1>) : (<p>no user</p>)}
             <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
                 <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">📢 Your Alerts</h2>
                 {alerts.length === 0 ? (
