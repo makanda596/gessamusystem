@@ -21,21 +21,15 @@ export const makeAlert = async (req, res) => {
 
 export const takeAlert = async (req, res) => {
     try {
-        // const { userId } = req.params;
-        const {id} =req.params
+        const {id } = req.params;
 
-        // if (!userId) {
-        //     return res.status(400).json({ error: "User ID is required" });
-        // } 
-        if (!id) {
-            return res.status(400).json({ error: "User ID is required" });}
-        const alerts = await Alert.find({ _id: id }).sort({ createdAt: -1 });
-        return res.status(200).json({ message: "Alerts fetched successfully", alerts });
+        if (!userId) {
+            return res.status(400).json({ error: "User ID is required" });
         }
 
-        // const alerts = await Alert.find({ _id: userId }).sort({ createdAt: -1 });
-        
-    catch (error) {
+        const alerts = await Alert.find({ _id:id}).sort({ createdAt: -1 });
+        return res.status(200).json({ message: "Alerts fetched successfully", alerts });
+    } catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
