@@ -83,7 +83,7 @@ const Navbar = ({ logout }) => {
 
         {/* Icons & Mobile Menu Button */}
         <div className="flex items-center space-x-6 text-white relative">
-          <a href="/alert" className="flex items-center space-x-1 hover:text-black">
+          <a href="/settings" className="flex items-center space-x-1 hover:text-black">
             <FaBell className="text-xl cursor-pointer hover:opacity-80" />
           </a>
 
