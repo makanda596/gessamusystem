@@ -21,14 +21,6 @@ router.delete('/deleteUser/:id', protectRoute, deleteUser);
 router.get("/studentCount", countStudents);
 router.get('/profile', protectRoute, getUserInfo);
 router.put('/update/:id', upload.single("file"), update); // Ensure correct file key
-router.get('/getimage', async (req, res) => {
-    try {
-        const data = await User.find({}); // Await directly without .then()
-        res.status(200).json({ status: 200, data: data });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({ error: "Error fetching images" });
-    }
-});
+
 
 export default router;
