@@ -4,35 +4,32 @@ import { AllAlert } from '../models/allAlerts.js';
 export const makeAlert = async (req, res) => {
     const { message, userId } = req.body;
 
-    try{
     if (!message || !userId) {
         return res.status(400).json({ error: "Message and user ID are required" });
     }
-        const newAlert = new Alert({ message, userId });
-        await newAlert.save();
-        return res.status(201).json({ message: "Alert created successfully", newAlert });
-}
-    
-    catch(error){
-        res.json(error.message)
-    }
 
-    
+    const newAlert = new Alert({ message, userId });
+    await newAlert.save();
 
 };
 
 export const takeAlert = async (req, res) => {
     try {
-        const { id: userId } = req.params; // Assuming user ID is in params
+        // const { userId } = req.params;
+        const {id} =req.params
 
-        if (!userId) {
-            return res.status(400).json({ error: "User ID is required" });
+        // if (!userId) {
+        //     return res.status(400).json({ error: "User ID is required" });
+        // } 
+        if (!id) {
+            return res.status(400).json({ error: "User ID is required" });}
+        const alerts = await Alert.find({ _id: id }).sort({ createdAt: -1 });
+        return res.status(200).json({ message: "Alerts fetched successfully", alerts });
         }
 
-        const alerts = await Alert.find({ userId }).sort({ createdAt: -1 });
-        return res.status(200).json({ message: "Alerts fetched successfully", alerts });
-    } catch (error) {
-        console.error("Error fetching alerts:", error);
+        // const alerts = await Alert.find({ _id: userId }).sort({ createdAt: -1 });
+        
+    catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };

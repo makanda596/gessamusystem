@@ -4,20 +4,12 @@ import { AllAlert } from '../models/allAlerts.js';
 export const makeAlert = async (req, res) => {
     const { message, userId } = req.body;
 
-    try{
     if (!message || !userId) {
         return res.status(400).json({ error: "Message and user ID are required" });
     }
-        const newAlert = new Alert({ message, userId });
-        await newAlert.save();
-        return res.status(201).json({ message: "Alert created successfully", newAlert });
-}
-    
-    catch(error){
-        res.json(error.message)
-    }
 
-    
+    const newAlert = new Alert({ message, userId });
+    await newAlert.save();
 
 };
 

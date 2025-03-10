@@ -14,8 +14,8 @@ const router = express.Router();
 router.post("/makeAlert", makeAlert);
 // router.post('/allalert', allalert) 
 // router.get('/getAllAlert', getAllAlert);
-router.get("/takeAlert/:userId",takeAlert);
-router.get('/countAlert/userId',alertCount);
+router.get("/takeAlert/:userId",takeeAlert);
+router.get('/countAlert/userId',Count);
 router.get('/getAlert', getAlert);
 
 router.delete('/deleteAlert/:id', deleteAlert); // Add delete alert route
