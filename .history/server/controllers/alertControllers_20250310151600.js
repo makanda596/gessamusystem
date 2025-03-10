@@ -8,7 +8,7 @@ export const makeAlert = async (req, res) => {
     if (!message || !userId) {
         return res.status(400).json({ error: "Message and user ID are required" });
     }
-        const newAlert = new Alert({ message, id: userId });
+        const newAlert = new Alert({ message, userId });
         await newAlert.save();
         return res.status(201).json({ message: "Alert created successfully", newAlert });
 }
@@ -21,43 +21,21 @@ export const makeAlert = async (req, res) => {
 
 };
 
-
 export const takeAlert = async (req, res) => {
     try {
-        // const { userId } = req.params;
-        const { id } = req.params
+        const { id: userId } = req.params; // Assuming user ID is in params
 
-        // if (!userId) {
-        //     return res.status(400).json({ error: "User ID is required" });
-        // } 
         if (!id) {
             return res.status(400).json({ error: "User ID is required" });
         }
-        const alerts = await Alert.find({ _id: id }).sort({ createdAt: -1 });
+
+        const alerts = await Alert.find({ id }).sort({ createdAt: -1 });
         return res.status(200).json({ message: "Alerts fetched successfully", alerts });
-    }
-
-    // const alerts = await Alert.find({ _id: userId }).sort({ createdAt: -1 });
-
-    catch (error) {
+    } catch (error) {
+        console.error("Error fetching alerts:", error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
-// export const takeAlert = async (req, res) => {
-//     try {
-//         const { id: userId } = req.params; // Assuming user ID is in params
-
-//         if (!userId) {
-//             return res.status(400).json({ error: "User ID is required" });
-//         }
-
-//         const alerts = await Alert.find({ userId }).sort({ createdAt: -1 });
-//         return res.status(200).json({ message: "Alerts fetched successfully", alerts });
-//     } catch (error) {
-//         console.error("Error fetching alerts:", error);
-//         return res.status(500).json({ error: "Internal Server Error" });
-//     }
-// };
 
 export const alertCount = async (req, res) => {
     const { userId } = req.params;

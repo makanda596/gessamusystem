@@ -8,7 +8,7 @@ export const makeAlert = async (req, res) => {
     if (!message || !userId) {
         return res.status(400).json({ error: "Message and user ID are required" });
     }
-        const newAlert = new Alert({ message, id: userId });
+        const newAlert = new Alert({ message, userId });
         await newAlert.save();
         return res.status(201).json({ message: "Alert created successfully", newAlert });
 }

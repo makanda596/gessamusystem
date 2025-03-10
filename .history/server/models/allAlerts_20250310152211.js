@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const allalertSchema = new mongoose.Schema({
         message: String,
         userId: {
-                required:true, type:String
+                required:true, 
         }, // Reference User
         createdAt: { type: Date, default: Date.now },
     
