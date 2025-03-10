@@ -51,12 +51,12 @@ const Alert = () => {
         //     return;
         // }
 
-        axios.get(`https://gessamusystem.onrender.com/alert/takeAlert/${user?._id}`)
+        axios.get(`https://gessamusystem.onrender.com/alert/takeAlert/${id}`)
             .then(response => setAlerts(response.data.alerts))
             .catch(err => setError(err.response?.data?.message || "An error occurred while fetching alerts"))
             .finally(() => setLoading(false));
             console.log(user?._id)
-    }, [user]);
+    }, []);
     if (error) return <p className="text-center mt-5 text-red-500">{error}</p>;
 
     if (loading) return <Loader />;

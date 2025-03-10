@@ -10,7 +10,7 @@ export const makeAlert = async (req, res) => {
     }
         const newAlert = new Alert({ message, userId });
         await newAlert.save();
-        return res.status(201).json({ message: "Alert created successfully", newAlert });
+        return res.status(201).json({ message: "Alert created successfully", alert: newAlert });
 }
     
     catch(error){
