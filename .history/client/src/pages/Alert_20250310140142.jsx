@@ -45,13 +45,13 @@ const Alert = () => {
     }, []);
 
     useEffect(() => {
-        if (!user?.user) {
+        if (!user.user) {
             setError("User ID is missing.");
             setLoading(false);
             return;
         }
 
-        axios.get(`https://gessamusystem.onrender.com/alert/takeAlert/${user?.user}`)
+        axios.get(`https://gessamusystem.onrender.com/alert/takeAlert/${user.user}`)
             .then(response => setAlerts(response.data.alerts))
             .catch(err => setError(err.response?.data?.message || "An error occurred while fetching alerts"))
             .finally(() => setLoading(false));
