@@ -26,9 +26,8 @@ export const takeAlert = async (req, res) => {
 
         // if (!userId) {
         //     return res.status(400).json({ error: "User ID is required" });
-        // } 
-        if (!id) {
-            return res.status(400).json({ error: "User ID is required" });}
+        // } if (!id) {
+            return res.status(400).json({ error: "User ID is required" });
         const alerts = await Alert.find({ _id: id }).sort({ createdAt: -1 });
         return res.status(200).json({ message: "Alerts fetched successfully", alerts });
         }
