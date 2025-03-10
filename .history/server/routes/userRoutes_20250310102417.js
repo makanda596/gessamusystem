@@ -6,7 +6,6 @@ import {
     getUserInfo, update
 } from '../controllers/userControllers.js';
 import protectRoute from '../middleware/protectRoute.js';
-import { User } from '../models/Usermodel.js';
 
 const router = express.Router();
 
@@ -23,7 +22,7 @@ router.get('/profile', protectRoute, getUserInfo);
 router.put('/update/:id', upload.single("file"), update); // Ensure correct file key
 router.get('/getimage', async (req, res) => {
     try {
-        const data = await User.find({}); // Await directly without .then()
+        const data = await image.find({}); // Await directly without .then()
         res.status(200).json({ status: 200, data: data });
     } catch (e) {
         console.error(e);
