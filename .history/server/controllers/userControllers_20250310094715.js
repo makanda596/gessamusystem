@@ -280,11 +280,13 @@ export const countStudents = async (req, res) => {
 // };
 
 
+// Multer storage configuration (stores images in the 'uploads' folder)
+
 
 export const update = async (req, res) => {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
     const { id } = req.params;
-    const avatar = req.file ? `/uploads/${req.file.filename}` : null; // Corrected file path
+    const avatar = req.file ? `/uploads/${req.file.filename}` : null; // Get uploaded file path
 
     try {
         const user = await User.findById(id);
@@ -308,7 +310,7 @@ export const update = async (req, res) => {
             }
         }
 
-        let updatedFields = { firstName, lastName, email, phoneNumber };
+        let updatedFields = { firstName, lastName, email, phoneNumber,avatar };
         if (avatar) updatedFields.avatar = avatar; // Add profile picture
         if (password) updatedFields.password = await bcrypt.hash(password, 10);
 
@@ -323,7 +325,6 @@ export const update = async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 };
-
 
 // Apply multer middleware to handle file uploads
 

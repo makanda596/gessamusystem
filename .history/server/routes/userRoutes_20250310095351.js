@@ -19,6 +19,6 @@ router.get('/getStudents', getStudent);
 router.delete('/deleteUser/:id', protectRoute, deleteUser);
 router.get("/studentCount", countStudents);
 router.get('/profile', protectRoute, getUserInfo);
-router.put('/update/:id', upload.single("file"), update); // Ensure correct file key
+router.put('/update/:id', upload.single("profilePic"), update); // Ensure correct file key
 
 export default router;

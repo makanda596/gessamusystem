@@ -280,6 +280,33 @@ export const countStudents = async (req, res) => {
 // };
 
 
+// Multer storage configuration (stores images in the 'uploads' folder)
+
+
+
+// Multer storage configuration (stores images in 'uploads' folder)
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // Store images in 'uploads' folder
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`); // Unique filename
+    },
+});
+
+// File filter to accept images only
+const fileFilter = (req, file, cb) => {
+    const allowedFileTypes = /jpeg|jpg|png/;
+    const extname = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = allowedFileTypes.test(file.mimetype);
+    if (extname && mimetype) {
+        return cb(null, true);
+    } else {
+        return cb(new Error("Only JPEG, JPG, or PNG files are allowed!"), false);
+    }
+};
+
+const upload = multer({ storage, fileFilter });
 
 export const update = async (req, res) => {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
@@ -323,6 +350,9 @@ export const update = async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 };
+
+// Apply multer middleware to handle file uploads
+export const updateWithImage = [upload.single("profilePic"), update];
 
 
 // Apply multer middleware to handle file uploads
