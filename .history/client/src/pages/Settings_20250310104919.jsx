@@ -130,6 +130,7 @@ const Settings = ({ logout }) => {
                         <button className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-all mt-4" onClick={handleDeleteAccount}>Delete Account</button>
                     </div>
                     <div className="w-full md:w-1/4 flex flex-col items-center">
+                    {/* // */}
                         {user && (
                             <div className="text-center">  
                                 <img src={`https://gessamusystem.onrender.com/update/${user?.avatar}`} alt="Profile" className="w-24 h-24 rounded-full mt-2 mx-auto" />
