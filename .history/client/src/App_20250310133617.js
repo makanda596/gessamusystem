@@ -32,7 +32,7 @@ const RedirectAuthenticatedUser = ({ children }) => {
   return isAuthenticated ? <Navigate to="/dashboard" replace /> : children;
 };
 
-function App() {
+function App({user}) {
   const { isCheckingAuth, checkAuth } = useAuthStore();
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
@@ -100,7 +100,7 @@ function App() {
             <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><Resetpassword /></RedirectAuthenticatedUser>} />
             <Route path="/projects" element={<ProtectedRoute><Allprojects /></ProtectedRoute>} />
             <Route path="/task" element={<ProtectedRoute><Tasks user={user}/></ProtectedRoute>} />
-            <Route path="/alert" element={<ProtectedRoute><Alert user={user} /></ProtectedRoute>} />
+            <Route path="/alert" element={<ProtectedRoute><Alert  /></ProtectedRoute>} />
             <Route path="/task/:id" element={<ProtectedRoute><Specific /></ProtectedRoute>} />
             <Route path="/trainings" element={<ProtectedRoute><Training /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
