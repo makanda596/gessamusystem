@@ -3,49 +3,10 @@ import axios from "axios";
 import { FaExclamationCircle, FaCheckCircle, FaClock } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 
-const Alert = () => {  
+const Alert = ({ user }) => {  
     const [alerts, setAlerts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [error, setError] = useState("");
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUserInfo = async () => {
-            const token = localStorage.getItem("token");
-
-            if (!token) {
-                setError("Unauthorized: No token found");
-                return;
-            }
-
-            try {
-                const response = await fetch("https://gessamusystem.onrender.com/auth/profile", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || "Failed to fetch user info");
-                }
-
-                setUser(data);;
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-
-        fetchUserInfo();
-    }, []);
-
-
-
-    if (error) return <p className="text-center mt-5 text-red-500">{error}</p>;
 
     useEffect(() => {
         if (!user._id) {
