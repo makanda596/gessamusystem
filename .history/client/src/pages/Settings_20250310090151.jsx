@@ -50,8 +50,7 @@ const Settings = ({ logout }) => {
                     firstName,
                     lastName,
                     email,
-                    phoneNumber,
-                    
+                    phoneNumber
                 }, // ✅ Send user details in the request body
                 {
                     headers: { Authorization: `Bearer ${token}` }
