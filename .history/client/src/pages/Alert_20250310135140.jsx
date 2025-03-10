@@ -7,8 +7,6 @@ const Alert = () => {
     const [alerts, setAlerts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    //skd
-    //skd
     const [user, setUser] = useState(null);
 
     useEffect(() => {
