@@ -12,11 +12,12 @@ const taskSchema = new mongoose.Schema({
     date: {
         type: String,
         required: true
-    },
+    }, 
     level: {
         type: Number,
         required: true
     },
+    completed: { type: Boolean, default: false, type: String },
 
 }, { timestamps: true })
 

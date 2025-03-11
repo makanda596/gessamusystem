@@ -11,6 +11,7 @@ router.get("/onetask/:id", task);
 router.delete("/deleteTask/:id", deleteTask);
 router.post('/submitTask/:id', submitTask);
 router.get('/getSubmittedTask', getSubmittedTask)
+// router.get('/getonesubmitedTask/:id', getOneSubmittedTask)
 router.put('/toggleComplete/:id', async (req, res) => {
     const { id } = req.params;
     const { completed } = req.body;

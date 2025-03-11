@@ -14,7 +14,7 @@ export const makeTask = async (req, res) => {
     } catch (error) {
         res.status(500).json(error.message)
     }
-}
+} 
 
 export const takeTask = async (req, res) => {
     try {
@@ -44,7 +44,7 @@ export const task = async (req, res) => {
     }
 }
 
-
+ 
 export const deleteTask = async (req, res) => {
     const { id } = req.params;
 
@@ -62,6 +62,14 @@ export const deleteTask = async (req, res) => {
 };
 
 
+// export const getOneSubmittedTask = async (req,res)=>{
+//     const {id} = req.params
+//     try {
+//         const getTask = await Task.findOne
+//     } catch (error) {
+        
+//     }
+// }
 export const submitTask = async (req, res) => {
     const {id} = req.params;  // Assume user information is stored in req.user after authentication middleware
     const {title} = req.body
