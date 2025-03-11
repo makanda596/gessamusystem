@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+import { FaEllipsisV } from 'react-icons/fa';
 
-const Tasks = () => {
+const Tasks = ({ user }) => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    const [notification, setNotification] = useState(null); // Notification state
+    const [notification, setNotification] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const tasksPerPage = 6;
 
     const showTask = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/task/takeTask');
+            const response = await axios.get('https://gessamusystem.onrender.com/task/takeTask');
             setTasks(response.data);
         } catch (error) {
             setError('Failed to load tasks. Please try again later.');
@@ -22,7 +25,7 @@ const Tasks = () => {
 
     const showNotification = (message) => {
         setNotification(message);
-        setTimeout(() => setNotification(null), 3000); // Hide after 3 seconds
+        setTimeout(() => setNotification(null), 3000); // Notification disappears after 3 seconds
     };
 
     useEffect(() => {
@@ -35,23 +38,27 @@ const Tasks = () => {
             (task.description && task.description.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
+    const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
+    const startIndex = (currentPage - 1) * tasksPerPage;
+    const displayedTasks = filteredTasks.slice(startIndex, startIndex + tasksPerPage);
+
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-gray-100 p-8">
-                <h1 className="text-4xl font-bold text-center text-blue-600 mb-8">My Tasks</h1>
-
+            <div className="min-h-screen bg-gray-100 p-4 md:p-4">
+                <h1 className="text-xl md:text-xl font-bold text-center text-blue-600 mb-2">Available Tasks</h1>
+                {/* Notification Popup */}
                 {notification && (
-                    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white py-2 px-4 rounded shadow-lg">
+                    <div className="fixed z-10 top-20 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white py-2 px-4 rounded shadow-lg">
                         {notification}
                     </div>
                 )}
 
-                <div className="max-w-md mx-auto mb-6">
+                <div className="max-w-sm mx-auto mb-2">
                     <input
                         type="text"
                         placeholder="Search tasks..."
-                        className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-80 p-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -63,8 +70,8 @@ const Tasks = () => {
                 {filteredTasks.length === 0 && !loading && !error ? (
                     <div className="text-center text-gray-600">No tasks found.</div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredTasks.map((task) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {displayedTasks.map((task) => (
                             <TaskCard key={task._id} task={task} showNotification={showNotification} />
                         ))}
                     </div>
@@ -75,20 +82,9 @@ const Tasks = () => {
 };
 
 const TaskCard = ({ task, showNotification }) => {
-    const [countdown, setCountdown] = useState('');
+    const [menuOpen, setMenuOpen] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        const updateCountdown = () => {
-            setCountdown(calculateCountdown(task.date));
-        };
-
-        updateCountdown();
-        const interval = setInterval(updateCountdown, 1000);
-
-        return () => clearInterval(interval);
-    }, [task.date]);
 
     const shareTask = () => {
         const taskUrl = `${window.location.origin}/task/${task._id}`;
@@ -113,47 +109,33 @@ const TaskCard = ({ task, showNotification }) => {
         }
 
         try {
-            await axios.post('http://localhost:5000/task/submitTask/:id', { title });
-            showNotification('Task submitted successfully!');
+            await axios.post(`https://gessamusystem.onrender.com/task/submitTask/${task._id}`, { title });
+            showNotification('Task submitted successfully!'); // Show success notification
             setShowModal(false);
             setTitle('');
         } catch (error) {
-            showNotification('Failed to submit the task. Please try again.');
+            showNotification('Failed to submit the task. Please try again.'); // Show error notification
         }
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition">
-            <h2 className="text-xl font-bold text-blue-700 mb-2">{task.task}</h2>
-            <p className="text-gray-700 mb-4">{task.description}</p>
-            <p className="text-sm text-gray-500 mb-2">
-                Level: <span className="font-medium">{task.level}</span>
-            </p>
-            <p className="text-sm text-gray-500 mb-4">
-                Due: <span className="font-medium">{new Date(task.date).toLocaleString()}</span>
-            </p>
-            <p className="text-sm text-red-600 font-semibold">Time Remaining: {countdown}</p>
-            <div className="flex justify-between items-center mt-4">
-                <button
-                    className={`px-4 py-2 rounded-md text-white ${task.completed ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'}`}
-                >
-                    {task.completed ? 'Mark as Pending' : 'Mark as Completed'}
-                </button>
-                <button className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">
-                    Delete
-                </button>
-                <button
-                    onClick={shareTask}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-                >
-                    Share Task
-                </button>
-                <button
-                    onClick={() => setShowModal(true)}
-                    className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
-                >
-                    Submit Task
-                </button>
+        <div>
+            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition relative">
+                <h2 className="text-xl font-bold text-blue-700 mb-2">{task.task}</h2>
+                <p className="text-gray-700 mb-4">{task.description}</p>
+                <p className="text-sm text-gray-500 mb-2">
+                    Level: <span className="font-medium">{task.level}</span>
+                </p>
+                <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
+                    <FaEllipsisV className="text-gray-600 hover:text-gray-800" />
+                </div>
+
+                {menuOpen && (
+                    <div className="absolute top-8 right-4 bg-white shadow-md rounded-md p-2 w-36 flex flex-col space-y-2">
+                        <button onClick={shareTask} className="text-sm p-1 text-white bg-blue-600 rounded-md">Share</button>
+                        <button onClick={() => setShowModal(true)} className="text-sm p-1 text-white bg-black rounded-md">Submit</button>
+                    </div>
+                )}
             </div>
 
             {showModal && (
@@ -170,16 +152,10 @@ const TaskCard = ({ task, showNotification }) => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                         <div className="mt-6 flex justify-end gap-4">
-                            <button
-                                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
-                                onClick={() => setShowModal(false)}
-                            >
+                            <button className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600" onClick={() => setShowModal(false)}>
                                 Cancel
                             </button>
-                            <button
-                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                                onClick={handleSubmitTask}
-                            >
+                            <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onClick={handleSubmitTask}>
                                 Submit
                             </button>
                         </div>
@@ -188,18 +164,6 @@ const TaskCard = ({ task, showNotification }) => {
             )}
         </div>
     );
-};
-
-const calculateCountdown = (dueDate) => {
-    const timeDiff = new Date(dueDate) - new Date();
-    if (timeDiff <= 0) return "Time's up!";
-
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
-    const seconds = Math.floor((timeDiff / 1000) % 60);
-
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
 };
 
 export default Tasks;

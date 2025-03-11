@@ -1,6 +1,7 @@
 import express from 'express';
-import { makeTask, takeTask, task, deleteTask, submitTask } from '../controllers/taskControllers.js';
+import { makeTask, takeTask, task, deleteTask, submitTask, getSubmittedTask } from '../controllers/taskControllers.js';
 import { Task } from '../models/taskmodel.js';
+import { verifyToken } from '../middleware/verifyToken.js'
 
 const router = express.Router();
 
@@ -8,7 +9,9 @@ router.post("/makeTask", makeTask);
 router.get("/takeTask", takeTask);
 router.get("/onetask/:id", task);
 router.delete("/deleteTask/:id", deleteTask);
-router.post('/submitTask/:id', verifyToken, submitTask);
+router.post('/submitTask/:id', submitTask);
+router.get('/getSubmittedTask', getSubmittedTask)
+// router.get('/getonesubmitedTask/:id', getOneSubmittedTask)
 router.put('/toggleComplete/:id', async (req, res) => {
     const { id } = req.params;
     const { completed } = req.body;

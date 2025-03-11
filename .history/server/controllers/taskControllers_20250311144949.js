@@ -14,7 +14,7 @@ export const makeTask = async (req, res) => {
     } catch (error) {
         res.status(500).json(error.message)
     }
-}
+} 
 
 export const takeTask = async (req, res) => {
     try {
@@ -44,7 +44,7 @@ export const task = async (req, res) => {
     }
 }
 
-
+ 
 export const deleteTask = async (req, res) => {
     const { id } = req.params;
 
@@ -62,19 +62,26 @@ export const deleteTask = async (req, res) => {
 };
 
 
+// export const getOneSubmittedTask = async (req,res)=>{
+//     const {id} = req.params
+//     try {
+//         const getTask = await Task.findOne
+//     } catch (error) {
+        
+//     }
+// }
 export const submitTask = async (req, res) => {
-    const { id: taskId } = req.params;  // Extract the taskId from request params
-    const userId = req.user.id;  // Assume user information is stored in req.user after authentication middleware
+    const {id} = req.params;  // Assume user information is stored in req.user after authentication middleware
     const {title} = req.body
     try {
-        if (!userId || !taskId) {
+        if (!id || !title) {
             return res.status(400).json({ message: "User ID and Task ID are required." });
         }
 
         const newSubmission = new Submission({
-            userId,
-            taskId,
-            title
+            id,
+            // taskId,
+            title 
         });
 
         await newSubmission.save();
@@ -85,3 +92,33 @@ export const submitTask = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 };
+
+
+export const getSubmittedTask = async (req, res) => {
+    try {
+        const submittedTasks = await Submission.find({}).sort({ submittedAt: -1 });
+
+        if (!submittedTasks || submittedTasks.length === 0) {
+            return res.status(400).json({ message: "No submitted tasks found" });
+        }
+
+        res.status(200).json(submittedTasks);
+    } catch (error) {
+        console.error("Error fetching submitted tasks:", error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+};
+
+// export const deleteTask = async (req,res)=>{
+//     const {id} = req.params
+//     try {
+//         const existingId = await Task.findById({id})
+//         if(!existingId){
+//             res.status(400).json({message:"no such task found"})
+//         } 
+//         await existingId.save()
+//         res.status(200).json({message:'task deleted successfully'})
+//     } catch (error) {
+//         res.status(400).json(error.message)
+//     }
+// }
