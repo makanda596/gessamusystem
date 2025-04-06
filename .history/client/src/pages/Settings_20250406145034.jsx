@@ -31,6 +31,7 @@ const Settings = ({ logout }) => {
                 console.error("Error fetching user data:", error);
             }
         };
+ /''
         fetchUser();
     }, []);
 

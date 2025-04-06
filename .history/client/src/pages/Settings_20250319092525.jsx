@@ -18,7 +18,7 @@ const Settings = ({ logout }) => {
         const fetchUser = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const response = await axios.get(`{import.meta.env.BACKEND_URL}/auth/profile`, {
+                const response = await axios.get("https://gessamusystem.onrender.com/auth/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
@@ -31,6 +31,7 @@ const Settings = ({ logout }) => {
                 console.error("Error fetching user data:", error);
             }
         };
+ /''
         fetchUser();
     }, []);
 
@@ -44,7 +45,7 @@ const Settings = ({ logout }) => {
             }
 
             const response = await axios.put(
-                `{import.meta.env.BACKEND_URL}/auth/update/${user._id}`,
+                `https://gessamusystem.onrender.com/auth/update/${user._id}`,
                 {
                     firstName,
                     lastName,
@@ -82,7 +83,7 @@ const Settings = ({ logout }) => {
 
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`{import.meta.env.BACKEND_URL}/auth/deleteUser/${user._id}`, {
+            await axios.delete(`https://gessamusystem.onrender.com/auth/deleteUser/${user._id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             window.location.href = "/";
