@@ -24,7 +24,7 @@ const ResetPassword = () => {
             setIsLoading(true);
             setError("");
             const response = await axios.post(
-                `{import.meta.env.BACKEND_URL}/auth/reset-password/${token}`,
+                `https://gessamubackend.onrender.com/auth/reset-password/${token}`,
                 { password }
             );
             setMessage(response.data.message);
