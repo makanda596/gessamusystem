@@ -30,7 +30,7 @@ const Navbar = ({ logout }) => {
 
         setUser(data);;
       } catch (err) {
-        err(err.message);
+      console.error(err.message);
       }
     };
 

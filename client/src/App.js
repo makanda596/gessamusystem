@@ -18,6 +18,7 @@ import AdminDashboard from './pages/ADMIN/AdminDashboard.jsx';
 import Training from './pages/Training.jsx';
 import Settings from './pages/Settings.jsx';
 import Profile from './pages/Profile.jsx';
+import Try from './pages/Try.jsx'
 
 
 // Protect routes that require authentication
@@ -59,6 +60,7 @@ function App({user}) {
             <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
             <Route path="/adminLogin" element={<AdminLoginPage />} />
+            <Route path="/try" element={<Try />} />
             <Route path="/signup" element={<RedirectAuthenticatedUser><SignUp /></RedirectAuthenticatedUser>} />
             <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPassword /></RedirectAuthenticatedUser>} />
             <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><Resetpassword /></RedirectAuthenticatedUser>} />

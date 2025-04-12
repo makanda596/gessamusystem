@@ -11,7 +11,7 @@ const GetProjects = () => {
     // Fetching all projects from the backend
     const fetchProjects = async () => {
         try {
-            const response = await axios.get("https://gessamubackend.onrender.com/projects/getAllprojects");
+            const response = await axios.get("http://localhost:5000/projects/getAllprojects");
             setProjects(response.data);
             setFilteredProjects(response.data); // Initially show all projects
         } catch (error) {
@@ -22,7 +22,7 @@ const GetProjects = () => {
     // Deleting a project
     const deleteProject = async (id) => {
         try {
-            await axios.delete(`https://gessamubackend.onrender.com/projects/deleteProject/${id}`);
+            await axios.delete(`http://localhost:5000/projects/deleteProject/${id}`);
 
             // Remove the deleted project from the state (frontend)
             setProjects(projects.filter(project => project._id !== id)); // Make sure to match the correct field (_id)

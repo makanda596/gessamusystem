@@ -23,7 +23,7 @@ const AllProjects = () => {
     const fetchProjects = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`{import.meta.env.BACKEND_URL}/projects/getweekly-projects`);
+            const response = await axios.get('http://localhost:5000/projects/getweekly-projects');
             setProjects(response.data);
         } catch (error) {
             console.error('Failed to fetch projects:', error);

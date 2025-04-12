@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import axios from 'axios';
 
 // Set your API endpoints
-const USER_API = "https://gessamusystem.onrender.com/auth";
+const BACKEND_URL = "http://localhost:5000";
 
 export const useAuthStore = create((set) => ({
     user: null,
@@ -16,7 +16,7 @@ export const useAuthStore = create((set) => ({
     signup: async (firstName, lastName, email, phoneNumber, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post(`${import.meta.env.BACKEND_URL}/auth/signup`, { firstName, lastName,  email, phoneNumber, password });
+            const response = await axios.post(`${BACKEND_URL}/auth/signup`, { firstName, lastName,  email, phoneNumber, password });
             set({ user: response.data.user, isLoading: false, isAuthenticated: true });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error signing up", isLoading: false });
@@ -28,19 +28,19 @@ export const useAuthStore = create((set) => ({
     adminLogin: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('https://gessamusystem.onrender.com/adminLogin', { email, password });
+            const response = await axios.post('http://localhost:5000/admin/adminLogin', { email, password });
             set({ admin: response.data.admin, isAuthenticated: true, isLoading: false, error: null });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error logging in", isLoading: false });
             throw error;
-        }
+        } 
     },
 
     // User Login
     login: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post(`${import.meta.env.BACKEND_URL}/auth/login`, { email, password });
+            const response = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
             localStorage.setItem("token", response.data.token);
             set({ user: response.data.user, isAuthenticated: true, isLoading: false, error: null });
             console.log("Login Response:", response.data);
@@ -53,7 +53,7 @@ export const useAuthStore = create((set) => ({
     // Logout 
     logout: async () => {
         try { 
-            await axios.post(`${import.meta.env.BACKEND_URL}/auth/logout`, null, { withCredentials: true });
+            await axios.post(`${BACKEND_URL}/auth/logout`, null, { withCredentials: true });
             localStorage.removeItem("token");
             set({ user: null, isAuthenticated: false, isCheckingAuth: false });
         } catch (error) {
@@ -66,7 +66,7 @@ export const useAuthStore = create((set) => ({
     forgotPassword: async (email) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post(`${import.meta.env.BACKEND_URL}/auth/password`, { email });
+            const response = await axios.post(`${BACKEND_URL}/auth/password`, { email });
             set({ message: response.data.message, isLoading: false });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error sending reset password email", isLoading: false });
@@ -79,7 +79,7 @@ export const useAuthStore = create((set) => ({
         set({ isCheckingAuth: true, error: null });
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get(`${import.meta.env.BACKEND_URL}/auth/check-auth`, {
+            const response = await axios.get(`${BACKEND_URL}/auth/check-auth`, {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });
@@ -96,7 +96,7 @@ export const useAuthStore = create((set) => ({
     // Get Projects
     getProjects: async () => {
         try {
-            const response = await axios.get(`${import.meta.env.BACKEND_URL}/auth/task/takeTask`);
+            const response = await axios.get(`${BACKEND_URL}/auth/task/takeTask`);
             set({ tasks: response.data.tasks });
         } catch (error) {
             console.log(error);
@@ -106,7 +106,7 @@ export const useAuthStore = create((set) => ({
     // Post Task
     postTask: async (title, description, date, level) => {
         try {
-            const response = await axios.post(`${import.meta.env.BACKEND_URL}/task/makeTask`, { title, description, date, level });
+            const response = await axios.post(`${BACKEND_URL}/task/makeTask`, { title, description, date, level });
             set({ task: response.data.task });
         } catch (error) {
             console.log(error);

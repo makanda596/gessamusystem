@@ -8,13 +8,13 @@ const PostWeekly = () => {
     const [description, setDescription] = useState('');
     const [reference, setReference] = useState(''); // Start with one empty reference
     const [date, setDate] = useState('');
-    const [file, setFile] = useState(null);
+    const [image, setImage] = useState(null);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        setImage(e.target.files[0]);
     };
 
     const handleSubmit = async (e) => {
@@ -23,7 +23,7 @@ const PostWeekly = () => {
         setMessage('');
         setLoading(true);
 
-        if (!title || !trainer || !description || !date || !file || reference.length === 0) {
+        if (!title || !trainer || !description || !date || !image|| reference.length === 0) {
             setError('All fields are required');
             setLoading(false);
             return;
@@ -36,9 +36,9 @@ const PostWeekly = () => {
             formData.append('description', description);
             formData.append('reference', reference); // Send reference as a JSON string
             formData.append('date', date);
-            formData.append('file', file);
+            formData.append('image', image);
 
-            await axios.post('https://gessamusystem.onrender.com/projects/weekly-projects', formData, {
+            await axios.post('http://localhost:5000/projects/weekly-projects', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -50,7 +50,7 @@ const PostWeekly = () => {
             setDescription('');
             setReference();
             setDate('');
-            setFile(null);
+            setImage(null);
         } catch (error) {
             setError(error.response?.data?.message || 'Failed to submit the project.');
         } finally {
