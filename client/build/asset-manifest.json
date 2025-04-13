@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7e1f75bf.css",
+    "main.js": "/static/js/main.c346d947.js",
+    "static/js/488.5dc00adb.chunk.js": "/static/js/488.5dc00adb.chunk.js",
+    "static/media/logo.jpg": "/static/media/logo.c903aeaf4a90e17f942f.jpg",
+    "static/media/gis.webp": "/static/media/gis.85a4246c9bc5cf864ef7.webp",
+    "index.html": "/index.html",
+    "main.7e1f75bf.css.map": "/static/css/main.7e1f75bf.css.map",
+    "main.c346d947.js.map": "/static/js/main.c346d947.js.map",
+    "488.5dc00adb.chunk.js.map": "/static/js/488.5dc00adb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e1f75bf.css",
+    "static/js/main.c346d947.js"
+  ]
+}
