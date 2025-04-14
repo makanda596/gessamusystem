@@ -87,44 +87,6 @@ export const verifyEmail = async(req,res)=>{
         res.status(400).json(error.message)
     }
 }
-export const EmailVerificationResend = async (req, res) => {
-    const { email } = req.body;
-
-    try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: "The email does not exist" });
-        }
-
-        if (user.isVerified) {
-            return res.status(400).json({ message: 'User already verified. Please login.' });
-        }
-
-        const verificationToken = Date.now() + 15 * 60 * 1000; 
-        const verificationTokenExpiresAt = crypto.randomBytes(2).toString("hex").toUpperCase(); 
-
-        user.isVerified = true,
-            user.verificationToken = undefined,
-            user.verificationTokenExpiresAt = undefined,
-        await user.save(); // Added save() to persist changes
-
-        // 5. Send verification email
-        await sendEmailVerification(email, verificationToken);
-
-        // 6. Return success response
-        res.status(200).json({
-            message: "New verification code sent to your email",
-            email: user.email // Don't send entire user object for security
-        });
-
-    } catch (error) {
-        console.error('Resend verification error:', error);
-        res.status(500).json({
-            message: "Error resending verification code",
-            error: error.message
-        });
-    }
-};
 export const login = async (req, res) => {
     const { email, password } = req.body;
     const generateToken = (id) => {

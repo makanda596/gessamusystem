@@ -25,7 +25,7 @@ export const useAuthStore = create((set) => ({
     signup: async (firstName, lastName, email, phoneNumber, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('http://localhost:5000//auth/signup', { firstName, lastName,  email, phoneNumber, password });
+            const response = await axios.post('http://localhost:5000/auth/signup', { firstName, lastName,  email, phoneNumber, password });
             set({ user: response.data.user, isLoading: false, isAuthenticated: true, email: response.data.user.email });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error signing up", isLoading: false });

@@ -25,8 +25,8 @@ export const useAuthStore = create((set) => ({
     signup: async (firstName, lastName, email, phoneNumber, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('http://localhost:5000//auth/signup', { firstName, lastName,  email, phoneNumber, password });
-            set({ user: response.data.user, isLoading: false, isAuthenticated: true, email: response.data.user.email });
+            const response = await axios.post('https://gessamusystem.onrender.com/auth/signup', { firstName, lastName,  email, phoneNumber, password });
+            set({ user: response.data.user, isLoading: false, isAuthenticated: true });
         } catch (error) {
             set({ error: error.response?.data?.message || "Error signing up", isLoading: false });
             throw error;

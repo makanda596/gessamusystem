@@ -37,8 +37,37 @@ dotenv.config()
 app.use(cookieParser());
 
 
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'CORS works!' });
+});
+
+app.post('/login', (req, res) => {
+    const { username, email, admNo } = req.body;  // Extracting multiple details from the request body
+
+    if (username && email && admNo) {  // Ensure all required fields are provided
+        req.session.user = username;  // Store the username
+        req.session.email = email;    // Store the email
+        req.session.admNo = admNo;    // Store the admission number
+        // Send a response with all the stored details
+        res.send({
+            message: 'Logged in',
+            user:{
+            user: req.session.user,
+            email: req.session.email,
+            admNo: req.session.admNo}
+        });
+    } else {
+        // If any required field is missing, send an error message
+        res.status(400).send({ message: 'Username, email, and admission number are required' });
+    }
+});
+
+app.get('/', (req, res) => {
+ res.json("hello")
+});
 //uploading a file
 //getting the images
+app.use('/images', imagesRoutes)
 app.use('/auth', userRoutes)
 
 //admin router
