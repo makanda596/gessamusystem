@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ResendEmailCard = ({ userEmail }) => { 
+const ResendEmailCard = ({ userEmail }) => { // Receive email as a prop
   const [isResending, setIsResending] = useState(false);
     const [resendMessage, setResendMessage] = useState({ text: '', type: '' });
 
@@ -12,7 +12,7 @@ const ResendEmailCard = ({ userEmail }) => {
         setResendMessage({ text: '', type: '' });
 
         try {
-            await axios.post('https://gessamusystem.onrender.com/auth/resendcode', { email: userEmail }); 
+            await axios.post('https://gessamusystem.onrender.com/auth/resendcode', { email: userEmail }); // Use the prop
             setResendMessage({ text: 'Verification email resent successfully!', type: 'success' });
         } catch (error) {
             setResendMessage({
