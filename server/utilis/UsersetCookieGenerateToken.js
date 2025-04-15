@@ -12,7 +12,6 @@ export const UsersetCookieGenerateToken = async (res, userId) => {
             httpOnly: true,
             secure: true,
             sameSite:"None",
-            // maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days in milliseconds
         })
         if (!token) {
             res.status(404).json({ message: "token not provided" })
