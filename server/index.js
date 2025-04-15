@@ -53,8 +53,7 @@ app.use('/projects', projectsRoutes)
 app.use('/alert', alertRoutes)
 
 const PORT = process.env.PORT || 6000;
-const MONGO_URL = "mongodb+srv://oumab743:makandabrian123@cluster0.qj7my.mongodb.net/Gessamu?retryWrites=true&w=majority&appName=Cluster0"
-//mongo db connect
+const MONGO_URL =process.env.MONGO_URL
 
 mongoose.connect(MONGO_URL)
 try {
