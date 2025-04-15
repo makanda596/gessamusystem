@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/check-auth', verifyToken, checkAuth);
 router.post('/signup', signup);
 router.post('/resendcode', EmailVerificationResend)
-router.put('/update', verifyToken, update)
+
 router.post('/login', login);
 router.post('/logout', logout);
 router.post('/password', forgotPassword);

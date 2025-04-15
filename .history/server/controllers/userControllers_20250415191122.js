@@ -271,9 +271,10 @@ export const getStudent = async (req, res) => {
 }
 
 export const deleteUser = async (req, res) => {
+    const { id } = req.params;
 
     try {
-        const user = await User.findByIdAndDelete(req.user.id);
+        const user = await User.findByIdAndDelete(id);
         if (!user) {
             return res.status(404).json({ message: "User not found with this ID" });
         }
@@ -320,7 +321,7 @@ export const update = async (req, res) => {
         }
 
         let updatedFields = { firstName, lastName, email, phoneNumber };
-        if (avatar) updatedFields.avatar = avatar; 
+        if (avatar) updatedFields.avatar = avatar; // Add profile picture
         if (password) updatedFields.password = await bcrypt.hash(password, 10);
 
         const updatedUser = await User.findByIdAndUpdate(id, updatedFields, { new: true });
