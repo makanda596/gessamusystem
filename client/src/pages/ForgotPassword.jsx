@@ -6,11 +6,10 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false); // Loading state
-    const [retryTimer, setRetryTimer] = useState(0); // Timer for retry
+    const [loading, setLoading] = useState(false); 
+    const [retryTimer, setRetryTimer] = useState(0); 
     const { forgotPassword } = useAuthStore();
 
-    // Countdown effect for retryTimer
     useEffect(() => {
         if (retryTimer > 0) {
             const timer = setInterval(() => setRetryTimer((prev) => prev - 1), 1000);
@@ -21,24 +20,24 @@ const ForgotPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setLoading(true); // Start loading
+        setLoading(true); 
         try {
             await forgotPassword(email);
             setMessage('Check your email to reset your password.');
             setError('');
-            setRetryTimer(60); // Start 1-minute cooldown
+            setRetryTimer(60); 
         } catch (err) {
             setError(err.response ? err.response.data.message : 'Something went wrong');
             setMessage('');
         } finally {
-            setLoading(false); // Stop loading
+            setLoading(false); 
         }
     };
 
     const handleRetry = () => {
         setMessage('');
         setError('');
-        setRetryTimer(0); // Reset timer
+        setRetryTimer(0);
     };
 
     return (
@@ -46,7 +45,7 @@ const ForgotPassword = () => {
             <div className="bg-white shadow-lg rounded-lg p-4 w-full max-w-md">
                 <div className="flex justify-center mb-6">
                     <img
-                        src={logo} // Replace with the correct path to your logo
+                        src={logo} 
                         alt="Logo"
                         className="w-20 h-20"
                     />
@@ -75,13 +74,12 @@ const ForgotPassword = () => {
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
-                        disabled={loading || retryTimer > 0} // Disable button if loading or in cooldown
+                        disabled={loading || retryTimer > 0} 
                     >
                         {loading ? 'Processing...' : 'Reset Password'}
                     </button>
                 </form>
 
-                {/* Didn't receive email and retry option */}
                 {retryTimer > 0 ? (
                     <p className="text-gray-500 text-center mt-4">
                         You can retry in {retryTimer} seconds.

@@ -1,36 +1,57 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../store/auth';
+import logo from '../assets/logo.jpg'
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const { forgotPassword } = useAuthStore()
+    const [loading, setLoading] = useState(false); 
+    const [retryTimer, setRetryTimer] = useState(0); 
+    const { forgotPassword } = useAuthStore();
+
+    useEffect(() => {
+        if (retryTimer > 0) {
+            const timer = setInterval(() => setRetryTimer((prev) => prev - 1), 1000);
+            return () => clearInterval(timer);
+        }
+    }, [retryTimer]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setLoading(true); 
         try {
-            await forgotPassword(email)
+            await forgotPassword(email);
+            setMessage('Check your email to reset your password.');
             setError('');
+            setRetryTimer(60); 
         } catch (err) {
             setError(err.response ? err.response.data.message : 'Something went wrong');
             setMessage('');
+        } finally {
+            setLoading(false); 
         }
+    };
+
+    const handleRetry = () => {
+        setMessage('');
+        setError('');
+        setRetryTimer(0);
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-blue-500">
-            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+            <div className="bg-white shadow-lg rounded-lg p-4 w-full max-w-md">
                 <div className="flex justify-center mb-6">
                     <img
-                        src="/path-to-logo.png" // Replace with the correct path to your logo
+                        src={logo} 
                         alt="Logo"
                         className="w-20 h-20"
                     />
                 </div>
 
-                <h2 className="text-2xl font-semibold text-center mb-4">Forgot Password</h2>
+                <h2 className="text-xl font-semibold text-center mb-4">Forgot Password</h2>
 
                 {/* Success or Error Message */}
                 {message && <p className="text-green-500 text-center mb-4">{message}</p>}
@@ -53,14 +74,33 @@ const ForgotPassword = () => {
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                        disabled={loading || retryTimer > 0} 
                     >
-                        Reset Password
+                        {loading ? 'Processing...' : 'Reset Password'}
                     </button>
                 </form>
 
+                {retryTimer > 0 ? (
+                    <p className="text-gray-500 text-center mt-4">
+                        You can retry in {retryTimer} seconds.
+                    </p>
+                ) : (
+                    message && (
+                        <div className="text-center mt-4">
+                            <p className="text-gray-700">Didn't receive the email?</p>
+                            <button
+                                onClick={handleRetry}
+                                className="text-blue-600 underline mt-2 focus:outline-none"
+                            >
+                                Retry the process
+                            </button>
+                        </div>
+                    )
+                )}
+
                 <div className="text-center mt-4">
                     <p>
-                        <a href="/login" className="text-blue-600 underline">Remembered your password? Login here.</a>
+                        <a href="/" className="text-blue-600 underline">Remembered your password? Login here.</a>
                     </p>
                 </div>
             </div>
