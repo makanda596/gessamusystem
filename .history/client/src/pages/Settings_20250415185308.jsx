@@ -14,11 +14,6 @@ const Settings = ({ logout }) => {
     const [showDeletePopup, setShowDeletePopup] = useState(false);
     const [user, setUser] = useState(null);
     const {error} = useAuthStore()
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -132,31 +127,7 @@ const Settings = ({ logout }) => {
                             </div>
                             <div>
                                 <label className="block text-gray-700">Password</label>
-                                <div style={{ position: 'relative' }}>
-                                    <input
-                                        type={showPassword ? 'text' : 'password'}
-                                        className="w-full p-2 border border-gray-300 rounded pr-8"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={togglePasswordVisibility}
-                                        style={{
-                                            position: 'absolute',
-                                            right: '8px',
-                                            top: '50%',
-                                            transform: 'translateY(-50%)',
-                                            background: 'none',
-                                            border: 'none',
-                                            padding: '0',
-                                            cursor: 'pointer',
-                                            outline: 'none',
-                                        }}
-                                    >
-                                        {showPassword ? 'Hide' : 'Show'}
-                                    </button>
-                                </div>
+                                <input type="password" className="w-full p-2 border border-gray-300 rounded" value={password} onChange={(e) => setPassword(e.target.value)} />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700">Profile Picture</label>
