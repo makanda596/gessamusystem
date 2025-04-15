@@ -15,6 +15,8 @@ import projectsRoutes from './routes/projectsRoutes.js'
 import alertRoutes from './routes/alertRoutes.js'
 
 import UserprojectRoutes from './routes/UserprojectRoutes.js'
+import bcrypt from "bcryptjs"
+import { User } from './models/Usermodel.js';
 
 
 

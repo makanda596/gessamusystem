@@ -15,16 +15,7 @@ export const postprojects = async (req, res) => {
     const { title, year, description, reference } = req.body
     try {
 
-        // const doc = req.file ? req.file.filename : null;
-
-        // if (!doc) {
-        //     return res.status(400).json({ message: "document file is required." });
-        // }
-
-        // const doc = req.file ? req.file.filename : null;
-        // if (!doc) {
-        //     return res.status(400).json({ message: "Document file is required." });
-        // }
+       
         const allprojects = new Project({
             title,
             year,
@@ -53,14 +44,7 @@ export const getprojects = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 
-    // export const getprojects = async (req, res) => {
-    //     try {
-
-    //         const projects = await Project.find().sort({ createdAt: -1 });
-    //         res.status(200).json(projects);
-    //     } catch (error) {
-    //         res.status(400).json(error.message);
-    //     }
+   
 };
 
 
@@ -70,18 +54,15 @@ export const weeklyProject = async (req, res) => {
     const { title, trainer, description, reference, date ,image} = req.body;
 
     try {
-        // Check for required fields
         if (!title || !trainer || !description || !date) {
             return res.status(400).json({ message: "All fields except references and doc are required." });
         } 
 
-        // Handle file upload for the 'doc' field
         const doc = req.file ? req.file.filename : null;
         if (!doc) {
             return res.status(400).json({ message: "Document file is required." });
         }
 
-        // Create a new weekly project document
         const newProject = new weeklyProjects({
             title,
             trainer,
@@ -93,7 +74,6 @@ export const weeklyProject = async (req, res) => {
             date,
         });
 
-        // Save the project to the database
         await newProject.save();
 
         res.status(201).json({
@@ -122,10 +102,7 @@ export const project = async (req, res) => {
     const { id } = req.params
 
     try {
-        // const project = await Project.findOne({ _id: id })
-        // if (!project) {
-        //     return res.status(400).json({ message: "no project found " })
-        // }
+       
         const weekly = await weeklyProjects.findOne({ _id: id })
         if (!weekly) {
             return res.status(400).json({ message: "no weekly project found " })
