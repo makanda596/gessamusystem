@@ -53,7 +53,7 @@ function App({user}) {
       </div>
     )}
     return (
-      <BrowserRouter>
+      <Router>
           <Routes>           
             <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
@@ -79,7 +79,7 @@ function App({user}) {
             <Route path="/project/:id" element={<ProtectedRoute><Aproject /></ProtectedRoute>} />
             <Route path="/boa" element={<AdminDashboard />} />
           </Routes>
-      </BrowserRouter>
+      </Router>
     );
   }
 
