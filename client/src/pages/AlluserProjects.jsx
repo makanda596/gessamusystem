@@ -105,7 +105,7 @@ const AlluserProjects = () => {
                   </div>
 
                   <p className="text-gray-600 text-md mb-3 ">
-                    <span className='text-black font-semibold'> description:</span> {project.description.length > 10 ? <p>{project.description.slice(0,10)}.........</p> : <p>{project.description}</p> }
+                    <span className='text-black font-semibold'> description:</span> {project.description.length > 40 ? <p>{project.description.slice(0,40)}.........</p> : <p>{project.description}</p> }
                   </p>
 
                   <div className="mb-4">
