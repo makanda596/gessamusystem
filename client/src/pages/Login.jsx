@@ -32,10 +32,9 @@ const LoginPage = () => {
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
       style={{ backgroundImage: `url(${gis})` }}
     >
-      {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="bg-blue-600 shadow-lg rounded-lg p-6 w-full max-w-md z-10">
+      <div className="bg-green-600 shadow-lg rounded-lg p-6 w-full max-w-md z-10">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Gessamu Logo" className="w-20 h-20" />
         </div>
