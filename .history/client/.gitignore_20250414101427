@@ -1,8 +1,0 @@
-# .gitignore
-
-node_modules/
-.cache/
-dist/
-.env
-.DS_Store
-*.log
