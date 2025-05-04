@@ -30,7 +30,6 @@ export const useAuthStore = create((set) => ({
             localStorage.setItem("email", response.data.user.email);
 
             set({ user: response.data.user, email: response.data.user.email, isLoading: false, isAuthenticated: true});
-            console.log({email:email})
         } catch (error) {
             set({ error: error.response?.data?.message || "Error signing up", isLoading: false });
             throw error;
