@@ -1,21 +1,13 @@
 import { Project } from '../models/projectmodel.js'
 import { weeklyProjects } from '../models/weeklyProjects.js';
-import cloudinary from "cloudinary";
 import dotenv from 'dotenv'
 
 dotenv.config();
 
 
-cloudinary.v2.config({
-    cloud_name: "db5pgr14l",
-    api_key: "419672131612681",
-    api_secret: "X6bdb7zw9Gae9IvWahEyzT9nB1o",
-});
 export const postprojects = async (req, res) => {
     const { title, year, description, reference } = req.body
     try {
-
-       
         const allprojects = new Project({
             title,
             year,

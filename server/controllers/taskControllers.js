@@ -2,17 +2,11 @@ import { Alert } from "../models/alertModel.js";
 import {  SubmitTask } from "../models/submitTask.js"
 import { Task } from "../models/taskmodel.js"
 import { User } from "../models/Usermodel.js"
-import cloudinary from "cloudinary";
 import dotenv from 'dotenv'
+import cloudinary from "../utilis/cloudinary.js";
 
 dotenv.config();
 
-
-cloudinary.v2.config({
-    cloud_name: "db5pgr14l",
-    api_key: "419672131612681",
-    api_secret: "X6bdb7zw9Gae9IvWahEyzT9nB1o",
-});
 
 export const makeTask = async (req, res) => {
     const { task, description, date, level } = req.body
@@ -90,13 +84,13 @@ export const submitTask = async (req, res) => {
         if ( !title) {
             return res.status(400).json({ message: " a title and an image is required" });
         }
-        const reponse = await cloudinary.v2.uploader.upload(image)
+        const uploadResponse = await cloudinary.uploader.upload(image);
         const user = await User.findById(userId)
         if(!user){
             return res.status(400).json({message:"please log in again or refresh the page"})
         }
         const newSubmission = new SubmitTask({
-            title ,userId,image:reponse.secure_url
+            title, userId, image: uploadResponse.secure_url
         });
 
         user.submittedtasks.push(newSubmission._id)

@@ -4,11 +4,10 @@ import axios from 'axios';
 const FileUpload = () => {
   const [image, setImage] = useState(null); // Make sure to initialize as null
 
-  // Handle the file change
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(file); // Store the file in state
+      setImage(file); 
     }
   };
 
@@ -17,7 +16,7 @@ const FileUpload = () => {
 
     if (image) {
       const formData = new FormData();
-      formData.append('image', image); // Append the file to FormData
+      formData.append('image', image); 
 
       try {
         const res = await axios.post('http://localhost:5000/images/oneImage', formData, {

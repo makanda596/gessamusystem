@@ -1,16 +1,11 @@
 import { User } from "../models/Usermodel.js"
-import cloudinary from "cloudinary";
 import dotenv from 'dotenv'
 import { Userproject } from "../models/Userproject.js";
+import cloudinary from "../utilis/cloudinary.js";
 
 dotenv.config();
 
 
-cloudinary.v2.config({
-    cloud_name: "dch4echnq",
-    api_key: "636769749966873",
-    api_secret: "JMHGOFfO4lt4mpkHp-t5SzEdGkY",
-});
 
 export const submitProject = async (req, res) => {
     const userId = req.user.id
@@ -19,7 +14,7 @@ export const submitProject = async (req, res) => {
         if ( !title) {
             return res.status(400).json({ message: " a title and an image is required" });
         }
-        const reponse = await cloudinary.v2.uploader.upload(image)
+        const reponse = await cloudinary.uploader.upload(image)
         const user = await User.findById(userId)
         if(!user){
             return res.status(400).json({message:"please log in again or refresh the page"})

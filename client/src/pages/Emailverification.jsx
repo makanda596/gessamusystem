@@ -37,7 +37,7 @@ const Emailverification = () => {
         setMessage({ text: '', type: '' });
 
         try {
-            const response = await axios.post('https://gessamusystem.onrender.com/auth/verifyEmail', { code });
+            const response = await axios.post('http://localhost:5000/auth/verifyEmail', { code });
             if (response.status >= 200 && response.status < 300) {
                 setMessage({
                     text: 'Email verified successfully! Redirecting to login...',

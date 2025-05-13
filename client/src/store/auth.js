@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import axios from 'axios';
 
 // Set your API endpoints
-const BACKEND_URL = "https://gessamusystem.onrender.com";
-// const BACKEND_URL = "http://localhost:5000";
+// const BACKEND_URL = "https://gessamusystem.onrender.com";
+const BACKEND_URL = "http://localhost:5000";
 
 export const useAuthStore = create((set) => ({
     user: null,
@@ -26,7 +26,7 @@ export const useAuthStore = create((set) => ({
     signup: async (firstName, lastName, email, phoneNumber, password) => {
         set({ isLoading: true, error: null });
         try {
-            const response = await axios.post('https://gessamusystem.onrender.com/auth/signup', { firstName, lastName,  email, phoneNumber, password });
+            const response = await axios.post(`${BACKEND_URL}/auth/signup`, { firstName, lastName,  email, phoneNumber, password });
             localStorage.setItem("email", response.data.user.email);
 
             set({ user: response.data.user, email: response.data.user.email, isLoading: false, isAuthenticated: true});

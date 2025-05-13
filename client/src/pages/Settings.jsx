@@ -84,14 +84,11 @@ const Settings = ({ logout }) => {
     };
 
     const confirmDeleteAccount = async () => {
-        if (!user || !user._id) {
-            alert("User ID not found. Please try again.");  
-            return;
-        }
+       
 
         try {
             const token = localStorage.getItem("token");
-            await axios.delete('https://gessamusystem.onrender.com/auth/deleteUser', {
+            await axios.delete('http://localhost:5000/auth/deleteUser', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             window.location.href = "/";

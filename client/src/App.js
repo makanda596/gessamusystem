@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from './store/auth.js';
 
 import Login from './pages/Login.jsx';
@@ -39,8 +39,14 @@ const RedirectAuthenticatedUser = ({ children }) => {
 
 function App({user}) {
   const { isCheckingAuth, checkAuth } = useAuthStore();
-  
+  // const location = useLocation()
+  // useEffect(() => {
+  //   if (location.pathname !== '/EmailVerification') {
+  //     localStorage.removeItem('email');
+  //   }
+  // }, [location]);
   useEffect(() => {
+    
     checkAuth();
   }, [checkAuth]);
 
@@ -52,7 +58,6 @@ function App({user}) {
       </div>
     )}
     return (
-      <Router>
           <Routes>           
             <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/" element={<RedirectAuthenticatedUser><Login /></RedirectAuthenticatedUser>} />
@@ -78,7 +83,6 @@ function App({user}) {
             <Route path="/project/:id" element={<ProtectedRoute><Aproject /></ProtectedRoute>} />
             <Route path="/boa" element={<ProtectedRoute><AdminDashboard /> </ProtectedRoute>}/>
           </Routes>
-      </Router>
     );
   }
 

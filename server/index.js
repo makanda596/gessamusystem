@@ -8,7 +8,6 @@ import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import quizRoutes from './routes/quizRoutes.js'
 import taskRoutes from './routes/taskRouters.js'
-import studentsRoutes from './routes/studentsRoutes.js'
 import projectsRoutes from './routes/projectsRoutes.js'
 import alertRoutes from './routes/alertRoutes.js'
 
@@ -19,8 +18,8 @@ import UserprojectRoutes from './routes/UserprojectRoutes.js'
 
 app.use(cors(
    {
-    // origin:"http://localhost:3000",
-        origin: ["https://gessamuportal.onrender.com"],  
+    origin:"http://localhost:3000",
+        // origin: ["https://gessamuportal.onrender.com"],  
         credentials: true, 
     })
 );
@@ -45,8 +44,6 @@ app.use('/quiz', quizRoutes)
 //tasks
 app.use('/task', taskRoutes)
 app.use('/userProjects',UserprojectRoutes)
-//getstudents
-app.use('/students', studentsRoutes)
 //post projects
 app.use('/projects', projectsRoutes)
 //post Alert
