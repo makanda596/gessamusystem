@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 const Projects = () => {
     const [complains, setComplains] = useState([])
-    //fetch tasks 
     const fetchTasks = async () => {
         try {
             const respond = await axios.get(`https://gessamusystem-back.onrender.com/task/takeTask`)

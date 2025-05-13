@@ -63,21 +63,20 @@ const AlluserProjects = () => {
                 key={project._id}
                 className="bg-blue-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 overflow-hidden flex flex-col"
               >
-                {/* User Information at the top */}
                 <div className="p-4 bg-gray-50 border-b border-gray-100">
                   <div className="flex items-center">
                     {project.userId.avatar && (
                       <img
-                        src={project.userId.avatar}
-                        alt={`${project.userId.firstName} ${project.userId.lastName}`}
+                        src={project?.userId?.avatar}
+                        alt="name"
                         className="w-10 h-10 rounded-full mr-3 border-2 border-blue-400 object-cover"
                       />
                     )}
                     <div className="flex-1">
                       <div className="text-sm font-medium text-gray-800">
-                        {project.userId.firstName} {project.userId.lastName}
+                        {project?.userId?.firstName} {project?.userId?.lastName}
                       </div>
-                      <div className="text-xs text-gray-500">{project.userId.email}</div>
+                      <div className="text-xs text-gray-500">{project?.userId?.email}</div>
                     </div>
                     <div className="text-xs text-gray-500 flex items-center">
                       <FaRegClock className="mr-1" />
@@ -89,8 +88,8 @@ const AlluserProjects = () => {
                 {project.image ? (
                   <div className="relative h-48 w-full overflow-hidden">
                     <img
-                      src={project.image}
-                      alt={project.title}
+                      src={project?.image}
+                      alt={project?.title}
                       className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -101,11 +100,11 @@ const AlluserProjects = () => {
 
                 <div className="p-3 flex-grow">
                   <div className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
-                    title: {project.title}
+                    title: {project?.title}
                   </div>
 
                   <p className="text-gray-600 text-md mb-3 ">
-                    <span className='text-black font-semibold'> description:</span> {project.description.length > 40 ? <p>{project.description.slice(0,40)}.........</p> : <p>{project.description}</p> }
+                    <span className='text-black font-semibold'> description:</span> {project?.description.length > 40 ? <p>{project.description.slice(0,40)}.........</p> : <p>{project.description}</p> }
                   </p>
 
                   <div className="mb-4">
@@ -114,13 +113,13 @@ const AlluserProjects = () => {
                       <span className="font-medium">Resources</span>
                     </div>
                     <div className="text-sm text-gray-600 line-clamp-2 pl-6">
-                      {project.resources}
+                      {project?.resources}
                     </div>
                   </div>
                 </div>
 
                 <div className="px-4 py-3 bg-gray-50 border-t border-gray-100">
-                  <Link to={`/project/${project._id}`} className="w-full text-indigo-600 text-sm font-medium flex items-center justify-center hover:text-indigo-800 transition-colors">
+                  <Link to={`/project/${project?._id}`} className="w-full text-indigo-600 text-sm font-medium flex items-center justify-center hover:text-indigo-800 transition-colors">
                     View Details <FaExternalLinkAlt className="ml-2 text-xs" />
                   </Link>
                 </div>
