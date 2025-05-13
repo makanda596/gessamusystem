@@ -19,4 +19,4 @@ dist/
 
 client/node_modules
 .qodo
-history
+.history
