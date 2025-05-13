@@ -12,7 +12,7 @@ const Aproject = () => {
     const fetchProject = async () => {
         setLoading(true); 
         try {
-            const response = await axios.get(`https://gessamusystem.onrender.com/userProjects/takeProject/${id}`);
+            const response = await axios.get(`https://gessamusystem-back.onrender.com/userProjects/takeProject/${id}`);
             setProject(response.data);
             setLoading(false);
         } catch (error) {

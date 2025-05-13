@@ -24,7 +24,7 @@ const Tasks = () => {
 
     const showTask = async () => {
         try {
-            const response = await axios.get('https://gessamusystem.onrender.com/task/takeTask');
+            const response = await axios.get('https://gessamusystem-back.onrender.com/task/takeTask');
             setTasks(response.data);
         } catch (error) {
             setError('Failed to load tasks. Please try again later.');

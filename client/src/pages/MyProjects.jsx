@@ -20,7 +20,7 @@ const MyProjects = () => {
         try {
             const token = localStorage.getItem("token")
             await axios.delete(
-                `https://gessamusystem.onrender.com/userProjects/deleteUserProject/${projectId}`,
+                `https://gessamusystem-back.onrender.com/userProjects/deleteUserProject/${projectId}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             )
             await getUserProjetcs()

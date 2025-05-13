@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import axios from 'axios';
 
 // Set your API endpoints
-// const BACKEND_URL = "https://gessamusystem.onrender.com";
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://gessamusystem-back.onrender.com";
+// const BACKEND_URL = "http://localhost:5000";
 
 export const useAuthStore = create((set) => ({
     user: null,

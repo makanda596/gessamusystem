@@ -24,7 +24,7 @@ const Settings = ({ logout }) => {
         const fetchUser = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const response = await axios.get('https://gessamusystem.onrender.com/auth/profile', {
+                const response = await axios.get('https://gessamusystem-back.onrender.com/auth/profile', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
@@ -51,7 +51,7 @@ const Settings = ({ logout }) => {
             }
 
             const response = await axios.put(
-                'https://gessamusystem.onrender.com/auth/update',
+                'https://gessamusystem-back.onrender.com/auth/update',
                 {
                     firstName,
                     lastName,
@@ -88,7 +88,7 @@ const Settings = ({ logout }) => {
 
         try {
             const token = localStorage.getItem("token");
-            await axios.delete('http://localhost:5000/auth/deleteUser', {
+            await axios.delete('https://gessamusystem-back.onrender.com/auth/deleteUser', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             window.location.href = "/";

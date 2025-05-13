@@ -26,7 +26,7 @@ const Trainings = () => {
     const fetchProjects = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://gessamusystem.onrender.com/projects/getweekly-projects');
+            const response = await axios.get('https://gessamusystem-back.onrender.com/projects/getweekly-projects');
             setProjects(response.data);
         } catch (error) {
             console.error('Failed to fetch projects:', error);

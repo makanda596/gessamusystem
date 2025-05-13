@@ -37,7 +37,7 @@ const Emailverification = () => {
         setMessage({ text: '', type: '' });
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/verifyEmail', { code });
+            const response = await axios.post('https://gessamusystem-back.onrender.com/auth/verifyEmail', { code });
             if (response.status >= 200 && response.status < 300) {
                 setMessage({
                     text: 'Email verified successfully! Redirecting to login...',
@@ -67,7 +67,7 @@ const Emailverification = () => {
         setResendMessage({ text: '', type: '' });
 
         try {
-            const response = await axios.post('https://gessamusystem.onrender.com/auth/resendcode', { email });
+            const response = await axios.post('https://gessamusystem-back.onrender.com/auth/resendcode', { email });
             if (response.status >= 200 && response.status < 300) {
                 setResendMessage({ text: 'Verification email resent successfully!', type: 'success' });
             } else {

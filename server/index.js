@@ -18,8 +18,8 @@ import UserprojectRoutes from './routes/UserprojectRoutes.js'
 
 app.use(cors(
    {
-    origin:"http://localhost:3000",
-        // origin: ["https://gessamuportal.onrender.com"],  
+    // origin:"http://localhost:3000",
+        origin: ["https://gessamu.onrender.com"],
         credentials: true, 
     })
 );
