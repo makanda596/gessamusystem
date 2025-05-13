@@ -14,7 +14,7 @@ const   Quiz = () => {
       }
 
       try {
-        const response = await fetch(`{import.meta.env.BACKEND_URL}/auth/profile`, {
+        const response = await fetch(`https://gessamusystem-back.onrender.com/auth/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

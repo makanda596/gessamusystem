@@ -11,7 +11,7 @@ const Specific = () => {
     // Fetch specific task details
     const showSpecific = async () => {
         try {
-            const response = await axios.get(`{import.meta.env.BACKEND_URL}/task/onetask/${id}`);
+            const response = await axios.get(`https://gessamusystem-back.onrender.com/task/onetask/${id}`);
             setTask(response.data);
         } catch (error) {
             setError('Failed to load task. Please try again later.');

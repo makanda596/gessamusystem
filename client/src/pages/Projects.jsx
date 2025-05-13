@@ -5,7 +5,7 @@ const Projects = () => {
     //fetch tasks 
     const fetchTasks = async () => {
         try {
-            const respond = await axios.get(`{import.meta.env.BACKEND_URL}/task/takeTask`)
+            const respond = await axios.get(`https://gessamusystem-back.onrender.com/task/takeTask`)
             const sortedTasks = respond.data
             setComplains(sortedTasks)
         } catch (error) {
