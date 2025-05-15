@@ -57,7 +57,7 @@ const SubmitTask = ({ setIsPopup, isPopup }) => {
         try {
             const token = localStorage.getItem("token");
             await axios.post(
-                "https://gessamusystem.onrender.com/task/submitTask",
+                "https://gessamusystem-back.onrender.com/task/submitTask",
                 { ...formData, image },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
