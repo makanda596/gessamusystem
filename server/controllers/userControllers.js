@@ -2,7 +2,7 @@ import { User } from '../models/Usermodel.js';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken'
-import { sendConfirmationEmail, sendPasswordResetEmail,  sendVerificationEmail, sendRestPasswordSucces, sendSuspiciousLoginEmail} from '../emails/Email.js';
+import { sendConfirmationEmail, sendPasswordResetEmail,  sendVerificationEmail, sendRestPasswordSucces} from '../emails/Email.js';
 import { validationResult } from 'express-validator';
 
 export const signup = async (req, res) => {
@@ -150,13 +150,14 @@ export const login = async (req, res) => {
             user.loginAttempts +=1 ;
             if (user.loginAttempts >= 3){
                 user.lockUntil = new Date(Date.now() + 15*60*1000)
+                // const ip =
+                //     req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
+                // await sendSuspiciousLoginEmail(email, ip);
             }
             await user.save()
             console.log(user.loginAttempts)
 
-            const ip =
-                req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
-            await sendSuspiciousLoginEmail(email, ip);
+           
             return res.status(400).json({ message: "Incorrect password" });
         }
 
