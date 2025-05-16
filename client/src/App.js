@@ -81,7 +81,7 @@ function App({user}) {
             <Route path='/projects' element={<ProtectedRoute><AlluserProjects /></ProtectedRoute>}/>
             <Route path="/training/:id" element={<ProtectedRoute><OneProject /></ProtectedRoute>} />
             <Route path="/project/:id" element={<ProtectedRoute><Aproject /></ProtectedRoute>} />
-            <Route path="/boa" element={<ProtectedRoute><AdminDashboard /> </ProtectedRoute>}/>
+            <Route path="/boacfcr" element={<ProtectedRoute><AdminDashboard /> </ProtectedRoute>}/>
           </Routes>
     );
   }
