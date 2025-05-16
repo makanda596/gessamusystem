@@ -150,9 +150,9 @@ export const login = async (req, res) => {
             user.loginAttempts +=1 ;
             if (user.loginAttempts >= 10){
                 user.lockUntil = new Date(Date.now() + 15*60*1000)
-                const ip =
-                    req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
-                await sendSuspiciousLoginEmail(email, ip);
+                // const ip =
+                //     req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
+                // await sendSuspiciousLoginEmail(email, ip);
             }
             await user.save()
             console.log(user.loginAttempts)
