@@ -32,12 +32,13 @@ const userSchema = new mongoose.Schema({
         default: ""
     },
     // completedTasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "SubmitTask" }],
-    isVerified:{type:Boolean, default:"false" },
+    isVerified:{type:Boolean, default:false },
     verificationToken:String,
     verificationTokenExpiresAt:Date,
     resetPasswordToken: String,
     resetPasswordExpiresAt: Date,
-
+    loginAttempts: { type: Number, default: 0 },
+    lockUntil: { type: Date }
 }, { timestamps: true });
 
 export const User = mongoose.model("User", userSchema);

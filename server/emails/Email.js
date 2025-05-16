@@ -1,7 +1,8 @@
 import nodemailer from 'nodemailer';
 import { PASSWORD_RESET_REQUEST_TEMPLATE, PASSWORD_RESET_SUCCESS_TEMPLATE,
-     VERIFICATION_EMAIL_TEMPLATE, SIGNUP_SUCCESS_TEMPLATE } from './Emailtemplates.js';
-
+    VERIFICATION_EMAIL_TEMPLATE, SIGNUP_SUCCESS_TEMPLATE, SUSPICIOUS_LOGIN_TEMPLATE
+} from './Emailtemplates.js';
+import axios from 'axios'
 import dotenv from 'dotenv';
 dotenv.config();
 const SMTP_API = process.env.SMTP_KEY
@@ -122,3 +123,37 @@ export const sendConfirmationEmail = async (email) => {
     }
 }
 
+export const sendSuspiciousLoginEmail = async (email, ip) => {
+    try {
+        const { data: geo } = await axios.get(`https://ipapi.co/${ip}/json/`);
+        const location = `${geo.city || "Unknown city"}, ${geo.region || "Region"}, ${geo.country_name || "Country"}`;
+
+       
+        const transporter = nodemailer.createTransport({
+            host: SMTP_API,
+            port: PORT_API,
+            secure: false,
+            auth: {
+                user: LOGIN_API,
+                pass: MASTER_API,
+            },
+        });
+        const subject = "⚠️ Suspicious Login Attempt Detected";
+
+        await transporter.sendMail({
+            from: EMAIL,
+            to: email,
+            subject,
+            html: SUSPICIOUS_LOGIN_TEMPLATE
+                .replace("{ip}", ip)
+                .replace("{location}", location)
+                .replace("{email}", email),
+            text: subject,
+        });
+
+        console.log("Suspicious login alert sent:", location);
+    } catch (error) {
+        console.error("Email failed:", error);
+        throw new Error(`Email delivery failed: ${error.message}`);
+    }
+  };

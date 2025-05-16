@@ -1,63 +1,66 @@
 import { User } from '../models/Usermodel.js';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import { sendConfirmationEmail, sendPasswordResetEmail,  sendVerificationEmail, sendRestPasswordSucces} from '../emails/Email.js';
-
-
-import jwt from 'jsonwebtoken';
-
+import jwt from 'jsonwebtoken'
+import { sendConfirmationEmail, sendPasswordResetEmail,  sendVerificationEmail, sendRestPasswordSucces, sendSuspiciousLoginEmail} from '../emails/Email.js';
+import { validationResult } from 'express-validator';
 
 export const signup = async (req, res) => {
-    const { firstName, lastName, email, phoneNumber ,password } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { firstName, lastName, email, phoneNumber, password } = req.body;
 
     try {
-        if (!firstName || !lastName  || !email || !phoneNumber || !password) {
-            return res.status(400).json({ message: "Please fill all the fields" });
-        }
+        // Check for existing user
+        const [existingUser, existingPhone] = await Promise.all([
+            User.findOne({ email: String(email) }),
+            User.findOne({ phoneNumber: String(phoneNumber) }),
+        ]);
 
-         const existingUser = await User.findOne({email});
         if (existingUser) {
             return res.status(400).json({ message: "Email already exists" });
-        } 
-        const existingphone = await User.findOne({ phoneNumber });
-        if (existingphone) {
-            return res.status(400).json({ message: "phone number already taken" });
+        }
+        if (existingPhone) {
+            return res.status(400).json({ message: "Phone number already taken" });
         }
 
+        // Hash the password securely
         const hashPassword = await bcrypt.hash(password, 10);
 
+        // Generate avatar and verification token
         const avatarUrl = `https://avatar.iran.liara.run/username?username=${encodeURIComponent(firstName + " " + lastName)}`;
+        const verificationToken = crypto.randomBytes(2).toString("hex").toUpperCase();
+        const verificationTokenExpiresAt = Date.now() + 15 * 60 * 1000;
 
-        const verificationToken = crypto.randomBytes(2).toString("hex").toUpperCase()
-        const verificationTokenExpiresAt = Date.now() +15 * 60 *1000
-        // Create the user
+        // Create user
         const user = new User({
             firstName,
             lastName,
-            
             email,
-            verificationToken: verificationToken,
-            verificationTokenExpiresAt: verificationTokenExpiresAt,
             phoneNumber,
             password: hashPassword,
-            avatar: avatarUrl, // Save the avatar URL in the database
+            avatar: avatarUrl,
+            verificationToken,
+            verificationTokenExpiresAt,
         });
 
-
-
         await user.save();
-        await sendVerificationEmail(email, verificationToken)
+        await sendVerificationEmail(email, verificationToken);
 
         res.status(200).json({
             success: true,
             message: "User signed up successfully",
             user: {
                 ...user._doc,
-                password: undefined, 
-            }
+                password: undefined, // Never send back password
+            },
         });
     } catch (error) {
-        res.status(500).json(error.message);
+        console.error("Signup error:", error);
+        res.status(500).json({ message: "Server error. Please try again later." });
     }
 };
 
@@ -143,9 +146,23 @@ export const login = async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect) {
+           
+            user.loginAttempts +=1 ;
+            if (user.loginAttempts >= 3){
+                user.lockUntil = new Date(Date.now() + 15*60*1000)
+            }
+            await user.save()
+            console.log(user.loginAttempts)
+
+            const ip =
+                req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
+            await sendSuspiciousLoginEmail(email, ip);
             return res.status(400).json({ message: "Incorrect password" });
         }
 
+        user.loginAttempts=0,
+            user.lockUntil=null
+            await user.save()
         res.status(200).json({
             message: "User logged in",
            

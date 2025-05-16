@@ -7,14 +7,16 @@ import {
 } from '../controllers/userControllers.js';
 
 import { verifyToken } from '../middleware/verifyToken.js';
+import { validateSignup } from '../middleware/validateSignup.js';
+import { loginLimiter } from '../middleware/loginLimiter.js';
 
 const router = express.Router();
 
 router.get('/check-auth', verifyToken, checkAuth);
-router.post('/signup', signup);
+router.post('/signup', validateSignup, signup);
 router.post('/resendcode', EmailVerificationResend)
 router.put('/update', verifyToken, update)
-router.post('/login', login);
+router.post('/login', loginLimiter, login);
 router.post('/logout', logout);
 router.post('/password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);

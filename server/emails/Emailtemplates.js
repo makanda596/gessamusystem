@@ -436,3 +436,98 @@ export const SIGNUP_SUCCESS_TEMPLATE = `
 </html>
 `;
 
+
+
+export const SUSPICIOUS_LOGIN_TEMPLATE = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspicious Login Attempt</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            background-color: #fff8f6;
+        }
+        .header {
+            background: linear-gradient(to right, #e74c3c, #f39c12); /* Red to Orange */
+            padding: 25px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .alert-box {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 5px solid #e67e22;
+            margin: 25px 0;
+        }
+        .alert-box strong {
+            color: #e74c3c;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 12px;
+        }
+        .highlight-red {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        .highlight-orange {
+            color: #e67e22;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚠️ Suspicious Login Attempt Detected</h1>
+    </div>
+    <div class="content">
+        <p>Dear {email},</p>
+
+        <div class="alert-box">
+            <p><strong>We noticed a suspicious login attempt</strong> to your account.</p>
+            <p><strong>IP Address:</strong> {ip}</p>
+            <p><strong>Location:</strong> {location}</p>
+            <p><strong>Time:</strong> {current_time}</p>
+        </div>
+
+        <p>If this was <span class="highlight-red">not you</span>, we highly recommend taking the following steps immediately:</p>
+        <ul style="padding-left: 20px;">
+            <li>Change your account password.</li>
+            <li>Enable two-factor authentication (if available).</li>
+            <li>Review your recent account activity.</li>
+        </ul>
+
+        <p>If you recognize this activity, no further action is needed.</p>
+
+        <p>Stay safe,<br><strong>The Security Team</strong></p>
+    </div>
+    <div class="footer">
+        <p>This is an automated message. Please do not reply to this email.</p>
+        <p>&copy; ${new Date().getFullYear()} Unitrade Hub. All rights reserved.</p>
+    </div>
+</body>
+</html>
+`;
