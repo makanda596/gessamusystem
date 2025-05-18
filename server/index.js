@@ -51,7 +51,7 @@ app.use('/alert', alertRoutes)
 
 const PORT = process.env.PORT || 6000;
 const MONGO_URL =process.env.MONGO_URL
-
+// sdll
 mongoose.connect(MONGO_URL)
 try {
     console.log("mongodb connected")
