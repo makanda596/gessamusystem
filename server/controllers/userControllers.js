@@ -127,7 +127,14 @@ export const EmailVerificationResend = async (req, res) => {
 export const login = async (req, res) => {
     const { email, password } = req.body;
     const generateToken = (id) => {
-        return jwt.sign({ id }, process.env.SECTRET_KEY, { expiresIn: "1d" })
+        const token = jwt.sign({ id }, process.env.SECTRET_KEY, { expiresIn: "20m" })
+        res.cookie("token",token,{
+            sameSite:"strict",
+            secure:true,
+            maxAge:20*60*1000,
+            httpOnly:true,
+        })
+        return token;
     }
     try {
         const user = await User.findOne({ email });

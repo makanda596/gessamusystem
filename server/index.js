@@ -12,8 +12,7 @@ import projectsRoutes from './routes/projectsRoutes.js'
 import alertRoutes from './routes/alertRoutes.js'
 
 import UserprojectRoutes from './routes/UserprojectRoutes.js'
-
-
+import helmet from "helmet"
 
 
 app.use(cors(
@@ -31,6 +30,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 dotenv.config()
 app.use(cookieParser());
 
+app.use(helmet())
 
 //uploading a file
 //getting the images
